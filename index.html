@@ -4,108 +4,168 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#080d18">
-<title>SafeSignal | One Tap. Someone Knows.</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Tamil:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#070b14">
+<title>SafeSignal | Personal Safety</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+Tamil:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 :root {
-  --bg:#080d18;
-  --panel:#111a2a;
-  --red:#ff304f;
-  --cyan:#00e5ff;
-  --text:#f5f7ff;
-  --muted:#9ba9bc;
+ --bg:#070b14;
+ --panel:#101a2a;
+ --red:#ff3155;
+ --cyan:#00e5ff;
+ --white:#f5f8ff;
+ --muted:#9aaac0;
 }
-* {box-sizing:border-box;margin:0;padding:0}
-body {
-  background:radial-gradient(circle at 50% 20%,#17253b 0%,var(--bg) 60%);
-  color:var(--text);
-  font-family:Inter,"Noto Sans Tamil",sans-serif;
-  min-height:100vh;
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+ background:var(--bg);color:var(--white);
+ font-family:Inter,"Noto Sans Tamil",sans-serif;
+ min-height:100vh;overflow-x:hidden;
 }
-body.tamil {font-family:"Noto Sans Tamil",sans-serif}
-.container {width:min(100% - 32px,650px);margin:auto}
-header {
-  display:flex;justify-content:space-between;align-items:center;
-  padding:22px 0;
+body.tamil{font-family:"Noto Sans Tamil",sans-serif}
+body:before{
+ content:"";position:fixed;inset:0;pointer-events:none;
+ background:
+ radial-gradient(ellipse at 10% 15%,#07394b55,transparent 40%),
+ radial-gradient(ellipse at 90% 45%,#650c2840,transparent 40%),
+ radial-gradient(ellipse at 50% 100%,#112f4d55,transparent 50%);
+ z-index:-1;
 }
-.logo {font-size:23px;font-weight:800;letter-spacing:-1px}
-.logo span {color:var(--red)}
-.live {
-  color:#ff7183;font-size:11px;font-weight:700;
-  letter-spacing:1px;display:flex;align-items:center;gap:7px;
+.container{width:min(100% - 34px,680px);margin:auto}
+header{
+ display:flex;align-items:center;justify-content:space-between;
+ padding:23px 0;border-bottom:1px solid #ffffff10;
 }
-.dot {
-  width:8px;height:8px;background:#ff304f;border-radius:50%;
-  box-shadow:0 0 12px #ff304f;animation:blink 1s infinite;
+.logo{font-size:23px;font-weight:900;letter-spacing:-1.2px}
+.logo span{color:var(--red)}
+.status{
+ font-size:10px;letter-spacing:1.5px;color:#ff7289;
+ display:flex;align-items:center;gap:8px;font-weight:800;
 }
-@keyframes blink {50%{opacity:.25}}
-.lang {
-  display:flex;justify-content:center;gap:8px;margin:15px 0 28px;
+.status i{
+ width:8px;height:8px;background:#ff3155;border-radius:50%;
+ box-shadow:0 0 13px #ff3155;animation:blink 1.3s infinite;
 }
-.lang button {
-  background:#172338;color:#b9c7da;border:1px solid #34435a;
-  padding:10px 22px;border-radius:30px;font-weight:700;cursor:pointer;
+@keyframes blink{50%{opacity:.25}}
+.lang{
+ display:flex;justify-content:center;gap:7px;
+ margin:25px auto 30px;
 }
-.lang button.active {
-  color:white;background:#263d59;border-color:var(--cyan);
-  box-shadow:0 0 14px #00e5ff33;
+.lang button{
+ border:1px solid #ffffff18;background:#111b2b;
+ color:#9eafc5;padding:10px 23px;border-radius:30px;
+ font-size:13px;font-weight:700;cursor:pointer;
 }
-.hero {text-align:center;padding:18px 0 25px}
-.eyebrow {
-  color:var(--cyan);font-size:11px;letter-spacing:3px;
-  font-weight:700;margin-bottom:15px;
+.lang button.active{
+ color:white;border-color:var(--cyan);
+ background:#0d303c;box-shadow:0 0 17px #00e5ff22;
 }
-h1 {font-size:clamp(30px,8vw,46px);line-height:1.2}
-.subtitle {color:var(--muted);margin-top:12px;font-size:14px;line-height:1.7}
-.sos-wrap {display:flex;justify-content:center;margin:38px auto}
-.sos {
-  width:190px;height:190px;border-radius:50%;
-  background:radial-gradient(circle at 35% 30%,#ff7181,#ed163c 65%,#a90025);
-  border:5px solid #ff9aa8;
-  color:white;font-size:37px;font-weight:800;
-  box-shadow:0 0 0 12px #ff304f12,0 0 35px #ff304f99,inset 0 0 20px #ffffff35;
-  cursor:pointer;animation:pulse 2s infinite;
+.hero{text-align:center;padding:15px 0 0}
+.eyebrow{
+ color:var(--cyan);font-size:10px;font-weight:800;
+ letter-spacing:3px;margin-bottom:17px;
 }
-.sos small {display:block;font-size:11px;letter-spacing:2px;margin-top:7px}
-@keyframes pulse {
-  0%,100%{transform:scale(1);box-shadow:0 0 0 10px #ff304f15,0 0 30px #ff304f88}
-  50%{transform:scale(1.045);box-shadow:0 0 0 22px #ff304f08,0 0 48px #ff304fbb}
+h1{font-size:clamp(34px,8vw,52px);line-height:1.17;letter-spacing:-1.8px}
+h1 span{color:var(--red);text-shadow:0 0 25px #ff315555}
+.subtitle{
+ max-width:420px;margin:16px auto 0;color:var(--muted);
+ font-size:14px;line-height:1.8;
 }
-.card {
-  background:linear-gradient(145deg,#172338cc,#0e1726ee);
-  border:1px solid #263950;border-radius:20px;padding:21px;
-  margin:17px 0;box-shadow:0 12px 35px #0004;
+.sos-area{
+ display:flex;flex-direction:column;align-items:center;
+ padding:34px 0 26px;
 }
-.card h2 {font-size:17px;margin-bottom:9px}
-.card p {font-size:13px;color:var(--muted);line-height:1.7}
-.actions {display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
-.action {
-  padding:15px 10px;border-radius:13px;border:1px solid #34445b;
-  background:#1a2940;color:white;font-size:13px;font-weight:700;
-  cursor:pointer;
+.ring{
+ width:220px;height:220px;border-radius:50%;
+ display:grid;place-items:center;position:relative;
 }
-.action.primary {border-color:var(--cyan);color:var(--cyan)}
-.info {
-  display:flex;gap:12px;align-items:center;
-  background:#102b31;border:1px solid #15515a;
-  border-radius:15px;padding:15px;margin:18px 0;
+.ring:before,.ring:after{
+ content:"";position:absolute;inset:0;border:1px solid #ff315555;
+ border-radius:50%;animation:ring 2.6s infinite;
 }
-.info-icon {font-size:23px}
-.info p {font-size:12px;color:#b6dfe3;line-height:1.6}
-footer {text-align:center;color:#78879c;font-size:11px;padding:25px 0 35px;line-height:1.8}
-#notice {
-  position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
-  background:#26364e;border:1px solid #536780;padding:13px 18px;
-  border-radius:12px;width:max-content;max-width:90%;
-  font-size:13px;display:none;z-index:5;text-align:center;
+.ring:after{animation-delay:1.3s}
+@keyframes ring{
+ 0%{transform:scale(.78);opacity:.8}
+ 100%{transform:scale(1.3);opacity:0}
 }
-@media(max-width:400px) {
-  .sos {width:165px;height:165px}
-  .actions {grid-template-columns:1fr}
+.sos{
+ width:174px;height:174px;border-radius:50%;
+ border:5px solid #ff9cac;
+ background:radial-gradient(circle at 35% 25%,#ff8c9e,#ff3155 55%,#9c082a);
+ color:white;font-weight:900;font-size:42px;
+ box-shadow:0 0 25px #ff315599,0 0 70px #ff315533,
+ inset 0 0 20px #ffffff44;
+ cursor:pointer;position:relative;z-index:2;
+ animation:sospulse 2s infinite;
+ transition:transform .2s;
+}
+.sos:active{transform:scale(.94)}
+.sos small{
+ display:block;font-size:10px;letter-spacing:2px;margin-top:7px;
+}
+@keyframes sospulse{
+ 0%,100%{box-shadow:0 0 25px #ff315599,0 0 65px #ff315533}
+ 50%{box-shadow:0 0 40px #ff3155cc,0 0 90px #ff315555}
+}
+.tap-label{
+ color:#ff8195;font-size:10px;font-weight:800;
+ letter-spacing:2px;margin-top:24px;
+}
+.card{
+ border:1px solid #ffffff13;
+ background:linear-gradient(135deg,#172438dd,#0e1726ee);
+ border-radius:22px;padding:23px;margin:17px 0;
+ box-shadow:0 15px 45px #0004;
+}
+.card h2{font-size:19px;margin-bottom:9px}
+.card p{color:var(--muted);font-size:13px;line-height:1.8}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:21px}
+.action{
+ min-height:54px;border-radius:13px;
+ border:1px solid #ffffff24;background:#1a2940;
+ color:white;font-weight:700;font-size:12px;
+ cursor:pointer;padding:12px 8px;
+ transition:.2s;
+}
+.action:active{transform:scale(.97)}
+.action.primary{
+ background:linear-gradient(110deg,#073b4a,#102c42);
+ border-color:#00cfe8;color:#62efff;
+ box-shadow:0 0 17px #00e5ff14;
+}
+.action:hover{border-color:var(--cyan)}
+.safety{
+ display:flex;align-items:center;gap:15px;
+ border:1px solid #1c4b54;background:#0d222a;
+ border-radius:17px;padding:17px;margin:18px 0;
+}
+.shield{
+ width:43px;height:43px;display:grid;place-items:center;
+ border-radius:13px;background:#123c44;font-size:22px;flex-shrink:0;
+}
+.safety p{font-size:12px;line-height:1.7;color:#b7d8df}
+footer{
+ text-align:center;padding:26px 0 35px;
+ color:#708097;font-size:11px;line-height:2;
+}
+.toast{
+ position:fixed;left:50%;bottom:25px;
+ transform:translate(-50%,20px);
+ width:max-content;max-width:calc(100% - 32px);
+ background:#122235;color:#eaf8ff;
+ border:1px solid #00cde655;
+ border-radius:14px;padding:13px 18px;
+ font-size:12px;line-height:1.6;
+ box-shadow:0 10px 35px #0009;
+ opacity:0;visibility:hidden;transition:.25s;
+ z-index:20;text-align:center;
+}
+.toast.show{opacity:1;visibility:visible;transform:translate(-50%,0)}
+@media(max-width:420px){
+ .ring{width:200px;height:200px}
+ .sos{width:158px;height:158px}
+ .actions{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -113,89 +173,91 @@ footer {text-align:center;color:#78879c;font-size:11px;padding:25px 0 35px;line-
 <body>
 <div class="container">
 <header>
-  <div class="logo">SAFE<span>SIGNAL</span></div>
-  <div class="live"><i class="dot"></i><span data-en="SAFETY FIRST" data-ta="பாதுகாப்பே முதன்மை">SAFETY FIRST</span></div>
+ <div class="logo">SAFE<span>SIGNAL</span></div>
+ <div class="status"><i></i><span data-en="SAFETY FIRST" data-ta="பாதுகாப்பே முதன்மை">SAFETY FIRST</span></div>
 </header>
 
 <div class="lang">
-  <button id="enBtn" class="active" onclick="setLang('en')">English</button>
-  <button id="taBtn" onclick="setLang('ta')">தமிழ்</button>
+ <button id="enBtn" class="active" onclick="setLang('en')">English</button>
+ <button id="taBtn" onclick="setLang('ta')">தமிழ்</button>
 </div>
 
 <section class="hero">
-  <div class="eyebrow" data-en="YOUR PERSONAL SAFETY COMPANION" data-ta="உங்கள் தனிப்பட்ட பாதுகாப்புத் துணை">YOUR PERSONAL SAFETY COMPANION</div>
-  <h1 data-en="Your Safety.<br>Our Priority." data-ta="உங்கள் பாதுகாப்பு.<br>எங்கள் முன்னுரிமை.">Your Safety.<br>Our Priority.</h1>
-  <p class="subtitle" data-en="One tap can help you reach the people who care about you." data-ta="ஒரே ஒரு தொடுதலில் உங்களைப் பற்றிக் கவலைப்படுபவர்களைத் தொடர்புகொள்ள உதவும்.">One tap can help you reach the people who care about you.</p>
+ <div class="eyebrow" data-en="YOUR PERSONAL SAFETY COMPANION" data-ta="உங்கள் தனிப்பட்ட பாதுகாப்புத் துணை">YOUR PERSONAL SAFETY COMPANION</div>
+ <h1 data-en="Your Safety.<br><span>Our Priority.</span>" data-ta="உங்கள் பாதுகாப்பு.<br><span>எங்கள் முன்னுரிமை.</span>">Your Safety.<br><span>Our Priority.</span></h1>
+ <p class="subtitle" data-en="Stay connected with the people who care about you. Help is just one tap away." data-ta="உங்களைப் பற்றிக் கவலைப்படுபவர்களுடன் இணைந்திருங்கள். உதவியை ஒரே தொடுதலில் அணுகுங்கள்.">Stay connected with the people who care about you. Help is just one tap away.</p>
 </section>
 
-<div class="sos-wrap">
-  <button class="sos" onclick="demoSOS()">SOS<small data-en="TAP FOR DEMO" data-ta="செயல்முறை விளக்கம்">TAP FOR DEMO</small></button>
-</div>
+<section class="sos-area">
+ <div class="ring">
+  <button class="sos" onclick="demoSOS()">SOS<small data-en="DEMO ONLY" data-ta="சோதனை மட்டும்">DEMO ONLY</small></button>
+ </div>
+ <div class="tap-label" data-en="EMERGENCY DEMO BUTTON" data-ta="அவசரநிலை சோதனை பொத்தான்">EMERGENCY DEMO BUTTON</div>
+</section>
 
 <section class="card">
-  <h2 data-en="Welcome to SafeSignal" data-ta="SafeSignal-க்கு வரவேற்கிறோம்">Welcome to SafeSignal</h2>
-  <p data-en="A simple safety platform designed to help you stay connected with your trusted emergency contacts." data-ta="உங்கள் நம்பகமான அவசரத் தொடர்புகளுடன் இணைந்திருக்க உதவும் எளிய பாதுகாப்புத் தளம்.">A simple safety platform designed to help you stay connected with your trusted emergency contacts.</p>
-  <div class="actions">
-    <button class="action primary" onclick="guest()" data-en="Continue as Guest" data-ta="விருந்தினராகத் தொடரவும்">Continue as Guest</button>
-    <button class="action" onclick="googleDemo()" data-en="Continue with Google" data-ta="Google மூலம் தொடரவும்">Continue with Google</button>
-  </div>
+ <h2 data-en="Welcome to SafeSignal" data-ta="SafeSignal-க்கு வரவேற்கிறோம்">Welcome to SafeSignal</h2>
+ <p data-en="A simple personal safety platform. Connect your trusted contacts and prepare your safety profile." data-ta="எளிய தனிப்பட்ட பாதுகாப்புத் தளம். உங்கள் நம்பகமான தொடர்புகளை இணைத்து பாதுகாப்பு விவரங்களைத் தயாரிக்கவும்.">A simple personal safety platform. Connect your trusted contacts and prepare your safety profile.</p>
+ <div class="actions">
+  <button class="action primary" onclick="guest()" data-en="Continue as Guest →" data-ta="விருந்தினராகத் தொடரவும் →">Continue as Guest →</button>
+  <button class="action" onclick="googleDemo()" data-en="Continue with Google" data-ta="Google மூலம் தொடரவும்">Continue with Google</button>
+ </div>
 </section>
 
-<div class="info">
-  <div class="info-icon">🛡️</div>
-  <p data-en="Your safety matters. Location sharing and emergency alerts will require your permission." data-ta="உங்கள் பாதுகாப்பு முக்கியம். இருப்பிடப் பகிர்வு மற்றும் அவசர எச்சரிக்கைகளுக்கு உங்கள் அனுமதி தேவை.">Your safety matters. Location sharing and emergency alerts will require your permission.</p>
+<div class="safety">
+ <div class="shield">🛡️</div>
+ <p data-en="Your privacy matters. Location sharing and emergency alerts will only work with your permission." data-ta="உங்கள் தனியுரிமை முக்கியம். இருப்பிடப் பகிர்வு மற்றும் அவசர எச்சரிக்கைகள் உங்கள் அனுமதியுடன் மட்டுமே செயல்படும்.">Your privacy matters. Location sharing and emergency alerts will only work with your permission.</p>
 </div>
 
 <footer>
-  <div data-en="SafeSignal | One Tap. Someone Knows." data-ta="SafeSignal | ஒரு தொடுதல். யாரோ ஒருவருக்கு தகவல்.">SafeSignal | One Tap. Someone Knows.</div>
-  <div data-en="This is an early demo. It does not send emergency alerts." data-ta="இது ஆரம்பகட்ட மாதிரி மட்டுமே. உண்மையான அவசர எச்சரிக்கைகளை அனுப்பாது.">This is an early demo. It does not send emergency alerts.</div>
-  <div>© 2026 SafeSignal</div>
+ <div>SAFESIGNAL © 2026</div>
+ <div data-en="One Tap. Someone Knows." data-ta="ஒரு தொடுதல். யாரோ ஒருவருக்குத் தகவல்.">One Tap. Someone Knows.</div>
+ <div data-en="Demo version – No real emergency alerts are sent." data-ta="சோதனைப் பதிப்பு – உண்மையான அவசர எச்சரிக்கைகள் அனுப்பப்படாது.">Demo version – No real emergency alerts are sent.</div>
 </footer>
 </div>
 
-<div id="notice"></div>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
 
 <script>
-let currentLang = "en";
+let lang="en";
+let toastTimer;
 
-function setLang(lang) {
-  currentLang = lang;
-  document.documentElement.lang = lang === "ta" ? "ta" : "en";
-  document.body.classList.toggle("tamil", lang === "ta");
-  document.querySelectorAll("[data-en]").forEach(el => {
-    el.innerHTML = el.dataset[lang];
-  });
-  document.getElementById("enBtn").classList.toggle("active",lang==="en");
-  document.getElementById("taBtn").classList.toggle("active",lang==="ta");
+function setLang(value){
+ lang=value;
+ document.documentElement.lang=value;
+ document.body.classList.toggle("tamil",value==="ta");
+ document.querySelectorAll("[data-en]").forEach(el=>{
+  el.innerHTML=el.getAttribute("data-"+value);
+ });
+ document.getElementById("enBtn").classList.toggle("active",value==="en");
+ document.getElementById("taBtn").classList.toggle("active",value==="ta");
 }
 
-function showNotice(en,ta) {
-  const n=document.getElementById("notice");
-  n.textContent=currentLang==="ta"?ta:en;
-  n.style.display="block";
-  clearTimeout(window.noticeTimer);
-  window.noticeTimer=setTimeout(()=>n.style.display="none",3500);
+function notify(en,ta){
+ const box=document.getElementById("toast");
+ box.textContent=lang==="ta"?ta:en;
+ box.classList.add("show");
+ clearTimeout(toastTimer);
+ toastTimer=setTimeout(()=>box.classList.remove("show"),3000);
 }
 
-function demoSOS() {
-  showNotice(
-    "DEMO ONLY: No emergency alert was sent.",
-    "சோதனை மட்டும்: எந்த அவசர எச்சரிக்கையும் அனுப்பப்படவில்லை."
-  );
+function demoSOS(){
+ notify(
+  "Demo only. No emergency alert was sent.",
+  "இது சோதனை மட்டுமே. எந்த அவசர எச்சரிக்கையும் அனுப்பப்படவில்லை."
+ );
 }
-
-function guest() {
-  showNotice(
-    "Guest access will be available in the next setup step.",
-    "விருந்தினர் அணுகல் அடுத்த கட்டத்தில் செயல்படுத்தப்படும்."
-  );
+function guest(){
+ notify(
+  "Guest access is coming soon.",
+  "விருந்தினர் அணுகல் விரைவில் வரும்."
+ );
 }
-
-function googleDemo() {
-  showNotice(
-    "Google login will be connected securely in a later step.",
-    "Google உள்நுழைவு அடுத்த கட்டத்தில் பாதுகாப்பாக இணைக்கப்படும்."
-  );
+function googleDemo(){
+ notify(
+  "Google sign-in will be connected in the next stage.",
+  "Google உள்நுழைவு அடுத்த கட்டத்தில் இணைக்கப்படும்."
+ );
 }
 </script>
 </body>
