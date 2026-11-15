@@ -7,6 +7,7 @@
 <meta name="theme-color" content="#070b14">
 <title>SafeSignal | One Tap. Someone Knows.</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+Tamil:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 <style>
 :root{--bg:#070b14;--red:#ff3155;--cyan:#00e5ff;--text:#f5f8ff;--muted:#9aabc1}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -92,107 +93,262 @@ footer p{font-size:11px;color:#718198;line-height:2}
 @media(max-width:520px){.logo{font-size:21px}.grid{grid-template-columns:1fr}.ring{width:205px;height:205px}.sos{width:160px;height:160px}.card{padding:19px}}
 </style>
 </head>
+
 <body>
 <header><div class="container">
-<div class="header-top"><div class="logo">SAFE<span>SIGNAL</span></div><div class="live"><i></i>SAFETY FIRST</div></div>
-<div class="languages"><button id="enBtn" class="active" onclick="setLang('en')">English</button><button id="taBtn" onclick="setLang('ta')">தமிழ்</button></div>
-<nav><a href="#home">Home</a><a href="#features">Features</a><a href="#account">Account</a><a href="#contacts">Contacts</a><a href="#setup">SOS Setup</a><a href="#about">About</a><a href="#privacy">Privacy</a><a href="#terms">Terms</a></nav>
+<div class="header-top">
+<div class="logo">SAFE<span>SIGNAL</span></div>
+<div class="live"><i></i><span data-i18n="safetyFirst">SAFETY FIRST</span></div>
+</div>
+
+<div class="languages">
+<button id="enBtn" class="active" onclick="setLang('en')">English</button>
+<button id="taBtn" onclick="setLang('ta')">தமிழ்</button>
+</div>
+
+<nav>
+<a href="#home" data-i18n="navHome">Home</a>
+<a href="#features" data-i18n="navFeatures">Features</a>
+<a href="#account" data-i18n="navAccount">Account</a>
+<a href="#contacts" data-i18n="navContacts">Contacts</a>
+<a href="#setup" data-i18n="navSetup">SOS Setup</a>
+<a href="#about" data-i18n="navAbout">About</a>
+<a href="#privacy" data-i18n="navPrivacy">Privacy</a>
+<a href="#terms" data-i18n="navTerms">Terms</a>
+</nav>
 </div></header>
 
 <main class="container">
 <section id="home" class="hero">
-<div class="eyebrow">YOUR PERSONAL SAFETY COMPANION</div>
-<h1>Your Safety.<br><span>Our Priority.</span></h1>
-<p class="subtitle">Stay connected with the people who care about you. Help is just one tap away.</p>
+<div class="eyebrow" data-i18n="eyebrow">YOUR PERSONAL SAFETY COMPANION</div>
+<h1><span data-i18n="heroLine1">Your Safety.</span><br><span data-i18n="heroLine2">Our Priority.</span></h1>
+<p class="subtitle" data-i18n="subtitle">Stay connected with the people who care about you. Help is just one tap away.</p>
 </section>
-<section class="sos-area"><div class="ring"><button class="sos" onclick="demoSOS()">SOS<small>DEMO ONLY</small></button></div><div class="tap-label">EMERGENCY DEMO BUTTON</div></section>
-<div class="info">Prototype notice: this SOS button does not send real alerts, messages or location. It does not contact emergency services. In India, call 112 directly in an emergency.</div>
+
+<section class="sos-area">
+<div class="ring">
+<button class="sos" onclick="demoSOS()">SOS<small data-i18n="demoOnly">DEMO ONLY</small></button>
+</div>
+<div class="tap-label" data-i18n="demoLabel">EMERGENCY DEMO BUTTON</div>
+</section>
+
+<div class="info" data-i18n="prototypeNotice">Prototype notice: this SOS button does not send real alerts, messages or location. It does not contact emergency services. In India, call 112 directly in an emergency.</div>
 
 <section class="card" id="account">
-<h2>SafeSignal Account</h2>
+<h2 data-i18n="accountTitle">SafeSignal Account</h2>
 <div id="loginPanel">
-<p>Continue as a guest or securely sign in with Google.</p>
-<button id="guestBtn" class="action primary" onclick="guestLogin()">Continue as Guest →</button>
-<button id="googleBtn" class="action" onclick="googleLogin()">Continue with Google</button>
+<p data-i18n="loginIntro">Continue as a guest or securely sign in with Google.</p>
+<button id="guestBtn" class="action primary" onclick="guestLogin()" data-i18n="guestLogin">Continue as Guest →</button>
+<button id="googleBtn" class="action" onclick="googleLogin()" data-i18n="googleLogin">Continue with Google</button>
 <p id="authMessage" style="margin-top:12px" aria-live="polite"></p>
 </div>
+
 <div id="dashboard" class="account-card hidden">
-<div class="account-status">SIGNED IN</div>
-<h2>Welcome to SafeSignal</h2>
-<p id="userType"></p><p id="userEmail"></p><p id="userId"></p>
+<div class="account-status" data-i18n="signedIn">SIGNED IN</div>
+<h2 data-i18n="welcome">Welcome to SafeSignal</h2>
+<p id="userType"></p>
+<p id="userEmail"></p>
+<p id="userId"></p>
 <div id="guestUpgrade">
-<p style="margin-top:14px">Secure your guest account by linking it to Google. This keeps your existing contacts with the same account.</p>
-<button class="action primary" onclick="linkGuestToGoogle()">Link this Guest Account to Google</button>
+<p style="margin-top:14px" data-i18n="guestUpgradeText">Secure your guest account by linking it to Google. This keeps your existing contacts with the same account.</p>
+<button class="action primary" onclick="linkGuestToGoogle()" data-i18n="linkGoogle">Link this Guest Account to Google</button>
 </div>
-<button class="action" onclick="document.getElementById('contacts').scrollIntoView({behavior:'smooth'})">Manage Emergency Contacts</button>
-<button class="action danger" onclick="logout()">Sign Out</button>
+<button class="action" onclick="document.getElementById('contacts').scrollIntoView({behavior:'smooth'})" data-i18n="manageContacts">Manage Emergency Contacts</button>
+<button class="action danger" onclick="logout()" data-i18n="signOut">Sign Out</button>
 </div>
 </section>
 
 <section id="contacts" class="card">
-<h2>👥 Emergency Contacts</h2>
-<p>You can save up to 3 trusted people. Add a contact only after they agree to receive emergency alerts from you.</p>
-<div id="contactsLoginNotice" class="info">Please sign in to manage your emergency contacts.</div>
+<h2 data-i18n="contactsTitle">👥 Emergency Contacts</h2>
+<p data-i18n="contactsIntro">You can save up to 3 trusted people. Add a contact only after they agree to receive emergency alerts from you.</p>
+<div id="contactsLoginNotice" class="info" data-i18n="signInNotice">Please sign in to manage your emergency contacts.</div>
+
 <div id="contactsApp" class="hidden">
 <p id="contactCount" style="margin-top:12px;color:#69efff;font-weight:700">0 / 3 contacts saved</p>
 <form id="contactForm">
 <input type="hidden" id="editId">
-<label class="field-label" for="contactName">Contact name</label>
-<input class="field" id="contactName" maxlength="60" placeholder="Enter full name" required>
-<label class="field-label" for="contactPhone">Mobile number</label>
-<input class="field" id="contactPhone" type="tel" inputmode="tel" maxlength="16" placeholder="+91 9876543210" required>
-<label class="consent"><input type="checkbox" id="contactConsent" required><span>I confirm this person has agreed to be listed as my emergency contact and may receive emergency alerts in the future.</span></label>
-<button class="action primary" id="saveContactBtn" type="submit">Save Contact</button>
-<button class="action hidden" id="cancelEditBtn" type="button" onclick="cancelEdit()">Cancel Edit</button>
+<label class="field-label" for="contactName" data-i18n="contactNameLabel">Contact name</label>
+<input class="field" id="contactName" maxlength="60" placeholder="Enter full name" data-i18n-placeholder="namePlaceholder" required>
+
+<label class="field-label" for="contactPhone" data-i18n="phoneLabel">Mobile number</label>
+<input class="field" id="contactPhone" type="tel" inputmode="tel" maxlength="16" placeholder="+91 9876543210" data-i18n-placeholder="phonePlaceholder" required>
+
+<label class="consent">
+<input type="checkbox" id="contactConsent" required>
+<span data-i18n="consentText">I confirm this person has agreed to be listed as my emergency contact and may receive emergency alerts in the future.</span>
+</label>
+
+<button class="action primary" id="saveContactBtn" type="submit" data-i18n="saveContact">Save Contact</button>
+<button class="action hidden" id="cancelEditBtn" type="button" onclick="cancelEdit()" data-i18n="cancelEdit">Cancel Edit</button>
 </form>
+
 <div id="contactMessage" aria-live="polite" style="margin-top:12px;font-size:12px;color:#9aabc1"></div>
-<h3>Saved Contacts</h3><div id="contactList"></div>
+<h3 data-i18n="savedContacts">Saved Contacts</h3>
+<div id="contactList"></div>
 </div>
 </section>
 
 <section id="features">
-<div class="section-title"><div class="eyebrow">BUILT FOR PERSONAL SAFETY</div><h2>Smart Safety Features</h2></div>
+<div class="section-title">
+<div class="eyebrow" data-i18n="featuresEyebrow">BUILT FOR PERSONAL SAFETY</div>
+<h2 data-i18n="featuresTitle">Smart Safety Features</h2>
+</div>
 <div class="grid">
-<div class="feature"><div class="emoji">🔴</div><h3>Floating SOS</h3><p>Quick-access emergency button planned for the Android app.</p></div>
-<div class="feature"><div class="emoji">👥</div><h3>Emergency Contacts</h3><p>Save up to three trusted contacts.</p></div>
-<div class="feature"><div class="emoji">📍</div><h3>Live Location</h3><p>Permission-based location sharing is planned.</p></div>
-<div class="feature"><div class="emoji">🔔</div><h3>Loud Alarm</h3><p>Emergency notification and alarm support are planned.</p></div>
+<div class="feature"><div class="emoji">🔴</div><h3 data-i18n="floatingFeature">Floating SOS</h3><p data-i18n="floatingFeatureText">Quick-access emergency button planned for the Android app.</p></div>
+<div class="feature"><div class="emoji">👥</div><h3 data-i18n="emergencyFeature">Emergency Contacts</h3><p data-i18n="emergencyFeatureText">Save up to three trusted contacts.</p></div>
+<div class="feature"><div class="emoji">📍</div><h3 data-i18n="locationFeature">Live Location</h3><p data-i18n="locationFeatureText">Permission-based location sharing is planned.</p></div>
+<div class="feature"><div class="emoji">🔔</div><h3 data-i18n="alarmFeature">Loud Alarm</h3><p data-i18n="alarmFeatureText">Emergency notification and alarm support are planned.</p></div>
 </div>
 </section>
 
-<section id="setup"><div class="section-title"><h2>Floating SOS Setup</h2></div><div class="card">
-<p>This preview displays a floating SOS button only on this website. It cannot appear over other apps or while your phone display is off.</p>
-<div class="switch-row"><div><strong>Floating SOS Preview</strong><p>Show the glowing button on this website</p></div><button id="floatSwitch" class="switch" role="switch" aria-checked="false" onclick="toggleFloating()"></button></div>
-</div></section>
+<section id="setup">
+<div class="section-title"><h2 data-i18n="setupTitle">Floating SOS Setup</h2></div>
+<div class="card">
+<p data-i18n="setupText">This preview displays a floating SOS button only on this website. It cannot appear over other apps or while your phone display is off.</p>
+<div class="switch-row">
+<div><strong data-i18n="previewTitle">Floating SOS Preview</strong><p data-i18n="previewText">Show the glowing button on this website</p></div>
+<button id="floatSwitch" class="switch" role="switch" aria-checked="false" onclick="toggleFloating()"></button>
+</div>
+</div>
+</section>
 
-<section id="about"><div class="section-title"><h2>About SafeSignal</h2></div><div class="card"><p>SafeSignal is an independent personal safety project. Our mission is to make safety tools easier to understand and access through a simple experience.</p></div></section>
-<section id="contact"><div class="section-title"><h2>Contact Us</h2></div><div class="card"><p>For questions and feedback, please use the project repository contact details. A working contact form will be added before public launch.</p></div></section>
-<section id="privacy"><div class="section-title"><h2>Privacy Policy</h2></div><div class="card">
-<h3>Account information</h3><p>Firebase Authentication is used for guest and Google sign-in.</p>
-<h3>Emergency contacts</h3><p>Contact names and phone numbers are stored in Firebase Cloud Firestore under the signed-in user's account. Users should add contacts only with their consent.</p>
-<h3>Location and alerts</h3><p>This version does not collect live location or send emergency messages. These features are not active.</p>
-<h3>Deletion</h3><p>Contact records can be deleted individually. Account deletion and complete data management will be added before public launch.</p>
-<h3>Third-party services</h3><p>Firebase Authentication, Google sign-in and Cloud Firestore are third-party services.</p>
-</div></section>
-<section id="terms"><div class="section-title"><h2>Terms & Conditions</h2></div><div class="card">
-<h3>Prototype</h3><p>SafeSignal is currently a prototype. SOS, messaging, live location and emergency response features are not yet active.</p>
-<h3>Responsible use</h3><p>Users must not misuse the service or submit false emergency reports. Add only contacts who have agreed.</p>
-<h3>Emergency limitations</h3><p>SafeSignal is not an emergency response service and cannot guarantee that help will arrive. In India, call 112 directly in an emergency.</p>
-</div></section>
+<section id="about">
+<div class="section-title"><h2 data-i18n="aboutTitle">About SafeSignal</h2></div>
+<div class="card"><p data-i18n="aboutText">SafeSignal is an independent personal safety project. Our mission is to make safety tools easier to understand and access through a simple experience.</p></div>
+</section>
+
+<section id="contact">
+<div class="section-title"><h2 data-i18n="contactTitle">Contact Us</h2></div>
+<div class="card"><p data-i18n="contactText">For questions and feedback, please use the project repository contact details. A working contact form will be added before public launch.</p></div>
+</section>
+
+<section id="privacy">
+<div class="section-title"><h2 data-i18n="privacyTitle">Privacy Policy</h2></div>
+<div class="card">
+<h3 data-i18n="privacyAccount">Account information</h3>
+<p data-i18n="privacyAccountText">Firebase Authentication is used for guest and Google sign-in.</p>
+<h3 data-i18n="privacyContacts">Emergency contacts</h3>
+<p data-i18n="privacyContactsText">Contact names and phone numbers are stored in Firebase Cloud Firestore under the signed-in user's account. Users should add contacts only with their consent.</p>
+<h3 data-i18n="privacyLocation">Location and alerts</h3>
+<p data-i18n="privacyLocationText">This version does not collect live location or send emergency messages. These features are not active.</p>
+<h3 data-i18n="privacyDeletion">Deletion</h3>
+<p data-i18n="privacyDeletionText">Contact records can be deleted individually. Account deletion and complete data management will be added before public launch.</p>
+<h3 data-i18n="privacyThirdParty">Third-party services</h3>
+<p data-i18n="privacyThirdPartyText">Firebase Authentication, Google sign-in and Cloud Firestore are third-party services.</p>
+</div>
+</section>
+
+<section id="terms">
+<div class="section-title"><h2 data-i18n="termsTitle">Terms & Conditions</h2></div>
+<div class="card">
+<h3 data-i18n="termsPrototype">Prototype</h3>
+<p data-i18n="termsPrototypeText">SafeSignal is currently a prototype. SOS, messaging, live location and emergency response features are not yet active.</p>
+<h3 data-i18n="termsUse">Responsible use</h3>
+<p data-i18n="termsUseText">Users must not misuse the service or submit false emergency reports. Add only contacts who have agreed.</p>
+<h3 data-i18n="termsEmergency">Emergency limitations</h3>
+<p data-i18n="termsEmergencyText">SafeSignal is not an emergency response service and cannot guarantee that help will arrive. In India, call 112 directly in an emergency.</p>
+</div>
+</section>
 </main>
 
 <button id="floatingSOS" class="floating-sos" onclick="demoSOS()">SOS<small>DEMO</small></button>
-<footer><div class="container"><div class="footer-logo">SAFE<span>SIGNAL</span></div>
-<div class="footer-links"><a href="#about">About</a><a href="#contact">Contact</a><a href="#privacy">Privacy</a><a href="#terms">Terms</a></div>
-<p>One Tap. Someone Knows.</p><p>© 2026 SafeSignal. Prototype version.</p><p>In an emergency in India, call 112 directly.</p></div></footer>
+
+<footer>
+<div class="container">
+<div class="footer-logo">SAFE<span>SIGNAL</span></div>
+<div class="footer-links">
+<a href="#about" data-i18n="navAbout">About</a>
+<a href="#contact" data-i18n="navContact">Contact</a>
+<a href="#privacy" data-i18n="navPrivacy">Privacy</a>
+<a href="#terms" data-i18n="navTerms">Terms</a>
+</div>
+<p data-i18n="tagline">One Tap. Someone Knows.</p>
+<p>© 2026 SafeSignal. <span data-i18n="prototypeVersion">Prototype version.</span></p>
+<p data-i18n="emergencyFooter">In an emergency in India, call 112 directly.</p>
+</div>
+</footer>
+
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
 <script>
 let currentLang="en",toastTimer;
-function setLang(lang){currentLang=lang;document.body.classList.toggle("ta",lang==="ta");document.getElementById("enBtn").classList.toggle("active",lang==="en");document.getElementById("taBtn").classList.toggle("active",lang==="ta");}
-function showToast(en,ta){const el=document.getElementById("toast");el.textContent=currentLang==="ta"?ta:en;el.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove("show"),3500);}
-function demoSOS(){showToast("Demo only. No alert or location has been sent. Call 112 in an emergency.","இது சோதனை மட்டுமே. எச்சரிக்கை அல்லது இருப்பிடம் அனுப்பப்படவில்லை. அவசரநிலையில் 112-ஐ அழைக்கவும்.");}
-function toggleFloating(){const sw=document.getElementById("floatSwitch"),btn=document.getElementById("floatingSOS");const on=!sw.classList.contains("on");sw.classList.toggle("on",on);sw.setAttribute("aria-checked",String(on));btn.classList.toggle("visible",on);showToast(on?"Website SOS preview enabled.":"Website SOS preview disabled.","இணையதள SOS மாதிரி மாற்றப்பட்டது.");}
+
+const translations={
+en:{
+safetyFirst:"SAFETY FIRST",navHome:"Home",navFeatures:"Features",navAccount:"Account",navContacts:"Contacts",navSetup:"SOS Setup",navAbout:"About",navPrivacy:"Privacy",navTerms:"Terms",navContact:"Contact",
+eyebrow:"YOUR PERSONAL SAFETY COMPANION",heroLine1:"Your Safety.",heroLine2:"Our Priority.",subtitle:"Stay connected with the people who care about you. Help is just one tap away.",
+demoOnly:"DEMO ONLY",demoLabel:"EMERGENCY DEMO BUTTON",prototypeNotice:"Prototype notice: this SOS button does not send real alerts, messages or location. It does not contact emergency services. In India, call 112 directly in an emergency.",
+accountTitle:"SafeSignal Account",loginIntro:"Continue as a guest or securely sign in with Google.",guestLogin:"Continue as Guest →",googleLogin:"Continue with Google",signedIn:"SIGNED IN",welcome:"Welcome to SafeSignal",guestUpgradeText:"Secure your guest account by linking it to Google. This keeps your existing contacts with the same account.",linkGoogle:"Link this Guest Account to Google",manageContacts:"Manage Emergency Contacts",signOut:"Sign Out",
+contactsTitle:"👥 Emergency Contacts",contactsIntro:"You can save up to 3 trusted people. Add a contact only after they agree to receive emergency alerts from you.",signInNotice:"Please sign in to manage your emergency contacts.",contactNameLabel:"Contact name",namePlaceholder:"Enter full name",phoneLabel:"Mobile number",phonePlaceholder:"+91 9876543210",consentText:"I confirm this person has agreed to be listed as my emergency contact and may receive emergency alerts in the future.",saveContact:"Save Contact",cancelEdit:"Cancel Edit",savedContacts:"Saved Contacts",
+featuresEyebrow:"BUILT FOR PERSONAL SAFETY",featuresTitle:"Smart Safety Features",floatingFeature:"Floating SOS",floatingFeatureText:"Quick-access emergency button planned for the Android app.",emergencyFeature:"Emergency Contacts",emergencyFeatureText:"Save up to three trusted contacts.",locationFeature:"Live Location",locationFeatureText:"Permission-based location sharing is planned.",alarmFeature:"Loud Alarm",alarmFeatureText:"Emergency notification and alarm support are planned.",
+setupTitle:"Floating SOS Setup",setupText:"This preview displays a floating SOS button only on this website. It cannot appear over other apps or while your phone display is off.",previewTitle:"Floating SOS Preview",previewText:"Show the glowing button on this website",
+aboutTitle:"About SafeSignal",aboutText:"SafeSignal is an independent personal safety project. Our mission is to make safety tools easier to understand and access through a simple experience.",contactTitle:"Contact Us",contactText:"For questions and feedback, please use the project repository contact details. A working contact form will be added before public launch.",
+privacyTitle:"Privacy Policy",privacyAccount:"Account information",privacyAccountText:"Firebase Authentication is used for guest and Google sign-in.",privacyContacts:"Emergency contacts",privacyContactsText:"Contact names and phone numbers are stored in Firebase Cloud Firestore under the signed-in user's account. Users should add contacts only with their consent.",privacyLocation:"Location and alerts",privacyLocationText:"This version does not collect live location or send emergency messages. These features are not active.",privacyDeletion:"Deletion",privacyDeletionText:"Contact records can be deleted individually. Account deletion and complete data management will be added before public launch.",privacyThirdParty:"Third-party services",privacyThirdPartyText:"Firebase Authentication, Google sign-in and Cloud Firestore are third-party services.",
+termsTitle:"Terms & Conditions",termsPrototype:"Prototype",termsPrototypeText:"SafeSignal is currently a prototype. SOS, messaging, live location and emergency response features are not yet active.",termsUse:"Responsible use",termsUseText:"Users must not misuse the service or submit false emergency reports. Add only contacts who have agreed.",termsEmergency:"Emergency limitations",termsEmergencyText:"SafeSignal is not an emergency response service and cannot guarantee that help will arrive. In India, call 112 directly in an emergency.",tagline:"One Tap. Someone Knows.",prototypeVersion:"Prototype version.",emergencyFooter:"In an emergency in India, call 112 directly."
+},
+ta:{
+safetyFirst:"பாதுகாப்பே முதன்மை",navHome:"முகப்பு",navFeatures:"வசதிகள்",navAccount:"கணக்கு",navContacts:"தொடர்புகள்",navSetup:"SOS அமைப்பு",navAbout:"எங்களைப் பற்றி",navPrivacy:"தனியுரிமை",navTerms:"விதிமுறைகள்",navContact:"தொடர்பு",
+eyebrow:"உங்களுக்கான தனிப்பட்ட பாதுகாப்பு துணை",heroLine1:"உங்கள் பாதுகாப்பு.",heroLine2:"எங்கள் முன்னுரிமை.",subtitle:"உங்களைப் பற்றி அக்கறை கொண்டவர்களுடன் இணைந்திருங்கள். ஒரே ஒரு தொடுதலில் உதவியை நாடலாம்.",
+demoOnly:"சோதனை மட்டும்",demoLabel:"அவசரநிலை சோதனை பொத்தான்",prototypeNotice:"முன்மாதிரி அறிவிப்பு: இந்த SOS பொத்தான் உண்மையான எச்சரிக்கை, செய்தி அல்லது இருப்பிடத்தை அனுப்பாது. அவசர சேவைகளைத் தொடர்புகொள்ளாது. இந்தியாவில் அவசரநிலை ஏற்பட்டால் நேரடியாக 112-ஐ அழைக்கவும்.",
+accountTitle:"SafeSignal கணக்கு",loginIntro:"Guest ஆகத் தொடரவும் அல்லது Google மூலம் பாதுகாப்பாக உள்நுழையவும்.",guestLogin:"Guest ஆகத் தொடரவும் →",googleLogin:"Google மூலம் உள்நுழையவும்",signedIn:"உள்நுழைந்துள்ளீர்கள்",welcome:"SafeSignal-க்கு வரவேற்கிறோம்",guestUpgradeText:"உங்கள் Guest கணக்கை Google-உடன் இணைத்து பாதுகாக்கவும். இதனால் ஏற்கனவே சேமித்த தொடர்புகள் அதே கணக்கில் இருக்கும்.",linkGoogle:"இந்த Guest கணக்கை Google-உடன் இணைக்கவும்",manageContacts:"அவசர தொடர்புகளை நிர்வகிக்கவும்",signOut:"வெளியேறு",
+contactsTitle:"👥 அவசர தொடர்புகள்",contactsIntro:"அதிகபட்சம் 3 நம்பகமான நபர்களைச் சேமிக்கலாம். அவர்களின் சம்மதத்தைப் பெற்ற பிறகே தொடர்பைச் சேர்க்கவும்.",signInNotice:"அவசர தொடர்புகளை நிர்வகிக்க முதலில் உள்நுழையவும்.",contactNameLabel:"தொடர்பின் பெயர்",namePlaceholder:"முழுப் பெயரை உள்ளிடவும்",phoneLabel:"கைபேசி எண்",phonePlaceholder:"+91 9876543210",consentText:"இந்த நபர் எனது அவசர தொடர்பாக இருக்கவும், எதிர்காலத்தில் அவசர எச்சரிக்கைகளைப் பெறவும் சம்மதித்துள்ளார் என்பதை உறுதிப்படுத்துகிறேன்.",saveContact:"தொடர்பைச் சேமிக்கவும்",cancelEdit:"திருத்தத்தை ரத்துசெய்",savedContacts:"சேமிக்கப்பட்ட தொடர்புகள்",
+featuresEyebrow:"தனிப்பட்ட பாதுகாப்பிற்காக உருவாக்கப்பட்டது",featuresTitle:"புத்திசாலித்தனமான பாதுகாப்பு வசதிகள்",floatingFeature:"மிதக்கும் SOS",floatingFeatureText:"Android செயலியில் விரைவாக அணுகக்கூடிய அவசர பொத்தான் உருவாக்க திட்டமிடப்பட்டுள்ளது.",emergencyFeature:"அவசர தொடர்புகள்",emergencyFeatureText:"மூன்று நம்பகமான தொடர்புகள் வரை சேமிக்கலாம்.",locationFeature:"நேரடி இருப்பிடம்",locationFeatureText:"அனுமதியுடன் இருப்பிடத்தைப் பகிரும் வசதி திட்டமிடப்பட்டுள்ளது.",alarmFeature:"உரத்த அலாரம்",alarmFeatureText:"அவசர அறிவிப்பு மற்றும் அலாரம் வசதிகள் திட்டமிடப்பட்டுள்ளன.",
+setupTitle:"மிதக்கும் SOS அமைப்பு",setupText:"இந்த முன்னோட்டத்தில் இந்த இணையதளத்தில் மட்டுமே மிதக்கும் SOS பொத்தான் தோன்றும். மற்ற செயலிகளுக்கு மேல் அல்லது திரை அணைந்திருக்கும்போது இது தோன்றாது.",previewTitle:"மிதக்கும் SOS முன்னோட்டம்",previewText:"இந்த இணையதளத்தில் ஒளிரும் பொத்தானைக் காட்டு",
+aboutTitle:"SafeSignal பற்றி",aboutText:"SafeSignal ஒரு சுயாதீனமான தனிப்பட்ட பாதுகாப்புத் திட்டமாகும். பாதுகாப்பு கருவிகளை எளிதாகப் புரிந்துகொண்டு பயன்படுத்த உதவுவதே எங்கள் நோக்கம்.",contactTitle:"எங்களைத் தொடர்புகொள்ள",contactText:"கேள்விகள் மற்றும் கருத்துகளுக்கு திட்டத்தின் repository-யில் உள்ள தொடர்பு விவரங்களைப் பயன்படுத்தவும். பொதுவெளியில் வெளியிடுவதற்கு முன் செயல்படும் தொடர்பு படிவம் சேர்க்கப்படும்.",
+privacyTitle:"தனியுரிமைக் கொள்கை",privacyAccount:"கணக்குத் தகவல்கள்",privacyAccountText:"Guest மற்றும் Google உள்நுழைவுக்கு Firebase Authentication பயன்படுத்தப்படுகிறது.",privacyContacts:"அவசர தொடர்புகள்",privacyContactsText:"தொடர்புகளின் பெயர்கள் மற்றும் கைபேசி எண்கள் உள்நுழைந்த பயனரின் Firebase Cloud Firestore கணக்கில் சேமிக்கப்படுகின்றன. அவர்களின் சம்மதத்துடன் மட்டுமே தொடர்புகளைச் சேர்க்க வேண்டும்.",privacyLocation:"இருப்பிடம் மற்றும் எச்சரிக்கைகள்",privacyLocationText:"இந்தப் பதிப்பு நேரடி இருப்பிடத்தைச் சேகரிக்காது அல்லது அவசர செய்திகளை அனுப்பாது. இந்த வசதிகள் இன்னும் செயல்படுத்தப்படவில்லை.",privacyDeletion:"நீக்குதல்",privacyDeletionText:"தொடர்புகளைத் தனித்தனியாக நீக்கலாம். கணக்கு நீக்கம் மற்றும் முழுமையான தரவு நிர்வாக வசதிகள் பொதுவெளி வெளியீட்டிற்கு முன் சேர்க்கப்படும்.",privacyThirdParty:"மூன்றாம் தரப்பு சேவைகள்",privacyThirdPartyText:"Firebase Authentication, Google உள்நுழைவு மற்றும் Cloud Firestore ஆகியவை மூன்றாம் தரப்பு சேவைகள்.",
+termsTitle:"விதிமுறைகள் மற்றும் நிபந்தனைகள்",termsPrototype:"முன்மாதிரி",termsPrototypeText:"SafeSignal தற்போது ஒரு முன்மாதிரி மட்டுமே. SOS, செய்தி அனுப்புதல், நேரடி இருப்பிடம் மற்றும் அவசர உதவி வசதிகள் இன்னும் செயல்படுத்தப்படவில்லை.",termsUse:"பொறுப்பான பயன்பாடு",termsUseText:"இந்தச் சேவையைத் தவறாகப் பயன்படுத்தவோ போலியான அவசர அறிக்கைகளைச் சமர்ப்பிக்கவோ கூடாது. சம்மதித்த தொடர்புகளை மட்டுமே சேர்க்கவும்.",termsEmergency:"அவசரநிலை வரம்புகள்",termsEmergencyText:"SafeSignal அவசர உதவி சேவை அல்ல. உதவி கிடைக்கும் என உறுதி அளிக்க முடியாது. இந்தியாவில் அவசரநிலை ஏற்பட்டால் நேரடியாக 112-ஐ அழைக்கவும்.",tagline:"ஒரே தொடுதல். ஒருவருக்குத் தகவல்.",prototypeVersion:"முன்மாதிரிப் பதிப்பு.",emergencyFooter:"இந்தியாவில் அவசரநிலை ஏற்பட்டால் நேரடியாக 112-ஐ அழைக்கவும்."
+}
+};
+
+function setLang(lang){
+ currentLang=lang;
+ document.documentElement.lang=lang==="ta"?"ta":"en";
+ document.body.classList.toggle("ta",lang==="ta");
+ document.getElementById("enBtn").classList.toggle("active",lang==="en");
+ document.getElementById("taBtn").classList.toggle("active",lang==="ta");
+
+ document.querySelectorAll("[data-i18n]").forEach(el=>{
+  const key=el.getAttribute("data-i18n");
+  const value=translations[lang][key];
+  if(value!==undefined)el.textContent=value;
+ });
+
+ document.querySelectorAll("[data-i18n-placeholder]").forEach(el=>{
+  const key=el.getAttribute("data-i18n-placeholder");
+  const value=translations[lang][key];
+  if(value!==undefined)el.placeholder=value;
+ });
+
+ updateCount();
+}
+
+function showToast(en,ta){
+ const el=document.getElementById("toast");
+ el.textContent=currentLang==="ta"?ta:en;
+ el.classList.add("show");
+ clearTimeout(toastTimer);
+ toastTimer=setTimeout(()=>el.classList.remove("show"),3500);
+}
+
+function demoSOS(){
+ showToast(
+  "Demo only. No alert or location has been sent. Call 112 in an emergency.",
+  "இது சோதனை மட்டுமே. எச்சரிக்கை அல்லது இருப்பிடம் அனுப்பப்படவில்லை. அவசரநிலையில் 112-ஐ அழைக்கவும்."
+ );
+}
+
+function toggleFloating(){
+ const sw=document.getElementById("floatSwitch");
+ const btn=document.getElementById("floatingSOS");
+ const on=!sw.classList.contains("on");
+ sw.classList.toggle("on",on);
+ sw.setAttribute("aria-checked",String(on));
+ btn.classList.toggle("visible",on);
+ showToast(
+  on?"Website SOS preview enabled.":"Website SOS preview disabled.",
+  on?"இணையதள SOS முன்னோட்டம் இயக்கப்பட்டது.":"இணையதள SOS முன்னோட்டம் நிறுத்தப்பட்டது."
+ );
+}
 </script>
 
 <script type="module">
@@ -202,6 +358,7 @@ import {
  signInAnonymously,GoogleAuthProvider,signInWithPopup,signInWithRedirect,
  getRedirectResult,signOut,linkWithPopup,linkWithRedirect
 } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-auth.js";
+
 import {
  getFirestore,collection,addDoc,onSnapshot,doc,updateDoc,deleteDoc,serverTimestamp
 } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-firestore.js";
@@ -228,6 +385,10 @@ let stopListening=null;
 let contacts=[];
 let busy=false;
 
+function msg(en,ta){
+ return window.currentLang==="ta"?ta:en;
+}
+
 function setBusy(value){
  busy=value;
  $("guestBtn").disabled=value;
@@ -237,17 +398,17 @@ function setBusy(value){
 function showAuthError(error){
  const code=error?.code||"";
  const messages={
-  "auth/api-key-not-valid":"Firebase API key is invalid. Check the Web API key in Firebase Project Settings.",
-  "auth/invalid-api-key":"Firebase API key is invalid. Check Firebase Project Settings.",
-  "auth/unauthorized-domain":"Add nammabustn-hub.github.io to Firebase Authentication > Settings > Authorized domains.",
-  "auth/operation-not-allowed":"Enable this sign-in provider in Firebase Authentication.",
-  "auth/popup-blocked":"Google popup was blocked. Allow popups or retry.",
-  "auth/popup-closed-by-user":"Google sign-in was cancelled. Please try again.",
-  "auth/credential-already-in-use":"This Google account is already linked to another SafeSignal account. Automatic account merging is not enabled.",
-  "auth/account-exists-with-different-credential":"This Google email already uses another sign-in method.",
-  "auth/network-request-failed":"Network error. Check your internet connection and retry."
+  "auth/api-key-not-valid":msg("Firebase API key is invalid. Check Firebase Project Settings and Google Cloud API restrictions.","Firebase API key தவறாக உள்ளது. Firebase Project Settings மற்றும் Google Cloud API restrictions-ஐ சரிபார்க்கவும்."),
+  "auth/invalid-api-key":msg("Firebase API key is invalid. Check Firebase Project Settings.","Firebase API key தவறாக உள்ளது. Firebase Project Settings-ஐ சரிபார்க்கவும்."),
+  "auth/unauthorized-domain":msg("Add nammabustn-hub.github.io to Firebase Authentication > Settings > Authorized domains.","Firebase Authentication > Settings > Authorized domains பகுதியில் nammabustn-hub.github.io சேர்க்கவும்."),
+  "auth/operation-not-allowed":msg("Enable this sign-in provider in Firebase Authentication.","Firebase Authentication பகுதியில் இந்த login முறையை enable செய்யவும்."),
+  "auth/popup-blocked":msg("Google popup was blocked. Allow popups or retry.","Google popup தடுக்கப்பட்டுள்ளது. Popup அனுமதித்து மீண்டும் முயற்சிக்கவும்."),
+  "auth/popup-closed-by-user":msg("Google sign-in was cancelled. Please try again.","Google login ரத்து செய்யப்பட்டது. மீண்டும் முயற்சிக்கவும்."),
+  "auth/credential-already-in-use":msg("This Google account is already linked to another SafeSignal account. Automatic account merging is not enabled.","இந்த Google கணக்கு வேறொரு SafeSignal கணக்குடன் ஏற்கனவே இணைக்கப்பட்டுள்ளது. தானியங்கி கணக்கு இணைப்பு இல்லை."),
+  "auth/account-exists-with-different-credential":msg("This Google email already uses another sign-in method.","இந்த Google email ஏற்கனவே வேறு login முறையில் பயன்படுத்தப்படுகிறது."),
+  "auth/network-request-failed":msg("Network error. Check your internet connection and retry.","இணைய இணைப்பில் பிழை. இணையத்தைச் சரிபார்த்து மீண்டும் முயற்சிக்கவும்.")
  };
- return messages[code]||error?.message||"Something went wrong. Please try again.";
+ return messages[code]||error?.message||msg("Something went wrong. Please try again.","ஏதோ பிழை ஏற்பட்டுள்ளது. மீண்டும் முயற்சிக்கவும்.");
 }
 
 function setAuthMessage(message){
@@ -258,22 +419,25 @@ function contactsRef(uid){
  return collection(db,"users",uid,"contacts");
 }
 
-function showContactMessage(message){
- $("contactMessage").textContent=message;
+function showContactMessage(en,ta){
+ $("contactMessage").textContent=msg(en,ta);
+}
+
+function updateCount(){
+ $("contactCount").textContent=msg(
+  contacts.length+" / 3 contacts saved",
+  contacts.length+" / 3 தொடர்புகள் சேமிக்கப்பட்டுள்ளன"
+ );
+ const editing=Boolean($("editId").value);
+ $("saveContactBtn").disabled=contacts.length>=3&&!editing;
 }
 
 function resetContactForm(){
  $("contactForm").reset();
  $("editId").value="";
- $("saveContactBtn").textContent="Save Contact";
+ $("saveContactBtn").textContent=msg("Save Contact","தொடர்பைச் சேமிக்கவும்");
  $("cancelEditBtn").classList.add("hidden");
  updateCount();
-}
-
-function updateCount(){
- $("contactCount").textContent=contacts.length+" / 3 contacts saved";
- const editing=Boolean($("editId").value);
- $("saveContactBtn").disabled=contacts.length>=3&&!editing;
 }
 
 function renderContacts(){
@@ -282,7 +446,7 @@ function renderContacts(){
 
  if(!contacts.length){
   const empty=document.createElement("p");
-  empty.textContent="No contacts saved yet.";
+  empty.textContent=msg("No contacts saved yet.","இதுவரை தொடர்புகள் சேமிக்கப்படவில்லை.");
   empty.style.marginTop="12px";
   list.appendChild(empty);
   updateCount();
@@ -294,10 +458,10 @@ function renderContacts(){
   item.className="contact-item";
 
   const name=document.createElement("strong");
-  name.textContent=contact.name||"Unnamed contact";
+  name.textContent=contact.name||msg("Unnamed contact","பெயரிடப்படாத தொடர்பு");
 
   const phone=document.createElement("p");
-  phone.textContent=contact.phone||"No phone number";
+  phone.textContent=contact.phone||msg("No phone number","கைபேசி எண் இல்லை");
 
   const actions=document.createElement("div");
   actions.className="contact-actions";
@@ -305,13 +469,13 @@ function renderContacts(){
   const edit=document.createElement("button");
   edit.className="action";
   edit.type="button";
-  edit.textContent="Edit";
+  edit.textContent=msg("Edit","திருத்து");
   edit.addEventListener("click",()=>editContact(contact));
 
   const remove=document.createElement("button");
   remove.className="action danger";
   remove.type="button";
-  remove.textContent="Delete";
+  remove.textContent=msg("Delete","நீக்கு");
   remove.addEventListener("click",()=>removeContact(contact.id));
 
   actions.append(edit,remove);
@@ -322,6 +486,19 @@ function renderContacts(){
  updateCount();
 }
 
+function showFirestoreError(error){
+ if(error?.code==="permission-denied"){
+  return msg(
+   "Permission denied. Check Firestore Rules for users/{userId}/contacts/{contactId}.",
+   "அனுமதி மறுக்கப்பட்டது. Firestore Rules-ஐ சரிபார்க்கவும்."
+  );
+ }
+ if(error?.code==="unavailable"){
+  return msg("Firestore is temporarily unavailable. Check your internet connection.","Firestore தற்காலிகமாக கிடைக்கவில்லை. இணைய இணைப்பைச் சரிபார்க்கவும்.");
+ }
+ return error?.message||msg("Unknown Firestore error.","தெரியாத Firestore பிழை.");
+}
+
 function listenToContacts(user){
  if(stopListening){
   stopListening();
@@ -330,7 +507,7 @@ function listenToContacts(user){
 
  contacts=[];
  renderContacts();
- showContactMessage("Loading your saved contacts...");
+ showContactMessage("Loading your saved contacts...","சேமித்த தொடர்புகள் ஏற்றப்படுகின்றன...");
 
  stopListening=onSnapshot(
   contactsRef(user.uid),
@@ -342,24 +519,15 @@ function listenToContacts(user){
     return aTime-bTime;
    });
    renderContacts();
-   showContactMessage(contacts.length
-    ? "Your contacts are synced with this account."
-    : "No contacts saved yet. Add your trusted contacts.");
+   showContactMessage(
+    contacts.length?"Your contacts are synced with this account.":"No contacts saved yet. Add your trusted contacts.",
+    contacts.length?"உங்கள் தொடர்புகள் இந்தக் கணக்குடன் ஒத்திசைக்கப்பட்டுள்ளன.":"இதுவரை தொடர்புகள் இல்லை. நம்பகமான நபர்களைச் சேர்க்கவும்."
+   );
   },
   error=>{
-   showContactMessage("Could not load contacts: "+showFirestoreError(error));
+   showContactMessage("Could not load contacts: "+showFirestoreError(error),"தொடர்புகளை ஏற்ற முடியவில்லை: "+showFirestoreError(error));
   }
  );
-}
-
-function showFirestoreError(error){
- if(error?.code==="permission-denied"){
-  return "Permission denied. Check that Firestore Rules match users/{userId}/contacts/{contactId}.";
- }
- if(error?.code==="unavailable"){
-  return "Firestore is temporarily unavailable. Check your internet connection.";
- }
- return error?.message||"Unknown Firestore error.";
 }
 
 function updateAccountUI(user){
@@ -385,17 +553,15 @@ function updateAccountUI(user){
  $("contactsApp").classList.remove("hidden");
 
  $("userType").textContent=user.isAnonymous
-  ?"Account type: Guest account"
-  :"Account type: Google account";
+  ?msg("Account type: Guest account","கணக்கு வகை: Guest கணக்கு")
+  :msg("Account type: Google account","கணக்கு வகை: Google கணக்கு");
 
  $("userEmail").textContent=user.email
-  ?"Email: "+user.email
-  :"Email: Not available for this account";
+  ?msg("Email: ","மின்னஞ்சல்: ")+user.email
+  :msg("Email: Not available for this account","மின்னஞ்சல்: இந்தக் கணக்கிற்கு இல்லை");
 
- $("userId").textContent="Account ID: "+user.uid;
-
+ $("userId").textContent=msg("Account ID: ","கணக்கு ID: ")+user.uid;
  $("guestUpgrade").classList.toggle("hidden",!user.isAnonymous);
-
  listenToContacts(user);
 }
 
@@ -412,10 +578,6 @@ window.guestLogin=async()=>{
  }
 };
 
-async function googleSignIn(){
- await signInWithPopup(auth,provider);
-}
-
 window.googleLogin=async()=>{
  if(busy)return;
  setBusy(true);
@@ -424,20 +586,12 @@ window.googleLogin=async()=>{
  try{
   if(auth.currentUser?.isAnonymous){
    await linkWithPopup(auth.currentUser,provider);
-   showToast(
-    "Guest account linked. Your contacts stay with this account.",
-    "Guest கணக்கு Google-உடன் இணைக்கப்பட்டது. Contacts அதே கணக்கில் இருக்கும்."
-   );
+   showToast("Guest account linked. Your contacts stay with this account.","Guest கணக்கு Google-உடன் இணைக்கப்பட்டது. உங்கள் தொடர்புகள் அதே கணக்கில் இருக்கும்.");
   }else{
-   await googleSignIn();
+   await signInWithPopup(auth,provider);
   }
  }catch(error){
-  const popupFallback=[
-   "auth/popup-blocked",
-   "auth/operation-not-supported-in-this-environment"
-  ];
-
-  if(popupFallback.includes(error.code)){
+  if(error.code==="auth/popup-blocked"||error.code==="auth/operation-not-supported-in-this-environment"){
    try{
     if(auth.currentUser?.isAnonymous){
      await linkWithRedirect(auth.currentUser,provider);
@@ -458,21 +612,16 @@ window.googleLogin=async()=>{
 
 window.linkGuestToGoogle=async()=>{
  const user=auth.currentUser;
-
  if(!user?.isAnonymous){
-  showToast("You are not signed in as a guest.","நீங்கள் Guest account-ல் login செய்யவில்லை.");
+  showToast("You are not signed in as a guest.","நீங்கள் Guest கணக்கில் உள்நுழையவில்லை.");
   return;
  }
 
  try{
   await linkWithPopup(user,provider);
-  showToast(
-   "Google linked successfully. Your contacts are preserved.",
-   "Google account வெற்றிகரமாக இணைக்கப்பட்டது. Contacts பாதுகாக்கப்பட்டுள்ளன."
-  );
+  showToast("Google linked successfully. Your contacts are preserved.","Google கணக்கு இணைக்கப்பட்டது. உங்கள் தொடர்புகள் பாதுகாக்கப்பட்டுள்ளன.");
  }catch(error){
-  if(error.code==="auth/popup-blocked"||
-     error.code==="auth/operation-not-supported-in-this-environment"){
+  if(error.code==="auth/popup-blocked"||error.code==="auth/operation-not-supported-in-this-environment"){
    try{
     await linkWithRedirect(user,provider);
     return;
@@ -482,7 +631,6 @@ window.linkGuestToGoogle=async()=>{
    }
   }
   setAuthMessage(showAuthError(error));
-  showToast(showAuthError(error),showAuthError(error));
  }
 };
 
@@ -490,9 +638,10 @@ window.logout=async()=>{
  if(!currentUser)return;
 
  if(currentUser.isAnonymous){
-  const ok=confirm(
-   "This is a Guest account. Signing out may make this guest account and its contacts difficult to recover. Link it to Google first if you want to keep access. Sign out anyway?"
-  );
+  const ok=confirm(msg(
+   "This is a Guest account. Signing out may make this guest account and its contacts difficult to recover. Link it to Google first if you want to keep access. Sign out anyway?",
+   "இது Guest கணக்கு. வெளியேறினால் இந்தக் கணக்கையும் தொடர்புகளையும் மீண்டும் பெற முடியாமல் போகலாம். முதலில் Google-உடன் இணைக்கவும். இருந்தாலும் வெளியேற வேண்டுமா?"
+  ));
   if(!ok)return;
  }
 
@@ -519,7 +668,7 @@ $("contactForm").addEventListener("submit",async event=>{
 
  const user=auth.currentUser;
  if(!user){
-  showContactMessage("Please sign in first.");
+  showContactMessage("Please sign in first.","முதலில் உள்நுழையவும்.");
   return;
  }
 
@@ -528,53 +677,45 @@ $("contactForm").addEventListener("submit",async event=>{
  const editId=$("editId").value;
 
  if(name.length<2){
-  showContactMessage("Please enter a valid contact name.");
+  showContactMessage("Please enter a valid contact name.","சரியான தொடர்புப் பெயரை உள்ளிடவும்.");
   return;
  }
 
  if(!validPhone(phone)){
-  showContactMessage("Enter a valid phone number with country code if needed.");
+  showContactMessage("Enter a valid phone number with country code if needed.","சரியான கைபேசி எண்ணை உள்ளிடவும். தேவைப்பட்டால் country code சேர்க்கவும்.");
   return;
  }
 
  if(!$("contactConsent").checked){
-  showContactMessage("Please confirm that this contact has agreed.");
+  showContactMessage("Please confirm that this contact has agreed.","இந்தத் தொடர்பின் சம்மதத்தை உறுதிப்படுத்தவும்.");
   return;
  }
 
  if(!editId&&contacts.length>=3){
-  showContactMessage("Maximum 3 contacts allowed.");
+  showContactMessage("Maximum 3 contacts allowed.","அதிகபட்சம் 3 தொடர்புகள் மட்டுமே அனுமதிக்கப்படும்.");
   return;
  }
 
  $("saveContactBtn").disabled=true;
- showContactMessage("Saving contact...");
+ showContactMessage("Saving contact...","தொடர்பு சேமிக்கப்படுகிறது...");
 
  try{
   if(editId){
-   const contactDoc=doc(db,"users",user.uid,"contacts",editId);
-   await updateDoc(contactDoc,{
-    name,
-    phone,
-    consentConfirmed:true,
-    updatedAt:serverTimestamp()
+   await updateDoc(doc(db,"users",user.uid,"contacts",editId),{
+    name,phone,consentConfirmed:true,updatedAt:serverTimestamp()
    });
-   showContactMessage("Contact updated successfully.");
+   showContactMessage("Contact updated successfully.","தொடர்பு வெற்றிகரமாக புதுப்பிக்கப்பட்டது.");
   }else{
    await addDoc(contactsRef(user.uid),{
-    name,
-    phone,
-    consentConfirmed:true,
-    createdAt:serverTimestamp(),
-    updatedAt:serverTimestamp()
+    name,phone,consentConfirmed:true,createdAt:serverTimestamp(),updatedAt:serverTimestamp()
    });
-   showContactMessage("Contact saved successfully.");
+   showContactMessage("Contact saved successfully.","தொடர்பு வெற்றிகரமாகச் சேமிக்கப்பட்டது.");
   }
 
   resetContactForm();
-  showToast("Contact saved successfully.","தொடர்பு வெற்றிகரமாக சேமிக்கப்பட்டது.");
+  showToast("Contact saved successfully.","தொடர்பு வெற்றிகரமாகச் சேமிக்கப்பட்டது.");
  }catch(error){
-  showContactMessage("Save failed: "+showFirestoreError(error));
+  showContactMessage("Save failed: "+showFirestoreError(error),"சேமிக்க முடியவில்லை: "+showFirestoreError(error));
  }finally{
   updateCount();
  }
@@ -585,7 +726,7 @@ function editContact(contact){
  $("contactName").value=contact.name||"";
  $("contactPhone").value=contact.phone||"";
  $("contactConsent").checked=Boolean(contact.consentConfirmed);
- $("saveContactBtn").textContent="Update Contact";
+ $("saveContactBtn").textContent=msg("Update Contact","தொடர்பைப் புதுப்பிக்கவும்");
  $("cancelEditBtn").classList.remove("hidden");
  updateCount();
  $("contactForm").scrollIntoView({behavior:"smooth",block:"center"});
@@ -593,36 +734,32 @@ function editContact(contact){
 
 window.cancelEdit=()=>{
  resetContactForm();
- showContactMessage("Edit cancelled.");
+ showContactMessage("Edit cancelled.","திருத்தம் ரத்து செய்யப்பட்டது.");
 };
 
 async function removeContact(id){
  const user=auth.currentUser;
  if(!user)return;
 
- const ok=confirm("Delete this emergency contact?");
+ const ok=confirm(msg("Delete this emergency contact?","இந்த அவசர தொடர்பை நீக்க வேண்டுமா?"));
  if(!ok)return;
 
  try{
   await deleteDoc(doc(db,"users",user.uid,"contacts",id));
-  showContactMessage("Contact deleted successfully.");
+  showContactMessage("Contact deleted successfully.","தொடர்பு வெற்றிகரமாக நீக்கப்பட்டது.");
   showToast("Contact deleted.","தொடர்பு நீக்கப்பட்டது.");
   if($("editId").value===id)resetContactForm();
  }catch(error){
-  showContactMessage("Delete failed: "+showFirestoreError(error));
+  showContactMessage("Delete failed: "+showFirestoreError(error),"நீக்க முடியவில்லை: "+showFirestoreError(error));
  }
 }
 
 async function initializeAuth(){
  try{
   await setPersistence(auth,browserLocalPersistence);
-  const redirectResult=await getRedirectResult(auth);
-
-  if(redirectResult?.user){
-   showToast(
-    "Google sign-in completed successfully.",
-    "Google login வெற்றிகரமாக முடிந்தது."
-   );
+  const result=await getRedirectResult(auth);
+  if(result?.user){
+   showToast("Sign-in completed successfully.","உள்நுழைவு வெற்றிகரமாக முடிந்தது.");
   }
  }catch(error){
   setAuthMessage(showAuthError(error));
@@ -637,4 +774,3 @@ initializeAuth();
 </script>
 </body>
 </html>
-\
