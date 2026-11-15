@@ -8,7 +8,7 @@
 <title>SafeSignal | One Tap. Someone Knows.</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+Tamil:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#070b14;--panel:#111d30;--red:#ff3155;--cyan:#00e5ff;--text:#f5f8ff;--muted:#9aabc1}
+:root{--bg:#070b14;--red:#ff3155;--cyan:#00e5ff;--text:#f5f8ff;--muted:#9aabc1}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;scroll-padding-top:100px}
 body{background:radial-gradient(ellipse at 5% 10%,#06394b55,transparent 40%),radial-gradient(ellipse at 95% 40%,#650d2a40,transparent 45%),var(--bg);color:var(--text);font-family:Inter,"Noto Sans Tamil",sans-serif}
@@ -200,7 +200,7 @@ import {initializeApp} from "https://www.gstatic.com/firebasejs/13.3.0/firebase-
 import {
  getAuth,onAuthStateChanged,setPersistence,browserLocalPersistence,
  signInAnonymously,GoogleAuthProvider,signInWithPopup,signInWithRedirect,
- getRedirectResult,signOut,linkWithPopup
+ getRedirectResult,signOut,linkWithPopup,linkWithRedirect
 } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-auth.js";
 import {
  getFirestore,collection,addDoc,onSnapshot,doc,updateDoc,deleteDoc,serverTimestamp
@@ -215,150 +215,425 @@ const firebaseConfig={
  appId:"1:560630364759:web:b62f087794092a44670112",
  measurementId:"G-PWDTZGFVHP"
 };
-const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app);
+
+const app=initializeApp(firebaseConfig);
+const auth=getAuth(app);
+const db=getFirestore(app);
 const provider=new GoogleAuthProvider();
 provider.setCustomParameters({prompt:"select_account"});
-const $=id=>document.getElementById(id);
-let currentUser=null,stopListening=null,contacts=[];
 
-function setBusy(v){$("guestBtn").disabled=v;$("googleBtn").disabled=v;}
-function errorText(e){
-const map={
-"auth/unauthorized-domain":"Website domain is not authorized in Firebase.",
-"auth/operation-not-allowed":"Enable this sign-in method in Firebase Authentication.",
-"auth/popup-blocked":"Popup blocked. Allow popups and try again.",
-"auth/credential-already-in-use":"This Google account already has a separate SafeSignal account. Sign into that Google account instead; automatic merging is not available yet.",
-"permission-denied":"Firestore permission denied. Check your Firestore Rules."
-};
-return map[e.code]||e.message||"Something went wrong.";
+const $=id=>document.getElementById(id);
+let currentUser=null;
+let stopListening=null;
+let contacts=[];
+let busy=false;
+
+function setBusy(value){
+ busy=value;
+ $("guestBtn").disabled=value;
+ $("googleBtn").disabled=value;
 }
-async function start(){
-try{await setPersistence(auth,browserLocalPersistence);await getRedirectResult(auth);}
-catch(e){$("authMessage").textContent=errorText(e);}
+
+function showAuthError(error){
+ const code=error?.code||"";
+ const messages={
+  "auth/api-key-not-valid":"Firebase API key is invalid. Check the Web API key in Firebase Project Settings.",
+  "auth/invalid-api-key":"Firebase API key is invalid. Check Firebase Project Settings.",
+  "auth/unauthorized-domain":"Add nammabustn-hub.github.io to Firebase Authentication > Settings > Authorized domains.",
+  "auth/operation-not-allowed":"Enable this sign-in provider in Firebase Authentication.",
+  "auth/popup-blocked":"Google popup was blocked. Allow popups or retry.",
+  "auth/popup-closed-by-user":"Google sign-in was cancelled. Please try again.",
+  "auth/credential-already-in-use":"This Google account is already linked to another SafeSignal account. Automatic account merging is not enabled.",
+  "auth/account-exists-with-different-credential":"This Google email already uses another sign-in method.",
+  "auth/network-request-failed":"Network error. Check your internet connection and retry."
+ };
+ return messages[code]||error?.message||"Something went wrong. Please try again.";
 }
+
+function setAuthMessage(message){
+ $("authMessage").textContent=message;
+}
+
+function contactsRef(uid){
+ return collection(db,"users",uid,"contacts");
+}
+
+function showContactMessage(message){
+ $("contactMessage").textContent=message;
+}
+
+function resetContactForm(){
+ $("contactForm").reset();
+ $("editId").value="";
+ $("saveContactBtn").textContent="Save Contact";
+ $("cancelEditBtn").classList.add("hidden");
+ updateCount();
+}
+
+function updateCount(){
+ $("contactCount").textContent=contacts.length+" / 3 contacts saved";
+ const editing=Boolean($("editId").value);
+ $("saveContactBtn").disabled=contacts.length>=3&&!editing;
+}
+
+function renderContacts(){
+ const list=$("contactList");
+ list.replaceChildren();
+
+ if(!contacts.length){
+  const empty=document.createElement("p");
+  empty.textContent="No contacts saved yet.";
+  empty.style.marginTop="12px";
+  list.appendChild(empty);
+  updateCount();
+  return;
+ }
+
+ contacts.forEach(contact=>{
+  const item=document.createElement("div");
+  item.className="contact-item";
+
+  const name=document.createElement("strong");
+  name.textContent=contact.name||"Unnamed contact";
+
+  const phone=document.createElement("p");
+  phone.textContent=contact.phone||"No phone number";
+
+  const actions=document.createElement("div");
+  actions.className="contact-actions";
+
+  const edit=document.createElement("button");
+  edit.className="action";
+  edit.type="button";
+  edit.textContent="Edit";
+  edit.addEventListener("click",()=>editContact(contact));
+
+  const remove=document.createElement("button");
+  remove.className="action danger";
+  remove.type="button";
+  remove.textContent="Delete";
+  remove.addEventListener("click",()=>removeContact(contact.id));
+
+  actions.append(edit,remove);
+  item.append(name,phone,actions);
+  list.appendChild(item);
+ });
+
+ updateCount();
+}
+
+function listenToContacts(user){
+ if(stopListening){
+  stopListening();
+  stopListening=null;
+ }
+
+ contacts=[];
+ renderContacts();
+ showContactMessage("Loading your saved contacts...");
+
+ stopListening=onSnapshot(
+  contactsRef(user.uid),
+  snapshot=>{
+   contacts=snapshot.docs.map(item=>({id:item.id,...item.data()}));
+   contacts.sort((a,b)=>{
+    const aTime=a.createdAt?.toMillis?.()||0;
+    const bTime=b.createdAt?.toMillis?.()||0;
+    return aTime-bTime;
+   });
+   renderContacts();
+   showContactMessage(contacts.length
+    ? "Your contacts are synced with this account."
+    : "No contacts saved yet. Add your trusted contacts.");
+  },
+  error=>{
+   showContactMessage("Could not load contacts: "+showFirestoreError(error));
+  }
+ );
+}
+
+function showFirestoreError(error){
+ if(error?.code==="permission-denied"){
+  return "Permission denied. Check that Firestore Rules match users/{userId}/contacts/{contactId}.";
+ }
+ if(error?.code==="unavailable"){
+  return "Firestore is temporarily unavailable. Check your internet connection.";
+ }
+ return error?.message||"Unknown Firestore error.";
+}
+
+function updateAccountUI(user){
+ currentUser=user;
+
+ if(!user){
+  $("loginPanel").classList.remove("hidden");
+  $("dashboard").classList.add("hidden");
+  $("contactsLoginNotice").classList.remove("hidden");
+  $("contactsApp").classList.add("hidden");
+  contacts=[];
+  renderContacts();
+  if(stopListening){
+   stopListening();
+   stopListening=null;
+  }
+  return;
+ }
+
+ $("loginPanel").classList.add("hidden");
+ $("dashboard").classList.remove("hidden");
+ $("contactsLoginNotice").classList.add("hidden");
+ $("contactsApp").classList.remove("hidden");
+
+ $("userType").textContent=user.isAnonymous
+  ?"Account type: Guest account"
+  :"Account type: Google account";
+
+ $("userEmail").textContent=user.email
+  ?"Email: "+user.email
+  :"Email: Not available for this account";
+
+ $("userId").textContent="Account ID: "+user.uid;
+
+ $("guestUpgrade").classList.toggle("hidden",!user.isAnonymous);
+
+ listenToContacts(user);
+}
+
 window.guestLogin=async()=>{
-setBusy(true);$("authMessage").textContent="";
-try{await signInAnonymously(auth);}
-catch(e){$("authMessage").textContent=errorText(e);}
-finally{setBusy(false);}
+ if(busy)return;
+ setBusy(true);
+ setAuthMessage("");
+ try{
+  await signInAnonymously(auth);
+ }catch(error){
+  setAuthMessage(showAuthError(error));
+ }finally{
+  setBusy(false);
+ }
 };
-window.googleLogin=async()=>{
-setBusy(true);$("authMessage").textContent="";
-try{
-if(auth.currentUser?.isAnonymous){
- await linkWithPopup(auth.currentUser,provider);
-}else{
+
+async function googleSignIn(){
  await signInWithPopup(auth,provider);
 }
-}catch(e){
-if(e.code==="auth/popup-blocked"||e.code==="auth/operation-not-supported-in-this-environment"){
-try{await signInWithRedirect(auth,provider);return;}catch(err){$("authMessage").textContent=errorText(err);}
-}else{$("authMessage").textContent=errorText(e);}
-}finally{setBusy(false);}
+
+window.googleLogin=async()=>{
+ if(busy)return;
+ setBusy(true);
+ setAuthMessage("");
+
+ try{
+  if(auth.currentUser?.isAnonymous){
+   await linkWithPopup(auth.currentUser,provider);
+   showToast(
+    "Guest account linked. Your contacts stay with this account.",
+    "Guest கணக்கு Google-உடன் இணைக்கப்பட்டது. Contacts அதே கணக்கில் இருக்கும்."
+   );
+  }else{
+   await googleSignIn();
+  }
+ }catch(error){
+  const popupFallback=[
+   "auth/popup-blocked",
+   "auth/operation-not-supported-in-this-environment"
+  ];
+
+  if(popupFallback.includes(error.code)){
+   try{
+    if(auth.currentUser?.isAnonymous){
+     await linkWithRedirect(auth.currentUser,provider);
+    }else{
+     await signInWithRedirect(auth,provider);
+    }
+    return;
+   }catch(redirectError){
+    setAuthMessage(showAuthError(redirectError));
+   }
+  }else{
+   setAuthMessage(showAuthError(error));
+  }
+ }finally{
+  setBusy(false);
+ }
 };
+
 window.linkGuestToGoogle=async()=>{
-if(!auth.currentUser?.isAnonymous){showToast("This account is already linked or signed in.","இந்த கணக்கு ஏற்கனவே இணைக்கப்பட்டுள்ளது.");return;}
-try{
-await linkWithPopup(auth.currentUser,provider);
-showToast("Guest account linked. Your saved contacts stay with this account.","Guest கணக்கு Google-உடன் இணைக்கப்பட்டது.");
-}catch(e){$("authMessage").textContent=errorText(e);showToast(errorText(e),errorText(e));}
+ const user=auth.currentUser;
+
+ if(!user?.isAnonymous){
+  showToast("You are not signed in as a guest.","நீங்கள் Guest account-ல் login செய்யவில்லை.");
+  return;
+ }
+
+ try{
+  await linkWithPopup(user,provider);
+  showToast(
+   "Google linked successfully. Your contacts are preserved.",
+   "Google account வெற்றிகரமாக இணைக்கப்பட்டது. Contacts பாதுகாக்கப்பட்டுள்ளன."
+  );
+ }catch(error){
+  if(error.code==="auth/popup-blocked"||
+     error.code==="auth/operation-not-supported-in-this-environment"){
+   try{
+    await linkWithRedirect(user,provider);
+    return;
+   }catch(redirectError){
+    setAuthMessage(showAuthError(redirectError));
+    return;
+   }
+  }
+  setAuthMessage(showAuthError(error));
+  showToast(showAuthError(error),showAuthError(error));
+ }
 };
+
 window.logout=async()=>{
-if(currentUser?.isAnonymous){
-const ok=confirm("This is a Guest account. Signing out may make its contacts difficult to recover. Link it to Google first to keep access. Sign out anyway?");
-if(!ok)return;
-}
-try{if(stopListening){stopListening();stopListening=null;}await signOut(auth);}
-catch(e){showToast(errorText(e),errorText(e));}
+ if(!currentUser)return;
+
+ if(currentUser.isAnonymous){
+  const ok=confirm(
+   "This is a Guest account. Signing out may make this guest account and its contacts difficult to recover. Link it to Google first if you want to keep access. Sign out anyway?"
+  );
+  if(!ok)return;
+ }
+
+ try{
+  if(stopListening){
+   stopListening();
+   stopListening=null;
+  }
+  await signOut(auth);
+  setAuthMessage("");
+  showToast("Signed out successfully.","வெற்றிகரமாக வெளியேறிவிட்டீர்கள்.");
+ }catch(error){
+  showToast(showAuthError(error),showAuthError(error));
+ }
 };
 
-function contactsRef(uid){return collection(db,"users",uid,"contacts");}
-function showMessage(t){$("contactMessage").textContent=t;}
-function updateCount(){
-$("contactCount").textContent=contacts.length+" / 3 contacts saved";
-$("saveContactBtn").disabled=contacts.length>=3&&!$("editId").value;
-}
-function renderContacts(){
-const list=$("contactList");list.innerHTML="";
-contacts.sort((a,b)=>(a.name||"").localeCompare(b.name||""));
-if(!contacts.length){list.textContent="No contacts saved yet.";updateCount();return;}
-contacts.forEach(c=>{
-const item=document.createElement("div");item.className="contact-item";
-const name=document.createElement("strong");name.textContent=c.name;
-const phone=document.createElement("p");phone.textContent=c.phone;
-const actions=document.createElement("div");actions.className="contact-actions";
-const edit=document.createElement("button");edit.className="action primary";edit.textContent="Edit";edit.onclick=()=>window.editContact(c.id);
-const del=document.createElement("button");del.className="action danger";del.textContent="Delete";del.onclick=()=>window.removeContact(c.id);
-actions.append(edit,del);item.append(name,phone,actions);list.append(item);
-});
-updateCount();
-}
-function listenContacts(user){
-if(stopListening){stopListening();stopListening=null;}
-contacts=[];
-$("contactList").textContent="Loading contacts...";
-stopListening=onSnapshot(contactsRef(user.uid),snapshot=>{
-contacts=snapshot.docs.map(d=>({id:d.id,...d.data()}));
-renderContacts();
-},e=>showMessage("Could not load contacts: "+errorText(e)));
+function validPhone(phone){
+ const cleaned=phone.replace(/[\s()-]/g,"");
+ return /^\+?[0-9]{8,15}$/.test(cleaned);
 }
 
-$("contactForm").addEventListener("submit",async e=>{
-e.preventDefault();
-if(!currentUser){showMessage("Please sign in first.");return;}
-const name=$("contactName").value.trim(),phone=$("contactPhone").value.trim();
-const editId=$("editId").value,consent=$("contactConsent").checked;
-const digits=phone.replace(/\D/g,"");
-if(name.length<2){showMessage("Please enter a valid name.");return;}
-if(digits.length<10||digits.length>15){showMessage("Enter a valid phone number.");return;}
-if(!consent){showMessage("Please confirm contact consent.");return;}
-if(!editId&&contacts.length>=3){showMessage("Maximum 3 contacts allowed.");return;}
-$("saveContactBtn").disabled=true;
-try{
-if(editId){
-await updateDoc(doc(db,"users",currentUser.uid,"contacts",editId),{name,phone,consent:true,updatedAt:serverTimestamp()});
-showMessage("Contact updated successfully.");
-}else{
-await addDoc(contactsRef(currentUser.uid),{name,phone,consent:true,createdAt:serverTimestamp(),updatedAt:serverTimestamp()});
-showMessage("Contact saved successfully.");
-}
-window.cancelEdit();
-}catch(err){showMessage("Save failed: "+errorText(err));}
-finally{updateCount();}
+$("contactForm").addEventListener("submit",async event=>{
+ event.preventDefault();
+
+ const user=auth.currentUser;
+ if(!user){
+  showContactMessage("Please sign in first.");
+  return;
+ }
+
+ const name=$("contactName").value.trim();
+ const phone=$("contactPhone").value.trim();
+ const editId=$("editId").value;
+
+ if(name.length<2){
+  showContactMessage("Please enter a valid contact name.");
+  return;
+ }
+
+ if(!validPhone(phone)){
+  showContactMessage("Enter a valid phone number with country code if needed.");
+  return;
+ }
+
+ if(!$("contactConsent").checked){
+  showContactMessage("Please confirm that this contact has agreed.");
+  return;
+ }
+
+ if(!editId&&contacts.length>=3){
+  showContactMessage("Maximum 3 contacts allowed.");
+  return;
+ }
+
+ $("saveContactBtn").disabled=true;
+ showContactMessage("Saving contact...");
+
+ try{
+  if(editId){
+   const contactDoc=doc(db,"users",user.uid,"contacts",editId);
+   await updateDoc(contactDoc,{
+    name,
+    phone,
+    consentConfirmed:true,
+    updatedAt:serverTimestamp()
+   });
+   showContactMessage("Contact updated successfully.");
+  }else{
+   await addDoc(contactsRef(user.uid),{
+    name,
+    phone,
+    consentConfirmed:true,
+    createdAt:serverTimestamp(),
+    updatedAt:serverTimestamp()
+   });
+   showContactMessage("Contact saved successfully.");
+  }
+
+  resetContactForm();
+  showToast("Contact saved successfully.","தொடர்பு வெற்றிகரமாக சேமிக்கப்பட்டது.");
+ }catch(error){
+  showContactMessage("Save failed: "+showFirestoreError(error));
+ }finally{
+  updateCount();
+ }
 });
-window.editContact=id=>{
-const c=contacts.find(x=>x.id===id);if(!c)return;
-$("editId").value=id;$("contactName").value=c.name;$("contactPhone").value=c.phone;$("contactConsent").checked=!!c.consent;
-$("saveContactBtn").textContent="Update Contact";$("saveContactBtn").disabled=false;
-$("cancelEditBtn").classList.remove("hidden");$("contactName").scrollIntoView({behavior:"smooth",block:"center"});
-};
+
+function editContact(contact){
+ $("editId").value=contact.id;
+ $("contactName").value=contact.name||"";
+ $("contactPhone").value=contact.phone||"";
+ $("contactConsent").checked=Boolean(contact.consentConfirmed);
+ $("saveContactBtn").textContent="Update Contact";
+ $("cancelEditBtn").classList.remove("hidden");
+ updateCount();
+ $("contactForm").scrollIntoView({behavior:"smooth",block:"center"});
+}
+
 window.cancelEdit=()=>{
-$("contactForm").reset();$("editId").value="";$("saveContactBtn").textContent="Save Contact";$("cancelEditBtn").classList.add("hidden");updateCount();
-};
-window.removeContact=async id=>{
-if(!currentUser||!confirm("Delete this emergency contact?"))return;
-try{await deleteDoc(doc(db,"users",currentUser.uid,"contacts",id));showMessage("Contact deleted.");if($("editId").value===id)window.cancelEdit();}
-catch(e){showMessage("Delete failed: "+errorText(e));}
+ resetContactForm();
+ showContactMessage("Edit cancelled.");
 };
 
-onAuthStateChanged(auth,user=>{
-currentUser=user;
-if(user){
-$("loginPanel").classList.add("hidden");$("dashboard").classList.remove("hidden");
-$("userType").textContent=user.isAnonymous?"Account type: Guest":"Account type: Google account";
-$("userEmail").textContent=user.email?"Email: "+user.email:"Email: Not available for guest account";
-$("userId").textContent="Account ID: "+user.uid;
-$("guestUpgrade").classList.toggle("hidden",!user.isAnonymous);
-$("contactsLoginNotice").classList.add("hidden");$("contactsApp").classList.remove("hidden");
-listenContacts(user);
-}else{
-$("loginPanel").classList.remove("hidden");$("dashboard").classList.add("hidden");
-$("contactsLoginNotice").classList.remove("hidden");$("contactsApp").classList.add("hidden");
-if(stopListening){stopListening();stopListening=null;}
-contacts=[];
+async function removeContact(id){
+ const user=auth.currentUser;
+ if(!user)return;
+
+ const ok=confirm("Delete this emergency contact?");
+ if(!ok)return;
+
+ try{
+  await deleteDoc(doc(db,"users",user.uid,"contacts",id));
+  showContactMessage("Contact deleted successfully.");
+  showToast("Contact deleted.","தொடர்பு நீக்கப்பட்டது.");
+  if($("editId").value===id)resetContactForm();
+ }catch(error){
+  showContactMessage("Delete failed: "+showFirestoreError(error));
+ }
 }
-});
-start();
+
+async function initializeAuth(){
+ try{
+  await setPersistence(auth,browserLocalPersistence);
+  const redirectResult=await getRedirectResult(auth);
+
+  if(redirectResult?.user){
+   showToast(
+    "Google sign-in completed successfully.",
+    "Google login வெற்றிகரமாக முடிந்தது."
+   );
+  }
+ }catch(error){
+  setAuthMessage(showAuthError(error));
+ }
+
+ onAuthStateChanged(auth,user=>{
+  updateAccountUI(user);
+ });
+}
+
+initializeAuth();
 </script>
 </body>
 </html>
