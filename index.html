@@ -3,517 +3,478 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#070b14">
 <title>SafeSignal | One Tap. Someone Knows.</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+Tamil:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<meta name="description" content="SafeSignal personal safety platform with English and Tamil support.">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+Tamil:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-:root {
+:root{
   --bg:#070b14;
+  --panel:#111d30;
   --red:#ff3155;
   --cyan:#00e5ff;
-  --white:#f5f8ff;
-  --muted:#9aaac0;
+  --text:#f5f8ff;
+  --muted:#9aabc1;
 }
-
-* {
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  -webkit-tap-highlight-color:transparent;
-}
-
-body {
-  min-height:100vh;
-  overflow-x:hidden;
-  color:var(--white);
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{
   background:
-    radial-gradient(ellipse at 5% 15%,#06374755,transparent 40%),
-    radial-gradient(ellipse at 95% 40%,#610c2a40,transparent 42%),
-    radial-gradient(ellipse at 50% 100%,#102e4b55,transparent 50%),
-    var(--bg);
+  radial-gradient(ellipse at 5% 10%,#06394b55,transparent 40%),
+  radial-gradient(ellipse at 95% 40%,#650d2a40,transparent 45%),
+  var(--bg);
+  color:var(--text);
   font-family:Inter,"Noto Sans Tamil",sans-serif;
 }
+body.ta{font-family:"Noto Sans Tamil",sans-serif}
+button,input{font:inherit}
+button{cursor:pointer;outline:none}
+.container{width:min(100% - 34px,850px);margin:auto}
 
-body.tamil {
-  font-family:"Noto Sans Tamil",sans-serif;
+/* HEADER */
+header{
+  position:sticky;top:0;z-index:20;
+  background:#080e1bf0;
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid #ffffff14;
 }
-
-button {
-  font:inherit;
-  outline:none;
-  -webkit-appearance:none;
-  appearance:none;
-  -webkit-tap-highlight-color:transparent;
+.header-top{
+  display:flex;justify-content:space-between;
+  align-items:center;padding:18px 0;
 }
-
-button:focus,
-button:focus-visible {
-  outline:none;
-}
-
-.container {
-  width:min(100% - 34px,680px);
-  margin:auto;
-}
-
-header {
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:23px 0;
-  border-bottom:1px solid #ffffff12;
-}
-
-.logo {
-  font-size:23px;
-  font-weight:900;
-  letter-spacing:-1.2px;
-}
-
-.logo span {
-  color:var(--red);
-  text-shadow:0 0 20px #ff315566;
-}
-
-.status {
-  display:flex;
-  align-items:center;
-  gap:8px;
-  color:#ff7289;
-  font-size:10px;
-  letter-spacing:1.5px;
-  font-weight:800;
-}
-
-.status i {
-  width:8px;
-  height:8px;
-  background:var(--red);
-  border-radius:50%;
+.logo{font-size:24px;font-weight:900;letter-spacing:-1px}
+.logo span{color:var(--red);text-shadow:0 0 20px #ff315566}
+.live{font-size:10px;font-weight:800;letter-spacing:1.5px;color:#ff728b}
+.live i{
+  display:inline-block;width:8px;height:8px;
+  border-radius:50%;background:var(--red);
   box-shadow:0 0 13px var(--red);
-  animation:blink 1.3s infinite;
+  margin-right:7px;animation:blink 1s infinite;
+}
+@keyframes blink{50%{opacity:.2}}
+
+.languages{display:flex;justify-content:center;gap:10px;padding:5px 0 14px}
+.languages button{
+  background:#142238;border:1px solid #ffffff20;
+  color:#aabbd0;border-radius:30px;padding:10px 24px;
+  font-weight:700;font-size:13px;
+}
+.languages button.active{
+  border-color:var(--cyan);color:white;
+  background:#10313c;box-shadow:0 0 17px #00e5ff22;
+}
+nav{display:flex;gap:8px;overflow-x:auto;padding-bottom:13px;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+nav a{
+  white-space:nowrap;text-decoration:none;
+  color:#b4c3d6;font-size:11px;
+  padding:9px 12px;border-radius:10px;
+  background:#ffffff09;border:1px solid #ffffff12;
 }
 
-@keyframes blink {
-  50% {opacity:.25}
+/* HERO */
+.hero{text-align:center;padding:52px 0 10px}
+.eyebrow{
+  color:var(--cyan);font-size:10px;
+  font-weight:800;letter-spacing:3px;margin-bottom:18px;
+}
+h1{font-size:clamp(36px,8vw,58px);line-height:1.2;letter-spacing:-2px}
+h1 span{color:var(--red);text-shadow:0 0 25px #ff315566}
+.subtitle{
+  color:var(--muted);font-size:14px;line-height:1.9;
+  max-width:570px;margin:18px auto;
 }
 
-.lang {
-  display:flex;
-  justify-content:center;
-  gap:9px;
-  margin:25px auto 30px;
+/* SOS BUTTON */
+.sos-area{display:flex;flex-direction:column;align-items:center;padding:35px 0 45px}
+.ring{
+  width:220px;height:220px;border-radius:50%;
+  display:grid;place-items:center;position:relative;
 }
-
-.lang button {
-  padding:11px 24px;
-  border-radius:30px;
-  border:1px solid #ffffff18;
-  background:#111b2b;
-  color:#9eafc5;
-  font-size:13px;
-  font-weight:700;
-  cursor:pointer;
-  transition:.25s;
+.ring:before,.ring:after{
+  content:"";position:absolute;inset:0;
+  border:1px solid #ff315566;border-radius:50%;
+  animation:ring 2.5s infinite;pointer-events:none;
 }
-
-.lang button.active {
-  color:white;
-  border-color:var(--cyan);
-  background:#0d303c;
-  box-shadow:0 0 17px #00e5ff22;
+.ring:after{animation-delay:1.2s}
+@keyframes ring{
+  0%{transform:scale(.8);opacity:.8}
+  100%{transform:scale(1.35);opacity:0}
 }
-
-.hero {
-  text-align:center;
-  padding:15px 0 0;
-}
-
-.eyebrow {
-  color:var(--cyan);
-  font-size:10px;
-  font-weight:800;
-  letter-spacing:3px;
-  margin-bottom:17px;
-}
-
-h1 {
-  font-size:clamp(34px,8vw,52px);
-  line-height:1.2;
-  letter-spacing:-1.8px;
-}
-
-h1 span {
-  color:var(--red);
-  text-shadow:0 0 25px #ff315555;
-}
-
-.subtitle {
-  max-width:440px;
-  margin:16px auto 0;
-  color:var(--muted);
-  font-size:14px;
-  line-height:1.9;
-}
-
-.sos-area {
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  padding:40px 0 35px;
-}
-
-.ring {
-  width:220px;
-  height:220px;
-  border-radius:50%;
-  display:grid;
-  place-items:center;
-  position:relative;
-}
-
-.ring::before,
-.ring::after {
-  content:"";
-  position:absolute;
-  inset:0;
-  border:1px solid #ff315566;
-  border-radius:50%;
-  animation:ring 2.6s infinite;
-  pointer-events:none;
-}
-
-.ring::after {
-  animation-delay:1.3s;
-}
-
-@keyframes ring {
-  0% {
-    transform:scale(.78);
-    opacity:.8;
-  }
-  100% {
-    transform:scale(1.3);
-    opacity:0;
-  }
-}
-
-.sos {
-  width:174px;
-  height:174px;
-  border-radius:50%;
+.sos{
+  width:175px;height:175px;border-radius:50%;
   border:5px solid #ff9cac;
-  background:
-    radial-gradient(circle at 35% 25%,#ff8c9e,#ff3155 55%,#9c082a);
-  color:white;
-  font-size:42px;
-  font-weight:900;
-  cursor:pointer;
-  position:relative;
-  z-index:2;
-  box-shadow:
-    0 0 25px #ff315599,
-    0 0 70px #ff315533,
-    inset 0 0 20px #ffffff44;
-  animation:sospulse 2s infinite;
-  transition:transform .2s;
-  user-select:none;
+  background:radial-gradient(circle at 35% 25%,#ff8c9e,#ff3155 55%,#970728);
+  color:white;font-size:44px;font-weight:900;
+  position:relative;z-index:2;
+  box-shadow:0 0 30px #ff315599,0 0 75px #ff315533,inset 0 0 20px #ffffff44;
+  animation:pulse 2s infinite;
+}
+.sos small{display:block;font-size:10px;letter-spacing:2px;margin-top:5px}
+@keyframes pulse{
+  50%{box-shadow:0 0 45px #ff3155dd,0 0 100px #ff315566}
+}
+.tap-label{
+  color:#ff8195;font-size:10px;font-weight:800;
+  letter-spacing:2px;margin-top:24px;text-align:center;
 }
 
-.sos:active {
-  transform:scale(.94);
+/* CARDS */
+.card{
+  border:1px solid #ffffff16;
+  background:linear-gradient(145deg,#17263bdd,#101a2bee);
+  border-radius:21px;padding:23px;margin:18px 0;
+  box-shadow:0 15px 45px #0003;
+}
+.card h2{font-size:21px;margin-bottom:12px}
+.card h3{font-size:15px;margin:17px 0 8px}
+.card p{font-size:13px;line-height:1.9;color:var(--muted)}
+.section-title{text-align:center;margin:52px 0 20px}
+.section-title h2{font-size:27px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.feature{
+  border:1px solid #ffffff15;background:#111d30;
+  padding:19px;border-radius:17px;
+}
+.feature .emoji{font-size:26px;margin-bottom:12px}
+.feature h3{font-size:14px;margin-bottom:7px}
+.feature p{font-size:12px;line-height:1.8;color:var(--muted)}
+.action{
+  width:100%;padding:14px;border-radius:12px;
+  border:1px solid #ffffff25;background:#1a2940;color:white;
+  font-size:12px;font-weight:700;margin-top:12px;
+}
+.action.primary{border-color:var(--cyan);background:#10313c;color:#69efff}
+.info{
+  background:#0d252d;border:1px solid #15505b;
+  border-radius:15px;padding:16px;margin:20px 0;
+  color:#bfe0e5;font-size:12px;line-height:1.8;
 }
 
-.sos small {
-  display:block;
-  font-size:10px;
-  letter-spacing:2px;
-  margin-top:7px;
+/* FLOATING SOS SETTINGS */
+.switch-row{
+  display:flex;justify-content:space-between;align-items:center;gap:15px;
+  padding:15px 0;border-bottom:1px solid #ffffff13;
 }
-
-@keyframes sospulse {
-  0%,100% {
-    box-shadow:0 0 25px #ff315599,0 0 65px #ff315533;
-  }
-  50% {
-    box-shadow:0 0 40px #ff3155cc,0 0 90px #ff315555;
-  }
+.switch-row strong{font-size:13px}
+.switch-row p{font-size:11px;color:var(--muted);margin-top:5px;line-height:1.6}
+.switch{
+  width:52px;height:29px;border-radius:30px;
+  border:1px solid #526078;background:#263449;
+  position:relative;flex-shrink:0;transition:.25s;
 }
-
-.tap-label {
-  color:#ff8195;
-  font-size:10px;
-  font-weight:800;
-  letter-spacing:2px;
-  margin-top:24px;
-  text-align:center;
+.switch:after{
+  content:"";position:absolute;width:21px;height:21px;
+  background:white;border-radius:50%;top:3px;left:4px;transition:.25s;
 }
+.switch.on{background:#087d69;border-color:#00e5a8;box-shadow:0 0 14px #00e5a833}
+.switch.on:after{left:25px;background:#8bffe0}
 
-.card {
-  border:1px solid #ffffff13;
-  background:linear-gradient(135deg,#172438dd,#0e1726ee);
-  border-radius:22px;
-  padding:23px;
-  margin:17px 0;
-  box-shadow:0 15px 45px #0004;
+/* WEBSITE FLOATING BUTTON DEMO */
+.floating-sos{
+  display:none;position:fixed;right:17px;bottom:25px;
+  z-index:40;width:67px;height:67px;border-radius:50%;
+  border:3px solid #ff9cac;
+  background:radial-gradient(circle at 35% 25%,#ff8c9e,#ff3155 55%,#970728);
+  color:white;font-size:19px;font-weight:900;
+  box-shadow:0 0 22px #ff3155bb,0 0 45px #ff315566;
+  animation:pulse 1.8s infinite;
 }
+.floating-sos.visible{display:block}
+.floating-sos small{display:block;font-size:8px;letter-spacing:1px}
 
-.card h2 {
-  font-size:19px;
-  margin-bottom:10px;
+/* TOAST */
+.toast{
+  position:fixed;left:50%;bottom:23px;z-index:60;
+  transform:translate(-50%,30px);
+  width:max-content;max-width:calc(100% - 30px);
+  padding:14px 18px;border-radius:14px;
+  border:1px solid var(--cyan);background:#102b38;
+  color:white;font-size:12px;line-height:1.6;text-align:center;
+  opacity:0;visibility:hidden;transition:.3s;
+  box-shadow:0 0 25px #00e5ff33;
 }
+.toast.show{opacity:1;visibility:visible;transform:translate(-50%,0)}
 
-.card p {
-  color:var(--muted);
-  font-size:13px;
-  line-height:1.9;
+/* FOOTER */
+footer{
+  margin-top:50px;border-top:1px solid #ffffff16;
+  padding:32px 0;text-align:center;
 }
+.footer-logo{font-size:23px;font-weight:900}
+.footer-logo span{color:var(--red)}
+.footer-links{display:flex;justify-content:center;gap:15px;flex-wrap:wrap;margin:20px 0}
+.footer-links a{color:#9aabc1;font-size:11px;text-decoration:none}
+footer p{font-size:11px;color:#718198;line-height:2}
 
-.actions {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-  margin-top:21px;
-}
-
-.action {
-  min-height:54px;
-  border-radius:13px;
-  border:1px solid #ffffff24;
-  background:#1a2940;
-  color:white;
-  font-weight:700;
-  font-size:12px;
-  cursor:pointer;
-  padding:12px 8px;
-  transition:.2s;
-}
-
-.action:active {
-  transform:scale(.97);
-}
-
-.action.primary {
-  background:linear-gradient(110deg,#073b4a,#102c42);
-  border-color:#00cfe8;
-  color:#62efff;
-  box-shadow:0 0 17px #00e5ff14;
-}
-
-.action:hover {
-  border-color:var(--cyan);
-}
-
-.safety {
-  display:flex;
-  align-items:center;
-  gap:15px;
-  border:1px solid #1c4b54;
-  background:#0d222a;
-  border-radius:17px;
-  padding:17px;
-  margin:18px 0;
-}
-
-.shield {
-  width:43px;
-  height:43px;
-  display:grid;
-  place-items:center;
-  border-radius:13px;
-  background:#123c44;
-  font-size:22px;
-  flex-shrink:0;
-}
-
-.safety p {
-  font-size:12px;
-  line-height:1.8;
-  color:#b7d8df;
-}
-
-footer {
-  text-align:center;
-  padding:26px 0 35px;
-  color:#708097;
-  font-size:11px;
-  line-height:2;
-}
-
-@media(max-width:420px) {
-  .ring {
-    width:200px;
-    height:200px;
-  }
-
-  .sos {
-    width:158px;
-    height:158px;
-  }
-
-  .actions {
-    grid-template-columns:1fr;
-  }
-
-  .logo {
-    font-size:21px;
-  }
+@media(max-width:520px){
+  .logo{font-size:21px}
+  .live{font-size:9px}
+  .grid{grid-template-columns:1fr}
+  .ring{width:205px;height:205px}
+  .sos{width:160px;height:160px}
+  .card{padding:19px}
 }
 </style>
 </head>
 
 <body>
-<div class="container">
 
 <header>
-  <div class="logo">SAFE<span>SIGNAL</span></div>
-  <div class="status">
-    <i></i>
-    <span data-en="SAFETY FIRST" data-ta="பாதுகாப்பே முதன்மை">SAFETY FIRST</span>
+<div class="container">
+  <div class="header-top">
+    <div class="logo">SAFE<span>SIGNAL</span></div>
+    <div class="live"><i></i><span data-en="SAFETY FIRST" data-ta="பாதுகாப்பே முதன்மை">SAFETY FIRST</span></div>
   </div>
+
+  <div class="languages">
+    <button id="enBtn" class="active" onclick="setLang('en')">English</button>
+    <button id="taBtn" onclick="setLang('ta')">தமிழ்</button>
+  </div>
+
+  <nav>
+    <a href="#home" data-en="Home" data-ta="முகப்பு">Home</a>
+    <a href="#features" data-en="Features" data-ta="வசதிகள்">Features</a>
+    <a href="#setup" data-en="SOS Setup" data-ta="SOS அமைப்பு">SOS Setup</a>
+    <a href="#about" data-en="About" data-ta="எங்களைப் பற்றி">About</a>
+    <a href="#contact" data-en="Contact" data-ta="தொடர்பு">Contact</a>
+    <a href="#privacy" data-en="Privacy" data-ta="தனியுரிமை">Privacy</a>
+    <a href="#terms" data-en="Terms" data-ta="விதிமுறைகள்">Terms</a>
+  </nav>
+</div>
 </header>
 
-<div class="lang">
-  <button id="enBtn" class="active" onclick="setLang('en')">English</button>
-  <button id="taBtn" onclick="setLang('ta')">தமிழ்</button>
-</div>
+<main class="container">
 
-<section class="hero">
-  <div class="eyebrow"
-    data-en="YOUR PERSONAL SAFETY COMPANION"
-    data-ta="உங்கள் தனிப்பட்ட பாதுகாப்புத் துணை">
-    YOUR PERSONAL SAFETY COMPANION
-  </div>
-
-  <h1
-    data-en="Your Safety.<br><span>Our Priority.</span>"
-    data-ta="உங்கள் பாதுகாப்பு.<br><span>எங்கள் முன்னுரிமை.</span>">
+<section id="home" class="hero">
+  <div class="eyebrow" data-en="YOUR PERSONAL SAFETY COMPANION" data-ta="உங்கள் தனிப்பட்ட பாதுகாப்புத் துணை">YOUR PERSONAL SAFETY COMPANION</div>
+  <h1 data-en="Your Safety.<br><span>Our Priority.</span>" data-ta="உங்கள் பாதுகாப்பு.<br><span>எங்கள் முன்னுரிமை.</span>">
     Your Safety.<br><span>Our Priority.</span>
   </h1>
-
-  <p class="subtitle"
-    data-en="Stay connected with the people who care about you. Help is just one tap away."
-    data-ta="உங்களைப் பற்றிக் கவலைப்படுபவர்களுடன் இணைந்திருங்கள். உதவியை ஒரே தொடுதலில் அணுகுங்கள்.">
+  <p class="subtitle" data-en="Stay connected with the people who care about you. Help is just one tap away." data-ta="உங்களைப் பற்றிக் கவலைப்படுபவர்களுடன் இணைந்திருங்கள். உதவி ஒரு தொடுதலில் கிடைக்க உதவும் தளம்.">
     Stay connected with the people who care about you. Help is just one tap away.
   </p>
 </section>
 
 <section class="sos-area">
   <div class="ring">
-    <button class="sos" type="button" onclick="demoSOS()">
-      SOS
-      <small data-en="DEMO ONLY" data-ta="சோதனை மட்டும்">DEMO ONLY</small>
-    </button>
+    <button class="sos" onclick="demoSOS()">SOS<small data-en="DEMO ONLY" data-ta="சோதனை மட்டும்">DEMO ONLY</small></button>
   </div>
-
-  <div class="tap-label"
-    data-en="EMERGENCY DEMO BUTTON"
-    data-ta="அவசரநிலை சோதனை பொத்தான்">
-    EMERGENCY DEMO BUTTON
-  </div>
+  <div class="tap-label" data-en="EMERGENCY DEMO BUTTON" data-ta="அவசரநிலை சோதனை பொத்தான்">EMERGENCY DEMO BUTTON</div>
 </section>
+
+<div class="info" data-en="Prototype only: this SOS button does not send real alerts, messages or location. Emergency services are not contacted." data-ta="மாதிரி மட்டுமே: இந்த SOS பொத்தான் உண்மையான எச்சரிக்கை, செய்தி அல்லது இருப்பிடத்தை அனுப்பாது. அவசர சேவைகள் தொடர்புகொள்ளப்படாது.">
+Prototype only: this SOS button does not send real alerts, messages or location. Emergency services are not contacted.
+</div>
 
 <section class="card">
-  <h2
-    data-en="Welcome to SafeSignal"
-    data-ta="SafeSignal-க்கு வரவேற்கிறோம்">
-    Welcome to SafeSignal
-  </h2>
-
-  <p
-    data-en="A simple personal safety platform. Connect your trusted contacts and prepare your safety profile."
-    data-ta="எளிய தனிப்பட்ட பாதுகாப்புத் தளம். உங்கள் நம்பகமான தொடர்புகளை இணைத்து பாதுகாப்பு விவரங்களைத் தயாரிக்கவும்.">
-    A simple personal safety platform. Connect your trusted contacts and prepare your safety profile.
+  <h2 data-en="Welcome to SafeSignal" data-ta="SafeSignal-க்கு வரவேற்கிறோம்">Welcome to SafeSignal</h2>
+  <p data-en="A personal safety platform designed to make emergency tools easier to access for everyone." data-ta="அனைவரும் அவசர பாதுகாப்புக் கருவிகளை எளிதாக அணுக உதவும் தனிப்பட்ட பாதுகாப்புத் தளம்.">
+  A personal safety platform designed to make emergency tools easier to access for everyone.
   </p>
+  <button class="action primary" onclick="showToast('Guest access is coming soon.','விருந்தினர் அணுகல் விரைவில் வரும்.')" data-en="Continue as Guest →" data-ta="விருந்தினராகத் தொடரவும் →">Continue as Guest →</button>
+  <button class="action" onclick="showToast('Google sign-in is not connected yet.','Google உள்நுழைவு இன்னும் இணைக்கப்படவில்லை.')" data-en="Continue with Google" data-ta="Google மூலம் தொடரவும்">Continue with Google</button>
+</section>
 
-  <div class="actions">
-    <button class="action primary" type="button"
-      onclick="guest()"
-      data-en="Continue as Guest →"
-      data-ta="விருந்தினராகத் தொடரவும் →">
-      Continue as Guest →
-    </button>
-
-    <button class="action" type="button"
-      onclick="googleDemo()"
-      data-en="Continue with Google"
-      data-ta="Google மூலம் தொடரவும்">
-      Continue with Google
-    </button>
+<section id="features">
+  <div class="section-title">
+    <div class="eyebrow" data-en="BUILT FOR PERSONAL SAFETY" data-ta="தனிப்பட்ட பாதுகாப்பிற்காக">BUILT FOR PERSONAL SAFETY</div>
+    <h2 data-en="Smart Safety Features" data-ta="புத்திசாலித்தனமான பாதுகாப்பு வசதிகள்">Smart Safety Features</h2>
+  </div>
+  <div class="grid">
+    <div class="feature"><div class="emoji">🔴</div><h3 data-en="Floating SOS" data-ta="மிதக்கும் SOS">Floating SOS</h3><p data-en="A planned quick-access emergency button for the Android app." data-ta="Android செயலியில் விரைவாக அணுகக்கூடிய SOS பொத்தான் திட்டமிடப்பட்டுள்ளது.">A planned quick-access emergency button for the Android app.</p></div>
+    <div class="feature"><div class="emoji">👥</div><h3 data-en="Emergency Contacts" data-ta="அவசரத் தொடர்புகள்">Emergency Contacts</h3><p data-en="Add trusted people who agree to receive your emergency alerts." data-ta="உங்கள் அவசர அறிவிப்புகளைப் பெற ஒப்புக்கொண்ட நம்பகமான நபர்களைச் சேர்க்கவும்.">Add trusted people who agree to receive your emergency alerts.</p></div>
+    <div class="feature"><div class="emoji">📍</div><h3 data-en="Live Location" data-ta="நேரடி இருப்பிடம்">Live Location</h3><p data-en="Permission-based location sharing is planned for the app." data-ta="அனுமதியுடன் செயல்படும் நேரடி இருப்பிடப் பகிர்வு திட்டமிடப்பட்டுள்ளது.">Permission-based location sharing is planned for the app.</p></div>
+    <div class="feature"><div class="emoji">🔔</div><h3 data-en="Loud Alarm" data-ta="சத்தமான அலாரம்">Loud Alarm</h3><p data-en="Emergency notifications and alarm support are planned for installed devices." data-ta="செயலி நிறுவப்பட்ட சாதனங்களில் அவசர அறிவிப்புகள் மற்றும் அலாரம் திட்டமிடப்பட்டுள்ளன.">Emergency notifications and alarm support are planned for installed devices.</p></div>
   </div>
 </section>
 
-<div class="safety">
-  <div class="shield">🛡️</div>
-  <p
-    data-en="Your privacy matters. Location sharing and emergency alerts will only work with your permission."
-    data-ta="உங்கள் தனியுரிமை முக்கியம். இருப்பிடப் பகிர்வு மற்றும் அவசர எச்சரிக்கைகள் உங்கள் அனுமதியுடன் மட்டுமே செயல்படும்.">
-    Your privacy matters. Location sharing and emergency alerts will only work with your permission.
-  </p>
-</div>
+<section id="setup">
+  <div class="section-title">
+    <div class="eyebrow" data-en="QUICK ACCESS" data-ta="விரைவான அணுகல்">QUICK ACCESS</div>
+    <h2 data-en="Floating SOS Setup" data-ta="மிதக்கும் SOS அமைப்பு">Floating SOS Setup</h2>
+  </div>
+
+  <div class="card">
+    <h2 data-en="Enable your SOS button" data-ta="உங்கள் SOS பொத்தானை இயக்குங்கள்">Enable your SOS button</h2>
+    <p data-en="Turn on this preview to see a floating SOS button on this website. This is only a website demonstration. It cannot appear over other apps or while your phone display is off."
+    data-ta="இந்த இணையதளத்தில் மிதக்கும் SOS பொத்தானைப் பார்க்க இதை இயக்குங்கள். இது இணையதள மாதிரி மட்டுமே. மற்ற செயலிகளுக்கு மேலேயோ அல்லது மொபைல் திரை அணைந்திருக்கும்போதோ இது தோன்றாது.">
+    Turn on this preview to see a floating SOS button on this website. This is only a website demonstration. It cannot appear over other apps or while your phone display is off.
+    </p>
+
+    <div class="switch-row">
+      <div>
+        <strong data-en="Floating SOS Preview" data-ta="மிதக்கும் SOS மாதிரி">Floating SOS Preview</strong>
+        <p data-en="Show the glowing button on this website" data-ta="இந்த இணையதளத்தில் ஒளிரும் பொத்தானைக் காட்டு">Show the glowing button on this website</p>
+      </div>
+      <button id="floatSwitch" class="switch" role="switch" aria-checked="false" aria-label="Floating SOS preview" onclick="toggleFloating()"></button>
+    </div>
+
+    <div class="switch-row">
+      <div>
+        <strong data-en="Emergency contacts" data-ta="அவசரத் தொடர்புகள்">Emergency contacts</strong>
+        <p data-en="Contact management will be available in the app" data-ta="தொடர்பு நிர்வாகம் செயலியில் கிடைக்கும்">Contact management will be available in the app</p>
+      </div>
+      <span style="color:#ffbd65;font-size:11px">Coming soon</span>
+    </div>
+
+    <button class="action primary" onclick="showToast('Android app setup is coming soon.','Android செயலி அமைப்பு விரைவில் வரும்.')" data-en="Set up Android App →" data-ta="Android செயலியை அமைக்கவும் →">Set up Android App →</button>
+  </div>
+</section>
+
+<section id="about">
+  <div class="section-title"><h2 data-en="About SafeSignal" data-ta="SafeSignal பற்றி">About SafeSignal</h2></div>
+  <div class="card">
+    <p data-en="SafeSignal is an independent personal safety project. Our mission is to make safety tools easier to understand and access through a simple bilingual experience."
+    data-ta="SafeSignal என்பது தனிப்பட்ட பாதுகாப்பிற்காக உருவாக்கப்படும் சுயாதீனத் திட்டம். எளிய இருமொழி அனுபவத்தின் மூலம் பாதுகாப்புக் கருவிகளை அனைவரும் எளிதாகப் புரிந்துகொண்டு அணுக உதவுவதே எங்கள் நோக்கம்.">
+    SafeSignal is an independent personal safety project. Our mission is to make safety tools easier to understand and access through a simple bilingual experience.
+    </p>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-title"><h2 data-en="Contact Us" data-ta="எங்களைத் தொடர்புகொள்ளுங்கள்">Contact Us</h2></div>
+  <div class="card">
+    <p data-en="For questions, feedback or suggestions, contact our team. A working contact email and message delivery system will be added before public launch."
+    data-ta="கேள்விகள், கருத்துகள் அல்லது ஆலோசனைகளுக்கு எங்கள் குழுவைத் தொடர்புகொள்ளுங்கள். பொதுவெளி வெளியீட்டிற்கு முன் செயல்படும் மின்னஞ்சல் மற்றும் செய்தி அனுப்பும் வசதி சேர்க்கப்படும்.">
+    For questions, feedback or suggestions, contact our team. A working contact email and message delivery system will be added before public launch.
+    </p>
+  </div>
+</section>
+
+<section id="privacy">
+  <div class="section-title"><h2 data-en="Privacy Policy" data-ta="தனியுரிமைக் கொள்கை">Privacy Policy</h2></div>
+  <div class="card">
+    <h3>1. Information</h3>
+    <p data-en="The current prototype does not activate account registration, emergency contact storage or live location sharing. When these features are introduced, the information collected and its purpose will be clearly explained."
+    data-ta="தற்போதைய மாதிரி வடிவத்தில் கணக்கு பதிவு, அவசரத் தொடர்புகள் சேமிப்பு அல்லது நேரடி இருப்பிடப் பகிர்வு செயல்பாட்டில் இல்லை. இவை அறிமுகப்படுத்தப்படும்போது சேகரிக்கப்படும் தகவல்களும் அவற்றின் நோக்கமும் தெளிவாக விளக்கப்படும்.">
+    The current prototype does not activate account registration, emergency contact storage or live location sharing. When these features are introduced, the information collected and its purpose will be clearly explained.
+    </p>
+    <h3>2. Location permissions</h3>
+    <p data-en="Location access will require clear permission. Users should only share location with people they trust."
+    data-ta="இருப்பிட அணுகலுக்கு தெளிவான அனுமதி தேவை. நம்பகமான நபர்களுடன் மட்டுமே இருப்பிடத்தைப் பகிர வேண்டும்.">
+    Location access will require clear permission. Users should only share location with people they trust.
+    </p>
+    <h3>3. Security and deletion</h3>
+    <p data-en="Before personal information is collected, security controls, data retention limits and deletion processes must be implemented."
+    data-ta="தனிப்பட்ட தகவல்கள் சேகரிக்கப்படுவதற்கு முன் பாதுகாப்பு கட்டுப்பாடுகள், தரவு சேமிப்புக் கால வரம்புகள் மற்றும் நீக்குதல் நடைமுறைகள் செயல்படுத்தப்பட வேண்டும்.">
+    Before personal information is collected, security controls, data retention limits and deletion processes must be implemented.
+    </p>
+    <h3>4. Cookies and advertising</h3>
+    <p data-en="If advertising or analytics services are added, this policy will be updated to explain relevant cookies, third-party services and privacy choices."
+    data-ta="விளம்பரங்கள் அல்லது பகுப்பாய்வு சேவைகள் சேர்க்கப்பட்டால், தொடர்புடைய குக்கீகள், வெளிப்புற சேவைகள் மற்றும் தனியுரிமைத் தேர்வுகள் குறித்து இந்தக் கொள்கை புதுப்பிக்கப்படும்.">
+    If advertising or analytics services are added, this policy will be updated to explain relevant cookies, third-party services and privacy choices.
+    </p>
+  </div>
+</section>
+
+<section id="terms">
+  <div class="section-title"><h2 data-en="Terms & Conditions" data-ta="விதிமுறைகள் மற்றும் நிபந்தனைகள்">Terms & Conditions</h2></div>
+  <div class="card">
+    <h3>1. Prototype</h3>
+    <p data-en="SafeSignal is currently a prototype. Its SOS, messaging, location and account features are not yet active."
+    data-ta="SafeSignal தற்போது மாதிரி வடிவத்தில் உள்ளது. SOS, செய்தி, இருப்பிடம் மற்றும் கணக்கு வசதிகள் இன்னும் செயல்பாட்டில் இல்லை.">
+    SafeSignal is currently a prototype. Its SOS, messaging, location and account features are not yet active.
+    </p>
+    <h3>2. Responsible use</h3>
+    <p data-en="Users must not misuse the service, harass others or submit false emergency reports."
+    data-ta="சேவையைத் தவறாகப் பயன்படுத்தவோ, பிறரைத் துன்புறுத்தவோ, பொய்யான அவசரத் தகவல்களைச் சமர்ப்பிக்கவோ கூடாது.">
+    Users must not misuse the service, harass others or submit false emergency reports.
+    </p>
+    <h3>3. Emergency limitations</h3>
+    <p data-en="SafeSignal is not an emergency response service and cannot guarantee that help will arrive. In India, call 112 directly in an emergency."
+    data-ta="SafeSignal அவசர உதவி சேவை அல்ல. உதவி கிடைக்கும் என்று உத்தரவாதம் அளிக்க முடியாது. இந்தியாவில் அவசரநிலையில் நேரடியாக 112-ஐ அழைக்கவும்.">
+    SafeSignal is not an emergency response service and cannot guarantee that help will arrive. In India, call 112 directly in an emergency.
+    </p>
+  </div>
+</section>
+
+</main>
 
 <footer>
-  <div>SAFESIGNAL © 2026</div>
-
-  <div
-    data-en="One Tap. Someone Knows."
-    data-ta="ஒரு தொடுதல். யாரோ ஒருவருக்குத் தகவல்.">
-    One Tap. Someone Knows.
+<div class="container">
+  <div class="footer-logo">SAFE<span>SIGNAL</span></div>
+  <div class="footer-links">
+    <a href="#about" data-en="About Us" data-ta="எங்களைப் பற்றி">About Us</a>
+    <a href="#contact" data-en="Contact Us" data-ta="தொடர்பு">Contact Us</a>
+    <a href="#privacy" data-en="Privacy Policy" data-ta="தனியுரிமை">Privacy Policy</a>
+    <a href="#terms" data-en="Terms" data-ta="விதிமுறைகள்">Terms</a>
   </div>
-
-  <div
-    data-en="Demo version – No real emergency alerts are sent."
-    data-ta="சோதனைப் பதிப்பு – உண்மையான அவசர எச்சரிக்கைகள் அனுப்பப்படாது.">
-    Demo version – No real emergency alerts are sent.
-  </div>
+  <p>One Tap. Someone Knows.</p>
+  <p>© 2026 SafeSignal. All rights reserved.</p>
+  <p data-en="Independent project. Not a government emergency service."
+     data-ta="சுயாதீனத் திட்டம். அரசு அவசர சேவை அல்ல.">
+     Independent project. Not a government emergency service.
+  </p>
+</div>
 </footer>
 
-</div>
+<button id="floatingSOS" class="floating-sos" onclick="demoSOS()">SOS<small>DEMO</small></button>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
 
 <script>
-let lang = "en";
+let lang="en";
+let toastTimer=false;
+let floatingEnabled=false;
 
-// Language switching
-function setLang(value) {
-  lang = value;
+function setLang(value){
+  lang=value;
+  document.documentElement.lang=value;
+  document.body.classList.toggle("ta",value==="ta");
 
-  document.documentElement.lang = value;
-
-  document.body.classList.toggle(
-    "tamil",
-    value === "ta"
-  );
-
-  document.querySelectorAll("[data-en]").forEach(el => {
-    el.innerHTML = el.getAttribute("data-" + value);
+  document.querySelectorAll("[data-en]").forEach(el=>{
+    el.innerHTML=el.getAttribute("data-"+value);
   });
 
-  document.getElementById("enBtn")
-    .classList.toggle("active", value === "en");
+  document.getElementById("enBtn").classList.toggle("active",value==="en");
+  document.getElementById("taBtn").classList.toggle("active",value==="ta");
 
-  document.getElementById("taBtn")
-    .classList.toggle("active", value === "ta");
+  try{localStorage.setItem("ss-language",value)}catch(e){}
 }
 
-// SOS is currently a visual demo only.
-// No popup, no alert, no emergency message.
-function demoSOS() {
-  return;
+function showToast(en,ta){
+  const box=document.getElementById("toast");
+  box.textContent=lang==="ta"?ta:en;
+  box.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>box.classList.remove("show"),3500);
 }
 
-// These buttons are visual previews.
-// Login and guest dashboard will be connected later.
-function guest() {
-  return;
+function toggleFloating(){
+  floatingEnabled=!floatingEnabled;
+  const sw=document.getElementById("floatSwitch");
+  const floating=document.getElementById("floatingSOS");
+
+  sw.classList.toggle("on",floatingEnabled);
+  sw.setAttribute("aria-checked",String(floatingEnabled));
+  floating.classList.toggle("visible",floatingEnabled);
+
+  try{localStorage.setItem("ss-floating-preview",String(floatingEnabled))}catch(e){}
+
+  showToast(
+    floatingEnabled?"Floating SOS preview enabled.":"Floating SOS preview disabled.",
+    floatingEnabled?"மிதக்கும் SOS மாதிரி இயக்கப்பட்டது.":"மிதக்கும் SOS மாதிரி அணைக்கப்பட்டது."
+  );
 }
 
-function googleDemo() {
-  return;
+function demoSOS(){
+  showToast(
+    "Demo only. No emergency message or location was sent.",
+    "சோதனை மட்டுமே. அவசரச் செய்தியோ இருப்பிடமோ அனுப்பப்படவில்லை."
+  );
 }
+
+try{
+  if(localStorage.getItem("ss-language")==="ta")setLang("ta");
+  if(localStorage.getItem("ss-floating-preview")==="true"){
+    floatingEnabled=true;
+    document.getElementById("floatSwitch").classList.add("on");
+    document.getElementById("floatSwitch").setAttribute("aria-checked","true");
+    document.getElementById("floatingSOS").classList.add("visible");
+  }
+}catch(e){}
 </script>
 
 </body>
