@@ -1,0 +1,202 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080d18">
+<title>SafeSignal | One Tap. Someone Knows.</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Tamil:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg:#080d18;
+  --panel:#111a2a;
+  --red:#ff304f;
+  --cyan:#00e5ff;
+  --text:#f5f7ff;
+  --muted:#9ba9bc;
+}
+* {box-sizing:border-box;margin:0;padding:0}
+body {
+  background:radial-gradient(circle at 50% 20%,#17253b 0%,var(--bg) 60%);
+  color:var(--text);
+  font-family:Inter,"Noto Sans Tamil",sans-serif;
+  min-height:100vh;
+}
+body.tamil {font-family:"Noto Sans Tamil",sans-serif}
+.container {width:min(100% - 32px,650px);margin:auto}
+header {
+  display:flex;justify-content:space-between;align-items:center;
+  padding:22px 0;
+}
+.logo {font-size:23px;font-weight:800;letter-spacing:-1px}
+.logo span {color:var(--red)}
+.live {
+  color:#ff7183;font-size:11px;font-weight:700;
+  letter-spacing:1px;display:flex;align-items:center;gap:7px;
+}
+.dot {
+  width:8px;height:8px;background:#ff304f;border-radius:50%;
+  box-shadow:0 0 12px #ff304f;animation:blink 1s infinite;
+}
+@keyframes blink {50%{opacity:.25}}
+.lang {
+  display:flex;justify-content:center;gap:8px;margin:15px 0 28px;
+}
+.lang button {
+  background:#172338;color:#b9c7da;border:1px solid #34435a;
+  padding:10px 22px;border-radius:30px;font-weight:700;cursor:pointer;
+}
+.lang button.active {
+  color:white;background:#263d59;border-color:var(--cyan);
+  box-shadow:0 0 14px #00e5ff33;
+}
+.hero {text-align:center;padding:18px 0 25px}
+.eyebrow {
+  color:var(--cyan);font-size:11px;letter-spacing:3px;
+  font-weight:700;margin-bottom:15px;
+}
+h1 {font-size:clamp(30px,8vw,46px);line-height:1.2}
+.subtitle {color:var(--muted);margin-top:12px;font-size:14px;line-height:1.7}
+.sos-wrap {display:flex;justify-content:center;margin:38px auto}
+.sos {
+  width:190px;height:190px;border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#ff7181,#ed163c 65%,#a90025);
+  border:5px solid #ff9aa8;
+  color:white;font-size:37px;font-weight:800;
+  box-shadow:0 0 0 12px #ff304f12,0 0 35px #ff304f99,inset 0 0 20px #ffffff35;
+  cursor:pointer;animation:pulse 2s infinite;
+}
+.sos small {display:block;font-size:11px;letter-spacing:2px;margin-top:7px}
+@keyframes pulse {
+  0%,100%{transform:scale(1);box-shadow:0 0 0 10px #ff304f15,0 0 30px #ff304f88}
+  50%{transform:scale(1.045);box-shadow:0 0 0 22px #ff304f08,0 0 48px #ff304fbb}
+}
+.card {
+  background:linear-gradient(145deg,#172338cc,#0e1726ee);
+  border:1px solid #263950;border-radius:20px;padding:21px;
+  margin:17px 0;box-shadow:0 12px 35px #0004;
+}
+.card h2 {font-size:17px;margin-bottom:9px}
+.card p {font-size:13px;color:var(--muted);line-height:1.7}
+.actions {display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+.action {
+  padding:15px 10px;border-radius:13px;border:1px solid #34445b;
+  background:#1a2940;color:white;font-size:13px;font-weight:700;
+  cursor:pointer;
+}
+.action.primary {border-color:var(--cyan);color:var(--cyan)}
+.info {
+  display:flex;gap:12px;align-items:center;
+  background:#102b31;border:1px solid #15515a;
+  border-radius:15px;padding:15px;margin:18px 0;
+}
+.info-icon {font-size:23px}
+.info p {font-size:12px;color:#b6dfe3;line-height:1.6}
+footer {text-align:center;color:#78879c;font-size:11px;padding:25px 0 35px;line-height:1.8}
+#notice {
+  position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
+  background:#26364e;border:1px solid #536780;padding:13px 18px;
+  border-radius:12px;width:max-content;max-width:90%;
+  font-size:13px;display:none;z-index:5;text-align:center;
+}
+@media(max-width:400px) {
+  .sos {width:165px;height:165px}
+  .actions {grid-template-columns:1fr}
+}
+</style>
+</head>
+
+<body>
+<div class="container">
+<header>
+  <div class="logo">SAFE<span>SIGNAL</span></div>
+  <div class="live"><i class="dot"></i><span data-en="SAFETY FIRST" data-ta="பாதுகாப்பே முதன்மை">SAFETY FIRST</span></div>
+</header>
+
+<div class="lang">
+  <button id="enBtn" class="active" onclick="setLang('en')">English</button>
+  <button id="taBtn" onclick="setLang('ta')">தமிழ்</button>
+</div>
+
+<section class="hero">
+  <div class="eyebrow" data-en="YOUR PERSONAL SAFETY COMPANION" data-ta="உங்கள் தனிப்பட்ட பாதுகாப்புத் துணை">YOUR PERSONAL SAFETY COMPANION</div>
+  <h1 data-en="Your Safety.<br>Our Priority." data-ta="உங்கள் பாதுகாப்பு.<br>எங்கள் முன்னுரிமை.">Your Safety.<br>Our Priority.</h1>
+  <p class="subtitle" data-en="One tap can help you reach the people who care about you." data-ta="ஒரே ஒரு தொடுதலில் உங்களைப் பற்றிக் கவலைப்படுபவர்களைத் தொடர்புகொள்ள உதவும்.">One tap can help you reach the people who care about you.</p>
+</section>
+
+<div class="sos-wrap">
+  <button class="sos" onclick="demoSOS()">SOS<small data-en="TAP FOR DEMO" data-ta="செயல்முறை விளக்கம்">TAP FOR DEMO</small></button>
+</div>
+
+<section class="card">
+  <h2 data-en="Welcome to SafeSignal" data-ta="SafeSignal-க்கு வரவேற்கிறோம்">Welcome to SafeSignal</h2>
+  <p data-en="A simple safety platform designed to help you stay connected with your trusted emergency contacts." data-ta="உங்கள் நம்பகமான அவசரத் தொடர்புகளுடன் இணைந்திருக்க உதவும் எளிய பாதுகாப்புத் தளம்.">A simple safety platform designed to help you stay connected with your trusted emergency contacts.</p>
+  <div class="actions">
+    <button class="action primary" onclick="guest()" data-en="Continue as Guest" data-ta="விருந்தினராகத் தொடரவும்">Continue as Guest</button>
+    <button class="action" onclick="googleDemo()" data-en="Continue with Google" data-ta="Google மூலம் தொடரவும்">Continue with Google</button>
+  </div>
+</section>
+
+<div class="info">
+  <div class="info-icon">🛡️</div>
+  <p data-en="Your safety matters. Location sharing and emergency alerts will require your permission." data-ta="உங்கள் பாதுகாப்பு முக்கியம். இருப்பிடப் பகிர்வு மற்றும் அவசர எச்சரிக்கைகளுக்கு உங்கள் அனுமதி தேவை.">Your safety matters. Location sharing and emergency alerts will require your permission.</p>
+</div>
+
+<footer>
+  <div data-en="SafeSignal | One Tap. Someone Knows." data-ta="SafeSignal | ஒரு தொடுதல். யாரோ ஒருவருக்கு தகவல்.">SafeSignal | One Tap. Someone Knows.</div>
+  <div data-en="This is an early demo. It does not send emergency alerts." data-ta="இது ஆரம்பகட்ட மாதிரி மட்டுமே. உண்மையான அவசர எச்சரிக்கைகளை அனுப்பாது.">This is an early demo. It does not send emergency alerts.</div>
+  <div>© 2026 SafeSignal</div>
+</footer>
+</div>
+
+<div id="notice"></div>
+
+<script>
+let currentLang = "en";
+
+function setLang(lang) {
+  currentLang = lang;
+  document.documentElement.lang = lang === "ta" ? "ta" : "en";
+  document.body.classList.toggle("tamil", lang === "ta");
+  document.querySelectorAll("[data-en]").forEach(el => {
+    el.innerHTML = el.dataset[lang];
+  });
+  document.getElementById("enBtn").classList.toggle("active",lang==="en");
+  document.getElementById("taBtn").classList.toggle("active",lang==="ta");
+}
+
+function showNotice(en,ta) {
+  const n=document.getElementById("notice");
+  n.textContent=currentLang==="ta"?ta:en;
+  n.style.display="block";
+  clearTimeout(window.noticeTimer);
+  window.noticeTimer=setTimeout(()=>n.style.display="none",3500);
+}
+
+function demoSOS() {
+  showNotice(
+    "DEMO ONLY: No emergency alert was sent.",
+    "சோதனை மட்டும்: எந்த அவசர எச்சரிக்கையும் அனுப்பப்படவில்லை."
+  );
+}
+
+function guest() {
+  showNotice(
+    "Guest access will be available in the next setup step.",
+    "விருந்தினர் அணுகல் அடுத்த கட்டத்தில் செயல்படுத்தப்படும்."
+  );
+}
+
+function googleDemo() {
+  showNotice(
+    "Google login will be connected securely in a later step.",
+    "Google உள்நுழைவு அடுத்த கட்டத்தில் பாதுகாப்பாக இணைக்கப்படும்."
+  );
+}
+</script>
+</body>
+</html>
