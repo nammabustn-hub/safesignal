@@ -3,14 +3,13 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#070b14">
 <title>SafeSignal | One Tap. Someone Knows.</title>
-<meta name="description" content="SafeSignal personal safety platform with English and Tamil support.">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+Tamil:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#070b14;--panel:#111d30;--red:#ff3155;--cyan:#00e5ff;--text:#f5f8ff;--muted:#9aabc1}
-*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+*{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;scroll-padding-top:100px}
 body{background:radial-gradient(ellipse at 5% 10%,#06394b55,transparent 40%),radial-gradient(ellipse at 95% 40%,#650d2a40,transparent 45%),var(--bg);color:var(--text);font-family:Inter,"Noto Sans Tamil",sans-serif}
 body.ta{font-family:"Noto Sans Tamil",sans-serif}
@@ -25,9 +24,8 @@ header{position:sticky;top:0;z-index:20;background:#080e1bf0;backdrop-filter:blu
 @keyframes blink{50%{opacity:.2}}
 .languages{display:flex;justify-content:center;gap:10px;padding:5px 0 14px}
 .languages button{background:#142238;border:1px solid #ffffff20;color:#aabbd0;border-radius:30px;padding:10px 24px;font-weight:700;font-size:13px}
-.languages button.active{border-color:var(--cyan);color:white;background:#10313c;box-shadow:0 0 17px #00e5ff22}
+.languages button.active{border-color:var(--cyan);color:white;background:#10313c}
 nav{display:flex;gap:8px;overflow-x:auto;padding-bottom:13px;scrollbar-width:none}
-nav::-webkit-scrollbar{display:none}
 nav a{white-space:nowrap;text-decoration:none;color:#b4c3d6;font-size:11px;padding:9px 12px;border-radius:10px;background:#ffffff09;border:1px solid #ffffff12}
 .hero{text-align:center;padding:48px 0 10px}
 .eyebrow{color:var(--cyan);font-size:10px;font-weight:800;letter-spacing:3px;margin-bottom:18px}
@@ -39,7 +37,7 @@ h1 span{color:var(--red);text-shadow:0 0 25px #ff315566}
 .ring:before,.ring:after{content:"";position:absolute;inset:0;border:1px solid #ff315566;border-radius:50%;animation:ring 2.5s infinite;pointer-events:none}
 .ring:after{animation-delay:1.2s}
 @keyframes ring{0%{transform:scale(.8);opacity:.8}100%{transform:scale(1.35);opacity:0}}
-.sos{width:175px;height:175px;border-radius:50%;border:5px solid #ff9cac;background:radial-gradient(circle at 35% 25%,#ff8c9e,#ff3155 55%,#970728);color:white;font-size:44px;font-weight:900;position:relative;z-index:2;box-shadow:0 0 30px #ff315599,0 0 75px #ff315533,inset 0 0 20px #ffffff44;animation:pulse 2s infinite}
+.sos{width:175px;height:175px;border-radius:50%;border:5px solid #ff9cac;background:radial-gradient(circle at 35% 25%,#ff8c9e,#ff3155 55%,#970728);color:white;font-size:44px;font-weight:900;position:relative;z-index:2;box-shadow:0 0 30px #ff315599,0 0 75px #ff315533;animation:pulse 2s infinite}
 .sos small{display:block;font-size:10px;letter-spacing:2px;margin-top:5px}
 @keyframes pulse{50%{box-shadow:0 0 45px #ff3155dd,0 0 100px #ff315566}}
 .tap-label{color:#ff8195;font-size:10px;font-weight:800;letter-spacing:2px;margin-top:24px;text-align:center}
@@ -47,35 +45,18 @@ h1 span{color:var(--red);text-shadow:0 0 25px #ff315566}
 .card h2{font-size:21px;margin-bottom:12px}
 .card h3{font-size:14px;margin:17px 0 8px}
 .card p{font-size:13px;line-height:1.9;color:var(--muted)}
-.section-title{text-align:center;margin:52px 0 20px}
-.section-title h2{font-size:27px}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}
-.feature{border:1px solid #ffffff15;background:#111d30;padding:19px;border-radius:17px}
-.feature .emoji{font-size:26px;margin-bottom:12px}
-.feature h3{font-size:14px;margin-bottom:7px}
-.feature p{font-size:12px;line-height:1.8;color:var(--muted)}
+.info{background:#0d252d;border:1px solid #15505b;border-radius:15px;padding:16px;margin:20px 0;color:#bfe0e5;font-size:12px;line-height:1.8}
 .action{width:100%;padding:14px;border-radius:12px;border:1px solid #ffffff25;background:#1a2940;color:white;font-size:12px;font-weight:700;margin-top:12px}
 .action.primary{border-color:var(--cyan);background:#10313c;color:#69efff}
 .action.danger{border-color:#ff526b;background:#421725;color:#ff9cac}
 .action:disabled{opacity:.5;cursor:wait}
-.info{background:#0d252d;border:1px solid #15505b;border-radius:15px;padding:16px;margin:20px 0;color:#bfe0e5;font-size:12px;line-height:1.8}
-.account-card{border:1px solid #00e5ff44;background:linear-gradient(145deg,#102c3a,#111d30);border-radius:20px;padding:22px;margin:18px 0;box-shadow:0 0 28px #00e5ff12}
+.account-card{border:1px solid #00e5ff44;background:linear-gradient(145deg,#102c3a,#111d30);border-radius:20px;padding:22px;margin:18px 0}
 .account-card h2{font-size:21px;margin-bottom:12px}
 .account-card p{color:var(--muted);font-size:12px;line-height:1.8;overflow-wrap:anywhere}
 .account-status{display:inline-block;padding:7px 12px;border-radius:30px;background:#103c36;color:#7bffda;font-size:10px;font-weight:800;margin-bottom:13px}
-.switch-row{display:flex;justify-content:space-between;align-items:center;gap:15px;padding:15px 0;border-bottom:1px solid #ffffff13}
-.switch-row strong{font-size:13px}
-.switch-row p{font-size:11px;color:var(--muted);margin-top:5px;line-height:1.6}
-.switch{width:52px;height:29px;border-radius:30px;border:1px solid #526078;background:#263449;position:relative;flex-shrink:0}
-.switch:after{content:"";position:absolute;width:21px;height:21px;background:white;border-radius:50%;top:3px;left:4px;transition:.25s}
-.switch.on{background:#087d69;border-color:#00e5a8;box-shadow:0 0 14px #00e5a833}
-.switch.on:after{left:25px;background:#8bffe0}
-.floating-sos{display:none;position:fixed;right:17px;bottom:25px;z-index:40;width:67px;height:67px;border-radius:50%;border:3px solid #ff9cac;background:radial-gradient(circle at 35% 25%,#ff8c9e,#ff3155 55%,#970728);color:white;font-size:19px;font-weight:900;box-shadow:0 0 22px #ff3155bb;animation:pulse 1.8s infinite}
-.floating-sos.visible{display:block}
-.floating-sos small{display:block;font-size:8px;letter-spacing:1px}
-.field{width:100%;padding:14px;margin-top:10px;border-radius:11px;border:1px solid #ffffff25;background:#091525;color:white;outline:none;font-size:14px}
-.field:focus{border-color:var(--cyan);box-shadow:0 0 12px #00e5ff22}
 .field-label{display:block;margin-top:14px;font-size:12px;color:#b8c8dc;font-weight:700}
+.field{width:100%;padding:14px;margin-top:10px;border-radius:11px;border:1px solid #ffffff25;background:#091525;color:white;outline:none;font-size:14px}
+.field:focus{border-color:var(--cyan)}
 .consent{display:flex;gap:10px;align-items:flex-start;margin-top:15px;color:#b8c8dc;font-size:12px;line-height:1.7}
 .consent input{margin-top:3px;accent-color:#00e5ff}
 .contact-item{border:1px solid #ffffff20;background:#0c192a;border-radius:14px;padding:15px;margin-top:12px}
@@ -83,7 +64,24 @@ h1 span{color:var(--red);text-shadow:0 0 25px #ff315566}
 .contact-item p{margin-top:5px;overflow-wrap:anywhere}
 .contact-actions{display:flex;gap:9px}
 .contact-actions button{flex:1}
-.toast{position:fixed;left:50%;bottom:23px;z-index:60;transform:translate(-50%,30px);width:max-content;max-width:calc(100% - 30px);padding:14px 18px;border-radius:14px;border:1px solid var(--cyan);background:#102b38;color:white;font-size:12px;line-height:1.6;text-align:center;opacity:0;visibility:hidden;transition:.3s;box-shadow:0 0 25px #00e5ff33}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.feature{border:1px solid #ffffff15;background:#111d30;padding:19px;border-radius:17px}
+.feature .emoji{font-size:26px;margin-bottom:12px}
+.feature h3{font-size:14px;margin-bottom:7px}
+.feature p{font-size:12px;line-height:1.8;color:var(--muted)}
+.section-title{text-align:center;margin:52px 0 20px}
+.section-title h2{font-size:27px}
+.switch-row{display:flex;justify-content:space-between;align-items:center;gap:15px;padding:15px 0;border-bottom:1px solid #ffffff13}
+.switch-row strong{font-size:13px}
+.switch-row p{font-size:11px;color:var(--muted);margin-top:5px}
+.switch{width:52px;height:29px;border-radius:30px;border:1px solid #526078;background:#263449;position:relative;flex-shrink:0}
+.switch:after{content:"";position:absolute;width:21px;height:21px;background:white;border-radius:50%;top:3px;left:4px;transition:.25s}
+.switch.on{background:#087d69;border-color:#00e5a8}
+.switch.on:after{left:25px}
+.floating-sos{display:none;position:fixed;right:17px;bottom:25px;z-index:40;width:67px;height:67px;border-radius:50%;border:3px solid #ff9cac;background:#ff3155;color:white;font-size:19px;font-weight:900;box-shadow:0 0 22px #ff3155bb}
+.floating-sos.visible{display:block}
+.floating-sos small{display:block;font-size:8px}
+.toast{position:fixed;left:50%;bottom:23px;z-index:60;transform:translate(-50%,30px);width:max-content;max-width:calc(100% - 30px);padding:14px 18px;border-radius:14px;border:1px solid var(--cyan);background:#102b38;color:white;font-size:12px;line-height:1.6;text-align:center;opacity:0;visibility:hidden;transition:.3s}
 .toast.show{opacity:1;visibility:visible;transform:translate(-50%,0)}
 footer{margin-top:50px;border-top:1px solid #ffffff16;padding:32px 0;text-align:center}
 .footer-logo{font-size:23px;font-weight:900}
@@ -91,25 +89,15 @@ footer{margin-top:50px;border-top:1px solid #ffffff16;padding:32px 0;text-align:
 .footer-links a{color:#9aabc1;font-size:11px;text-decoration:none}
 footer p{font-size:11px;color:#718198;line-height:2}
 .hidden{display:none!important}
-@media(max-width:520px){.logo{font-size:21px}.live{font-size:9px}.grid{grid-template-columns:1fr}.ring{width:205px;height:205px}.sos{width:160px;height:160px}.card{padding:19px}}
+@media(max-width:520px){.logo{font-size:21px}.grid{grid-template-columns:1fr}.ring{width:205px;height:205px}.sos{width:160px;height:160px}.card{padding:19px}}
 </style>
 </head>
 <body>
-<header>
-<div class="container">
-<div class="header-top">
-<div class="logo">SAFE<span>SIGNAL</span></div>
-<div class="live"><i></i><span data-en="SAFETY FIRST" data-ta="பாதுகாப்பே முதன்மை">SAFETY FIRST</span></div>
-</div>
-<div class="languages">
-<button id="enBtn" class="active" onclick="setLang('en')">English</button>
-<button id="taBtn" onclick="setLang('ta')">தமிழ்</button>
-</div>
-<nav>
-<a href="#home">Home</a><a href="#features">Features</a><a href="#setup">SOS Setup</a><a href="#account">Account</a><a href="#contacts">Contacts</a><a href="#about">About</a><a href="#privacy">Privacy</a><a href="#terms">Terms</a>
-</nav>
-</div>
-</header>
+<header><div class="container">
+<div class="header-top"><div class="logo">SAFE<span>SIGNAL</span></div><div class="live"><i></i>SAFETY FIRST</div></div>
+<div class="languages"><button id="enBtn" class="active" onclick="setLang('en')">English</button><button id="taBtn" onclick="setLang('ta')">தமிழ்</button></div>
+<nav><a href="#home">Home</a><a href="#features">Features</a><a href="#account">Account</a><a href="#contacts">Contacts</a><a href="#setup">SOS Setup</a><a href="#about">About</a><a href="#privacy">Privacy</a><a href="#terms">Terms</a></nav>
+</div></header>
 
 <main class="container">
 <section id="home" class="hero">
@@ -117,279 +105,240 @@ footer p{font-size:11px;color:#718198;line-height:2}
 <h1>Your Safety.<br><span>Our Priority.</span></h1>
 <p class="subtitle">Stay connected with the people who care about you. Help is just one tap away.</p>
 </section>
-
-<section class="sos-area">
-<div class="ring"><button class="sos" onclick="demoSOS()">SOS<small>DEMO ONLY</small></button></div>
-<div class="tap-label">EMERGENCY DEMO BUTTON</div>
-</section>
+<section class="sos-area"><div class="ring"><button class="sos" onclick="demoSOS()">SOS<small>DEMO ONLY</small></button></div><div class="tap-label">EMERGENCY DEMO BUTTON</div></section>
 <div class="info">Prototype notice: this SOS button does not send real alerts, messages or location. It does not contact emergency services. In India, call 112 directly in an emergency.</div>
 
 <section class="card" id="account">
 <h2>SafeSignal Account</h2>
 <div id="loginPanel">
-<p>Continue as a guest or securely sign in with Google to access your personal dashboard.</p>
+<p>Continue as a guest or securely sign in with Google.</p>
 <button id="guestBtn" class="action primary" onclick="guestLogin()">Continue as Guest →</button>
 <button id="googleBtn" class="action" onclick="googleLogin()">Continue with Google</button>
 <p id="authMessage" style="margin-top:12px" aria-live="polite"></p>
 </div>
 <div id="dashboard" class="account-card hidden">
 <div class="account-status">SIGNED IN</div>
-<h2>Welcome to your Dashboard</h2>
+<h2>Welcome to SafeSignal</h2>
 <p id="userType"></p><p id="userEmail"></p><p id="userId"></p>
-<button class="action primary" onclick="document.getElementById('contacts').scrollIntoView({behavior:'smooth'})">Manage Emergency Contacts</button>
-<button class="action" onclick="logout()">Sign Out</button>
+<div id="guestUpgrade">
+<p style="margin-top:14px">Secure your guest account by linking it to Google. This keeps your existing contacts with the same account.</p>
+<button class="action primary" onclick="linkGuestToGoogle()">Link this Guest Account to Google</button>
+</div>
+<button class="action" onclick="document.getElementById('contacts').scrollIntoView({behavior:'smooth'})">Manage Emergency Contacts</button>
+<button class="action danger" onclick="logout()">Sign Out</button>
 </div>
 </section>
 
 <section id="contacts" class="card">
 <h2>👥 Emergency Contacts</h2>
-<p>Add up to 5 trusted people. Add a contact only after they agree to receive emergency alerts from you.</p>
+<p>You can save up to 3 trusted people. Add a contact only after they agree to receive emergency alerts from you.</p>
 <div id="contactsLoginNotice" class="info">Please sign in to manage your emergency contacts.</div>
 <div id="contactsApp" class="hidden">
+<p id="contactCount" style="margin-top:12px;color:#69efff;font-weight:700">0 / 3 contacts saved</p>
 <form id="contactForm">
 <input type="hidden" id="editId">
 <label class="field-label" for="contactName">Contact name</label>
 <input class="field" id="contactName" maxlength="60" placeholder="Enter full name" required>
 <label class="field-label" for="contactPhone">Mobile number</label>
-<input class="field" id="contactPhone" class="field" type="tel" inputmode="tel" maxlength="16" placeholder="+91 9876543210" required>
+<input class="field" id="contactPhone" type="tel" inputmode="tel" maxlength="16" placeholder="+91 9876543210" required>
 <label class="consent"><input type="checkbox" id="contactConsent" required><span>I confirm this person has agreed to be listed as my emergency contact and may receive emergency alerts in the future.</span></label>
 <button class="action primary" id="saveContactBtn" type="submit">Save Contact</button>
 <button class="action hidden" id="cancelEditBtn" type="button" onclick="cancelEdit()">Cancel Edit</button>
 </form>
 <div id="contactMessage" aria-live="polite" style="margin-top:12px;font-size:12px;color:#9aabc1"></div>
-<h3>Saved Contacts</h3>
-<div id="contactList"><p>Loading contacts...</p></div>
+<h3>Saved Contacts</h3><div id="contactList"></div>
 </div>
 </section>
 
 <section id="features">
 <div class="section-title"><div class="eyebrow">BUILT FOR PERSONAL SAFETY</div><h2>Smart Safety Features</h2></div>
 <div class="grid">
-<div class="feature"><div class="emoji">🔴</div><h3>Floating SOS</h3><p>A planned quick-access emergency button for the Android app.</p></div>
-<div class="feature"><div class="emoji">👥</div><h3>Emergency Contacts</h3><p>Save trusted people who agree to receive emergency alerts.</p></div>
+<div class="feature"><div class="emoji">🔴</div><h3>Floating SOS</h3><p>Quick-access emergency button planned for the Android app.</p></div>
+<div class="feature"><div class="emoji">👥</div><h3>Emergency Contacts</h3><p>Save up to three trusted contacts.</p></div>
 <div class="feature"><div class="emoji">📍</div><h3>Live Location</h3><p>Permission-based location sharing is planned.</p></div>
 <div class="feature"><div class="emoji">🔔</div><h3>Loud Alarm</h3><p>Emergency notification and alarm support are planned.</p></div>
 </div>
 </section>
 
-<section id="setup">
-<div class="section-title"><div class="eyebrow">QUICK ACCESS</div><h2>Floating SOS Setup</h2></div>
-<div class="card">
-<h2>Enable your SOS button</h2>
+<section id="setup"><div class="section-title"><h2>Floating SOS Setup</h2></div><div class="card">
 <p>This preview displays a floating SOS button only on this website. It cannot appear over other apps or while your phone display is off.</p>
-<div class="switch-row">
-<div><strong>Floating SOS Preview</strong><p>Show the glowing button on this website</p></div>
-<button id="floatSwitch" class="switch" role="switch" aria-checked="false" aria-label="Floating SOS preview" onclick="toggleFloating()"></button>
-</div>
-</div>
-</section>
+<div class="switch-row"><div><strong>Floating SOS Preview</strong><p>Show the glowing button on this website</p></div><button id="floatSwitch" class="switch" role="switch" aria-checked="false" onclick="toggleFloating()"></button></div>
+</div></section>
 
-<section id="about"><div class="section-title"><h2>About SafeSignal</h2></div><div class="card"><p>SafeSignal is an independent personal safety project. Our mission is to make safety tools easier to understand and access through a simple bilingual experience.</p></div></section>
-<section id="contact"><div class="section-title"><h2>Contact Us</h2></div><div class="card"><p>For questions, feedback or suggestions, please use the project repository contact details. A working contact form will be added before public launch.</p></div></section>
-
-<section id="privacy">
-<div class="section-title"><h2>Privacy Policy</h2></div>
-<div class="card">
-<h3>1. Account information</h3><p>Firebase Authentication is used for guest and Google sign-in. Guest accounts use an anonymous Firebase user ID.</p>
-<h3>2. Emergency contacts</h3><p>Contact names and phone numbers entered by signed-in users are stored in Firebase Cloud Firestore under that user's account. Access is restricted by Firestore security rules. Users should add contacts only with their consent.</p>
-<h3>3. Location and alerts</h3><p>This version does not collect live location or send emergency messages. These features are not active.</p>
-<h3>4. Data deletion</h3><p>Contact records can be deleted individually from the contacts section. Account deletion and complete data management will be added before public launch.</p>
-<h3>5. Third-party services</h3><p>Firebase Authentication, Google sign-in and Cloud Firestore are third-party services.</p>
-</div>
-</section>
-
-<section id="terms">
-<div class="section-title"><h2>Terms & Conditions</h2></div>
-<div class="card">
-<h3>1. Prototype</h3><p>SafeSignal is currently a prototype. SOS, messaging, live location and emergency response features are not yet active.</p>
-<h3>2. Responsible use</h3><p>Users must not misuse the service, harass others or submit false emergency reports. Add only contacts who have agreed.</p>
-<h3>3. Emergency limitations</h3><p>SafeSignal is not an emergency response service and cannot guarantee that help will arrive. In India, call 112 directly in an emergency.</p>
-</div>
-</section>
+<section id="about"><div class="section-title"><h2>About SafeSignal</h2></div><div class="card"><p>SafeSignal is an independent personal safety project. Our mission is to make safety tools easier to understand and access through a simple experience.</p></div></section>
+<section id="contact"><div class="section-title"><h2>Contact Us</h2></div><div class="card"><p>For questions and feedback, please use the project repository contact details. A working contact form will be added before public launch.</p></div></section>
+<section id="privacy"><div class="section-title"><h2>Privacy Policy</h2></div><div class="card">
+<h3>Account information</h3><p>Firebase Authentication is used for guest and Google sign-in.</p>
+<h3>Emergency contacts</h3><p>Contact names and phone numbers are stored in Firebase Cloud Firestore under the signed-in user's account. Users should add contacts only with their consent.</p>
+<h3>Location and alerts</h3><p>This version does not collect live location or send emergency messages. These features are not active.</p>
+<h3>Deletion</h3><p>Contact records can be deleted individually. Account deletion and complete data management will be added before public launch.</p>
+<h3>Third-party services</h3><p>Firebase Authentication, Google sign-in and Cloud Firestore are third-party services.</p>
+</div></section>
+<section id="terms"><div class="section-title"><h2>Terms & Conditions</h2></div><div class="card">
+<h3>Prototype</h3><p>SafeSignal is currently a prototype. SOS, messaging, live location and emergency response features are not yet active.</p>
+<h3>Responsible use</h3><p>Users must not misuse the service or submit false emergency reports. Add only contacts who have agreed.</p>
+<h3>Emergency limitations</h3><p>SafeSignal is not an emergency response service and cannot guarantee that help will arrive. In India, call 112 directly in an emergency.</p>
+</div></section>
 </main>
 
 <button id="floatingSOS" class="floating-sos" onclick="demoSOS()">SOS<small>DEMO</small></button>
-<footer><div class="container">
-<div class="footer-logo">SAFE<span>SIGNAL</span></div>
+<footer><div class="container"><div class="footer-logo">SAFE<span>SIGNAL</span></div>
 <div class="footer-links"><a href="#about">About</a><a href="#contact">Contact</a><a href="#privacy">Privacy</a><a href="#terms">Terms</a></div>
-<p>One Tap. Someone Knows.</p><p>© 2026 SafeSignal. Prototype version.</p><p>In an emergency in India, call 112 directly.</p>
-</div></footer>
+<p>One Tap. Someone Knows.</p><p>© 2026 SafeSignal. Prototype version.</p><p>In an emergency in India, call 112 directly.</p></div></footer>
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
 <script>
 let currentLang="en",toastTimer;
-function setLang(lang){
-currentLang=lang;document.body.classList.toggle("ta",lang==="ta");
-document.getElementById("enBtn").classList.toggle("active",lang==="en");
-document.getElementById("taBtn").classList.toggle("active",lang==="ta");
-document.querySelectorAll("[data-en][data-ta]").forEach(el=>el.innerHTML=el.getAttribute("data-"+lang));
-}
-function showToast(en,ta){
-const el=document.getElementById("toast");el.textContent=currentLang==="ta"?ta:en;
-el.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove("show"),3500);
-}
+function setLang(lang){currentLang=lang;document.body.classList.toggle("ta",lang==="ta");document.getElementById("enBtn").classList.toggle("active",lang==="en");document.getElementById("taBtn").classList.toggle("active",lang==="ta");}
+function showToast(en,ta){const el=document.getElementById("toast");el.textContent=currentLang==="ta"?ta:en;el.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove("show"),3500);}
 function demoSOS(){showToast("Demo only. No alert or location has been sent. Call 112 in an emergency.","இது சோதனை மட்டுமே. எச்சரிக்கை அல்லது இருப்பிடம் அனுப்பப்படவில்லை. அவசரநிலையில் 112-ஐ அழைக்கவும்.");}
-function toggleFloating(){
-const sw=document.getElementById("floatSwitch"),btn=document.getElementById("floatingSOS");
-const on=!sw.classList.contains("on");sw.classList.toggle("on",on);sw.setAttribute("aria-checked",String(on));btn.classList.toggle("visible",on);
-showToast(on?"Website SOS preview enabled.":"Website SOS preview disabled.",on?"இணையதள SOS மாதிரி இயக்கப்பட்டது.":"இணையதள SOS மாதிரி அணைக்கப்பட்டது.");
-}
+function toggleFloating(){const sw=document.getElementById("floatSwitch"),btn=document.getElementById("floatingSOS");const on=!sw.classList.contains("on");sw.classList.toggle("on",on);sw.setAttribute("aria-checked",String(on));btn.classList.toggle("visible",on);showToast(on?"Website SOS preview enabled.":"Website SOS preview disabled.","இணையதள SOS மாதிரி மாற்றப்பட்டது.");}
 </script>
 
 <script type="module">
 import {initializeApp} from "https://www.gstatic.com/firebasejs/13.3.0/firebase-app.js";
 import {
-getAuth,onAuthStateChanged,setPersistence,browserLocalPersistence,
-signInAnonymously,GoogleAuthProvider,signInWithPopup,signInWithRedirect,
-getRedirectResult,signOut
+ getAuth,onAuthStateChanged,setPersistence,browserLocalPersistence,
+ signInAnonymously,GoogleAuthProvider,signInWithPopup,signInWithRedirect,
+ getRedirectResult,signOut,linkWithPopup
 } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-auth.js";
 import {
-getFirestore,collection,addDoc,query,orderBy,onSnapshot,
-doc,updateDoc,deleteDoc,serverTimestamp
+ getFirestore,collection,addDoc,onSnapshot,doc,updateDoc,deleteDoc,serverTimestamp
 } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-firestore.js";
 
 const firebaseConfig={
-apiKey:"AIzaSyAUBNNDxgtPCP2ky_vcAVWV9IVtdAEp9rs",
-authDomain:"safesignal-22407.firebaseapp.com",
-projectId:"safesignal-22407",
-storageBucket:"safesignal-22407.firebasestorage.app",
-messagingSenderId:"560630364759",
-appId:"1:560630364759:web:b62f087794092a44670112",
-measurementId:"G-PWDTZGFVHP"
+ apiKey:"AIzaSyAUBNNDxgtPC2Pky_vcAVWV9IVtdAEp9rs",
+ authDomain:"safesignal-22407.firebaseapp.com",
+ projectId:"safesignal-22407",
+ storageBucket:"safesignal-22407.firebasestorage.app",
+ messagingSenderId:"560630364759",
+ appId:"1:560630364759:web:b62f087794092a44670112",
+ measurementId:"G-PWDTZGFVHP"
 };
 const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app);
-const googleProvider=new GoogleAuthProvider();
-googleProvider.setCustomParameters({prompt:"select_account"});
-
+const provider=new GoogleAuthProvider();
+provider.setCustomParameters({prompt:"select_account"});
 const $=id=>document.getElementById(id);
-const guestBtn=$("guestBtn"),googleBtn=$("googleBtn");
-let currentUser=null,unsubscribeContacts=null,contactsCache=[];
+let currentUser=null,stopListening=null,contacts=[];
 
-function setBusy(busy){
-guestBtn.disabled=busy;googleBtn.disabled=busy;
-guestBtn.textContent=busy?"Please wait...":"Continue as Guest →";
-googleBtn.textContent=busy?"Please wait...":"Continue with Google";
-}
-function errorText(error){
-const messages={
-"auth/unauthorized-domain":"This website domain is not authorized in Firebase.",
-"auth/operation-not-allowed":"Please enable this sign-in method in Firebase Authentication.",
-"auth/popup-blocked":"Google popup was blocked. Please allow popups and try again.",
-"auth/popup-closed-by-user":"Google sign-in was closed before completion.",
-"auth/network-request-failed":"Network problem. Check your internet connection.",
-"permission-denied":"Firestore permission denied. Please check your security rules."
+function setBusy(v){$("guestBtn").disabled=v;$("googleBtn").disabled=v;}
+function errorText(e){
+const map={
+"auth/unauthorized-domain":"Website domain is not authorized in Firebase.",
+"auth/operation-not-allowed":"Enable this sign-in method in Firebase Authentication.",
+"auth/popup-blocked":"Popup blocked. Allow popups and try again.",
+"auth/credential-already-in-use":"This Google account already has a separate SafeSignal account. Sign into that Google account instead; automatic merging is not available yet.",
+"permission-denied":"Firestore permission denied. Check your Firestore Rules."
 };
-return messages[error.code]||error.message||"Something went wrong.";
+return map[e.code]||e.message||"Something went wrong.";
 }
 async function start(){
 try{await setPersistence(auth,browserLocalPersistence);await getRedirectResult(auth);}
-catch(error){$("authMessage").textContent=errorText(error);}
+catch(e){$("authMessage").textContent=errorText(e);}
 }
 window.guestLogin=async()=>{
 setBusy(true);$("authMessage").textContent="";
 try{await signInAnonymously(auth);}
-catch(error){$("authMessage").textContent=errorText(error);}
+catch(e){$("authMessage").textContent=errorText(e);}
 finally{setBusy(false);}
 };
 window.googleLogin=async()=>{
 setBusy(true);$("authMessage").textContent="";
-try{await signInWithPopup(auth,googleProvider);}
-catch(error){
-if(error.code==="auth/popup-blocked"||error.code==="auth/operation-not-supported-in-this-environment"){
-try{await signInWithRedirect(auth,googleProvider);return;}
-catch(e){$("authMessage").textContent=errorText(e);}
-}else{$("authMessage").textContent=errorText(error);}
+try{
+if(auth.currentUser?.isAnonymous){
+ await linkWithPopup(auth.currentUser,provider);
+}else{
+ await signInWithPopup(auth,provider);
+}
+}catch(e){
+if(e.code==="auth/popup-blocked"||e.code==="auth/operation-not-supported-in-this-environment"){
+try{await signInWithRedirect(auth,provider);return;}catch(err){$("authMessage").textContent=errorText(err);}
+}else{$("authMessage").textContent=errorText(e);}
 }finally{setBusy(false);}
 };
+window.linkGuestToGoogle=async()=>{
+if(!auth.currentUser?.isAnonymous){showToast("This account is already linked or signed in.","இந்த கணக்கு ஏற்கனவே இணைக்கப்பட்டுள்ளது.");return;}
+try{
+await linkWithPopup(auth.currentUser,provider);
+showToast("Guest account linked. Your saved contacts stay with this account.","Guest கணக்கு Google-உடன் இணைக்கப்பட்டது.");
+}catch(e){$("authMessage").textContent=errorText(e);showToast(errorText(e),errorText(e));}
+};
 window.logout=async()=>{
-try{if(unsubscribeContacts){unsubscribeContacts();unsubscribeContacts=null;}
-await signOut(auth);showToast("You have signed out.","நீங்கள் வெளியேறிவிட்டீர்கள்.");
-}catch(e){showToast("Sign out failed.","வெளியேற முடியவில்லை.");}
+if(currentUser?.isAnonymous){
+const ok=confirm("This is a Guest account. Signing out may make its contacts difficult to recover. Link it to Google first to keep access. Sign out anyway?");
+if(!ok)return;
+}
+try{if(stopListening){stopListening();stopListening=null;}await signOut(auth);}
+catch(e){showToast(errorText(e),errorText(e));}
 };
 
 function contactsRef(uid){return collection(db,"users",uid,"contacts");}
-function showContactMessage(message){$("contactMessage").textContent=message;}
-
+function showMessage(t){$("contactMessage").textContent=t;}
+function updateCount(){
+$("contactCount").textContent=contacts.length+" / 3 contacts saved";
+$("saveContactBtn").disabled=contacts.length>=3&&!$("editId").value;
+}
 function renderContacts(){
 const list=$("contactList");list.innerHTML="";
-if(!contactsCache.length){list.innerHTML="<p>No contacts saved yet.</p>";return;}
-contactsCache.forEach(contact=>{
+contacts.sort((a,b)=>(a.name||"").localeCompare(b.name||""));
+if(!contacts.length){list.textContent="No contacts saved yet.";updateCount();return;}
+contacts.forEach(c=>{
 const item=document.createElement("div");item.className="contact-item";
-const name=document.createElement("strong");name.textContent=contact.name;
-const phone=document.createElement("p");phone.textContent=contact.phone;
+const name=document.createElement("strong");name.textContent=c.name;
+const phone=document.createElement("p");phone.textContent=c.phone;
 const actions=document.createElement("div");actions.className="contact-actions";
-const edit=document.createElement("button");edit.className="action primary";edit.textContent="Edit";
-edit.addEventListener("click",()=>window.editContact(contact.id));
-const del=document.createElement("button");del.className="action danger";del.textContent="Delete";
-del.addEventListener("click",()=>window.removeContact(contact.id));
+const edit=document.createElement("button");edit.className="action primary";edit.textContent="Edit";edit.onclick=()=>window.editContact(c.id);
+const del=document.createElement("button");del.className="action danger";del.textContent="Delete";del.onclick=()=>window.removeContact(c.id);
 actions.append(edit,del);item.append(name,phone,actions);list.append(item);
 });
+updateCount();
 }
-
 function listenContacts(user){
-if(unsubscribeContacts){unsubscribeContacts();unsubscribeContacts=null;}
-const q=query(contactsRef(user.uid),orderBy("createdAt","asc"));
+if(stopListening){stopListening();stopListening=null;}
+contacts=[];
 $("contactList").textContent="Loading contacts...";
-unsubscribeContacts=onSnapshot(q,snapshot=>{
-contactsCache=snapshot.docs.map(d=>({id:d.id,...d.data()}));
+stopListening=onSnapshot(contactsRef(user.uid),snapshot=>{
+contacts=snapshot.docs.map(d=>({id:d.id,...d.data()}));
 renderContacts();
-},error=>{
-showContactMessage("Could not load contacts: "+errorText(error));
-});
+},e=>showMessage("Could not load contacts: "+errorText(e)));
 }
 
-$("contactForm").addEventListener("submit",async event=>{
-event.preventDefault();
-if(!currentUser){showContactMessage("Please sign in first.");return;}
-const name=$("contactName").value.trim();
-const phone=$("contactPhone").value.trim();
-const consent=$("contactConsent").checked;
-const editId=$("editId").value;
+$("contactForm").addEventListener("submit",async e=>{
+e.preventDefault();
+if(!currentUser){showMessage("Please sign in first.");return;}
+const name=$("contactName").value.trim(),phone=$("contactPhone").value.trim();
+const editId=$("editId").value,consent=$("contactConsent").checked;
 const digits=phone.replace(/\D/g,"");
-if(name.length<2){showContactMessage("Please enter a valid name.");return;}
-if(digits.length<10||digits.length>15){showContactMessage("Enter a valid phone number with country code if needed.");return;}
-if(!consent){showContactMessage("Please confirm the contact has agreed.");return;}
-if(!editId&&contactsCache.length>=5){showContactMessage("Maximum 5 contacts allowed.");return;}
-
-const saveBtn=$("saveContactBtn");saveBtn.disabled=true;saveBtn.textContent="Saving...";
+if(name.length<2){showMessage("Please enter a valid name.");return;}
+if(digits.length<10||digits.length>15){showMessage("Enter a valid phone number.");return;}
+if(!consent){showMessage("Please confirm contact consent.");return;}
+if(!editId&&contacts.length>=3){showMessage("Maximum 3 contacts allowed.");return;}
+$("saveContactBtn").disabled=true;
 try{
 if(editId){
-await updateDoc(doc(db,"users",currentUser.uid,"contacts",editId),{
-name,phone,consent:true,updatedAt:serverTimestamp()
-});
-showContactMessage("Contact updated successfully.");
+await updateDoc(doc(db,"users",currentUser.uid,"contacts",editId),{name,phone,consent:true,updatedAt:serverTimestamp()});
+showMessage("Contact updated successfully.");
 }else{
-await addDoc(contactsRef(currentUser.uid),{
-name,phone,consent:true,createdAt:serverTimestamp(),updatedAt:serverTimestamp()
-});
-showContactMessage("Contact saved successfully.");
+await addDoc(contactsRef(currentUser.uid),{name,phone,consent:true,createdAt:serverTimestamp(),updatedAt:serverTimestamp()});
+showMessage("Contact saved successfully.");
 }
 window.cancelEdit();
-}catch(error){showContactMessage("Save failed: "+errorText(error));}
-finally{saveBtn.disabled=false;saveBtn.textContent="Save Contact";}
+}catch(err){showMessage("Save failed: "+errorText(err));}
+finally{updateCount();}
 });
-
 window.editContact=id=>{
-const contact=contactsCache.find(c=>c.id===id);if(!contact)return;
-$("editId").value=id;$("contactName").value=contact.name;
-$("contactPhone").value=contact.phone;$("contactConsent").checked=!!contact.consent;
-$("saveContactBtn").textContent="Update Contact";
-$("cancelEditBtn").classList.remove("hidden");
-$("contactName").scrollIntoView({behavior:"smooth",block:"center"});
+const c=contacts.find(x=>x.id===id);if(!c)return;
+$("editId").value=id;$("contactName").value=c.name;$("contactPhone").value=c.phone;$("contactConsent").checked=!!c.consent;
+$("saveContactBtn").textContent="Update Contact";$("saveContactBtn").disabled=false;
+$("cancelEditBtn").classList.remove("hidden");$("contactName").scrollIntoView({behavior:"smooth",block:"center"});
 };
 window.cancelEdit=()=>{
-$("contactForm").reset();$("editId").value="";
-$("saveContactBtn").textContent="Save Contact";
-$("cancelEditBtn").classList.add("hidden");
+$("contactForm").reset();$("editId").value="";$("saveContactBtn").textContent="Save Contact";$("cancelEditBtn").classList.add("hidden");updateCount();
 };
 window.removeContact=async id=>{
-if(!currentUser)return;
-if(!confirm("Delete this emergency contact?"))return;
-try{
-await deleteDoc(doc(db,"users",currentUser.uid,"contacts",id));
-showContactMessage("Contact deleted.");
-if($("editId").value===id)window.cancelEdit();
-}catch(error){showContactMessage("Delete failed: "+errorText(error));}
+if(!currentUser||!confirm("Delete this emergency contact?"))return;
+try{await deleteDoc(doc(db,"users",currentUser.uid,"contacts",id));showMessage("Contact deleted.");if($("editId").value===id)window.cancelEdit();}
+catch(e){showMessage("Delete failed: "+errorText(e));}
 };
 
 onAuthStateChanged(auth,user=>{
@@ -398,14 +347,15 @@ if(user){
 $("loginPanel").classList.add("hidden");$("dashboard").classList.remove("hidden");
 $("userType").textContent=user.isAnonymous?"Account type: Guest":"Account type: Google account";
 $("userEmail").textContent=user.email?"Email: "+user.email:"Email: Not available for guest account";
-$("userId").textContent="User ID: "+user.uid;
+$("userId").textContent="Account ID: "+user.uid;
+$("guestUpgrade").classList.toggle("hidden",!user.isAnonymous);
 $("contactsLoginNotice").classList.add("hidden");$("contactsApp").classList.remove("hidden");
 listenContacts(user);
 }else{
 $("loginPanel").classList.remove("hidden");$("dashboard").classList.add("hidden");
 $("contactsLoginNotice").classList.remove("hidden");$("contactsApp").classList.add("hidden");
-if(unsubscribeContacts){unsubscribeContacts();unsubscribeContacts=null;}
-contactsCache=[];
+if(stopListening){stopListening();stopListening=null;}
+contacts=[];
 }
 });
 start();
