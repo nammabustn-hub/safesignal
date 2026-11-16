@@ -3,136 +3,73 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#070b14">
-<meta name="description" content="SafeSignal - One Tap. Someone Knows. Keep your trusted emergency contacts ready.">
+<meta name="description" content="SafeSignal - One Tap. Someone Knows.">
 <title>SafeSignal | One Tap. Someone Knows.</title>
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Tamil:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
-:root {
-  --bg:#070b14;
-  --panel:#101827;
-  --panel2:#0c1421;
-  --red:#ff3155;
-  --cyan:#00e5ff;
-  --text:#f3f7ff;
-  --muted:#91a0b8;
-  --border:rgba(255,255,255,.09);
-  --green:#20d99a;
+:root{
+--bg:#070b14;--panel:#101827;--red:#ff3155;--cyan:#00e5ff;
+--text:#f3f7ff;--muted:#91a0b8;--border:rgba(255,255,255,.09);
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  margin:0;background:radial-gradient(circle at 50% -20%,#142b42 0%,#070b14 48%);
-  color:var(--text);font-family:Inter,"Noto Sans Tamil",sans-serif;
-  min-height:100vh;
-}
-body.ta{font-family:"Noto Sans Tamil",Inter,sans-serif}
+html{scroll-behavior:smooth;scroll-padding-top:120px}
+body{margin:0;background:radial-gradient(circle at 50% -20%,#142b42,#070b14 50%);color:var(--text);font-family:Inter,"Noto Sans Tamil",sans-serif}
+body.ta{font-family:"Noto Sans Tamil",sans-serif}
 button,input{font:inherit}
-button{
-  cursor:pointer;border:0;
-  -webkit-tap-highlight-color:transparent;
-  outline:none;
-}
-button:focus,button:active,button:focus-visible{
-  outline:none;
-}
-a{color:var(--cyan);text-decoration:none}
+button{cursor:pointer;border:0;outline:none;-webkit-tap-highlight-color:transparent}
+button:focus,button:active,button:focus-visible{outline:none}
+a{text-decoration:none;color:var(--cyan)}
 .container{width:min(1100px,92%);margin:auto}
-header{
-  position:sticky;top:0;z-index:10;
-  background:rgba(7,11,20,.88);backdrop-filter:blur(18px);
-  border-bottom:1px solid var(--border);
-}
-.nav{
-  min-height:72px;display:flex;align-items:center;
-  justify-content:space-between;gap:15px;
-}
-.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:20px}
-.logo{
-  width:38px;height:38px;border-radius:12px;
-  display:grid;place-items:center;color:var(--cyan);
-  background:#102b39;border:1px solid #00e5ff66;
-  box-shadow:0 0 20px #00e5ff22;font-size:20px;
-}
-.nav-right{display:flex;align-items:center;gap:9px}
-.lang-btn,.small-btn{
-  color:var(--text);background:#152033;border:1px solid var(--border);
-  border-radius:10px;padding:10px 13px;font-size:12px;font-weight:700;
-}
+
+header{position:sticky;top:0;z-index:30;background:rgba(7,11,20,.95);backdrop-filter:blur(18px);border-bottom:1px solid var(--border)}
+.nav{min-height:66px;display:flex;align-items:center;justify-content:space-between;gap:15px}
+.brand{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:800}
+.logo{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;color:var(--cyan);background:#102b39;border:1px solid #00e5ff66;box-shadow:0 0 20px #00e5ff22}
+.lang-btn{color:white;background:#152033;border:1px solid var(--border);border-radius:10px;padding:10px 13px;font-size:12px;font-weight:700}
+.nav-links{display:flex;align-items:center;justify-content:center;gap:27px;min-height:43px;border-top:1px solid #ffffff0a;overflow-x:auto;white-space:nowrap;scrollbar-width:none}
+.nav-links::-webkit-scrollbar{display:none}
+.nav-links a{color:#b8c6d9;font-size:12px;font-weight:700;padding:12px 0}
+.nav-links a:hover{color:var(--cyan)}
+
 .hero{text-align:center;padding:65px 0 35px}
-.pill{
-  display:inline-block;border:1px solid #00e5ff55;
-  background:#00e5ff0c;color:var(--cyan);
-  padding:8px 14px;border-radius:30px;font-size:11px;
-  letter-spacing:1.5px;font-weight:800;
-}
-h1{font-size:clamp(35px,7vw,64px);line-height:1.08;margin:23px 0 13px;letter-spacing:-2px}
+.pill{display:inline-block;border:1px solid #00e5ff55;background:#00e5ff0c;color:var(--cyan);padding:8px 14px;border-radius:30px;font-size:11px;letter-spacing:1.5px;font-weight:800}
+h1{font-size:clamp(35px,7vw,64px);line-height:1.1;margin:23px 0 13px;letter-spacing:-2px}
 .gradient{background:linear-gradient(90deg,#00e5ff,#8b9dff);-webkit-background-clip:text;color:transparent}
-.subtitle{color:var(--muted);max-width:580px;margin:0 auto;line-height:1.8;font-size:14px}
+.subtitle{color:var(--muted);max-width:580px;margin:auto;line-height:1.8;font-size:14px}
 .sos-wrap{margin:42px auto 24px;display:grid;place-items:center}
-.sos-button{
-  width:174px;height:174px;border-radius:50%;
-  color:white;background:radial-gradient(circle at 35% 30%,#ff7188,#ff3155 55%,#9c1532);
-  border:7px solid #ff315533;
-  box-shadow:0 0 0 12px #ff315510,0 0 55px #ff315566,inset 0 0 25px #ffffff22;
-  font-size:27px;font-weight:900;letter-spacing:2px;
-  animation:pulse 2s infinite;
-  touch-action:manipulation;user-select:none;
-  -webkit-appearance:none;appearance:none;
-}
-.sos-button:focus,.sos-button:focus-visible,.sos-button:active{
-  outline:none;box-shadow:0 0 0 12px #ff315510,0 0 55px #ff315566,inset 0 0 25px #ffffff22;
-}
-@keyframes pulse{
-  0%,100%{transform:scale(1);filter:brightness(1)}
-  50%{transform:scale(1.035);filter:brightness(1.12)}
-}
+.sos-button{width:174px;height:174px;border-radius:50%;color:white;background:radial-gradient(circle at 35% 30%,#ff7188,#ff3155 55%,#9c1532);border:7px solid #ff315533;box-shadow:0 0 0 12px #ff315510,0 0 55px #ff315566,inset 0 0 25px #ffffff22;font-size:27px;font-weight:900;letter-spacing:2px;animation:pulse 2s infinite;touch-action:manipulation;appearance:none}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.035);filter:brightness(1.12)}}
 .sos-caption{color:var(--muted);font-size:12px;text-align:center;line-height:1.7}
-.notice{
-  max-width:600px;margin:25px auto;padding:13px 16px;
-  border:1px solid #ffbd4a44;background:#ffbd4a0b;
-  color:#e8c98b;border-radius:12px;font-size:12px;line-height:1.7;
-}
+.notice{max-width:600px;margin:25px auto;padding:13px 16px;border:1px solid #ffbd4a44;background:#ffbd4a0b;color:#e8c98b;border-radius:12px;font-size:12px;line-height:1.7}
+
 .section{padding:35px 0}
 .section-title{text-align:center;font-size:25px;margin:0 0 10px}
 .section-desc{text-align:center;color:var(--muted);font-size:13px;margin:0 auto 25px;line-height:1.7}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
-.card{
-  background:linear-gradient(145deg,#111d2d,#0b1320);
-  border:1px solid var(--border);border-radius:18px;padding:22px;
-  box-shadow:0 12px 35px #0002;
-}
+.card{background:linear-gradient(145deg,#111d2d,#0b1320);border:1px solid var(--border);border-radius:18px;padding:22px;box-shadow:0 12px 35px #0002}
 .card h3{margin:0 0 9px;font-size:15px}
-.card p{color:var(--muted);font-size:12px;line-height:1.8;margin:0}
+.card p{color:var(--muted);font-size:12px;line-height:1.8}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}
 .card-icon{font-size:25px;margin-bottom:13px}
-.account-card{max-width:680px;margin:0 auto}
+.account-card{max-width:680px;margin:auto}
 .auth-buttons{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:17px}
-.primary,.secondary,.danger{
-  padding:13px 16px;border-radius:11px;font-weight:800;font-size:13px;
-}
+.primary,.secondary,.danger{padding:13px 16px;border-radius:11px;font-weight:800;font-size:13px}
 .primary{background:linear-gradient(90deg,#00bcd4,#00e5ff);color:#03121a}
 .secondary{background:#1b2b40;color:white;border:1px solid #ffffff18}
 .danger{background:#ff31551c;color:#ff7188;border:1px solid #ff315555}
-.primary:disabled,.secondary:disabled{opacity:.5;cursor:not-allowed}
+button:disabled{opacity:.5;cursor:not-allowed}
 .status{font-size:12px;color:var(--muted);margin-top:14px;line-height:1.7}
 .user-row{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap}
 .user-email{font-size:13px;color:var(--cyan);overflow-wrap:anywhere}
 .contact-form{display:grid;grid-template-columns:1fr 1fr auto;gap:9px;margin:18px 0}
-input{
-  min-width:0;width:100%;background:#08111e;border:1px solid #26354a;
-  border-radius:10px;padding:13px;color:white;outline:none;font-size:13px;
-}
+input{min-width:0;width:100%;background:#08111e;border:1px solid #26354a;border-radius:10px;padding:13px;color:white;outline:none;font-size:13px}
 input:focus{border-color:var(--cyan);box-shadow:0 0 0 3px #00e5ff12}
 input::placeholder{color:#718198}
 .contact-list{display:grid;gap:9px}
-.contact-item{
-  display:flex;align-items:center;justify-content:space-between;gap:10px;
-  padding:13px;background:#0b1523;border:1px solid var(--border);border-radius:12px;
-}
+.contact-item{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:13px;background:#0b1523;border:1px solid var(--border);border-radius:12px}
 .contact-info{min-width:0}
 .contact-name{font-size:13px;font-weight:700}
 .contact-phone{font-size:12px;color:var(--muted);margin-top:5px}
@@ -142,205 +79,173 @@ input::placeholder{color:#718198}
 .delete-btn{background:#ff31551a;color:#ff7188}
 .empty{text-align:center;color:var(--muted);font-size:12px;padding:25px 8px;border:1px dashed #ffffff22;border-radius:12px}
 .hidden{display:none!important}
-.info-box{
-  padding:15px;border-radius:12px;background:#00e5ff09;
-  border:1px solid #00e5ff30;color:#b9dce5;font-size:12px;line-height:1.8;margin-top:15px;
-}
+.info-box{padding:15px;border-radius:12px;background:#00e5ff09;border:1px solid #00e5ff30;color:#b9dce5;font-size:12px;line-height:1.8;margin-top:15px}
+
+.floating-setting{max-width:680px;margin:auto;display:flex;justify-content:space-between;align-items:center;gap:15px;padding:16px;border-radius:14px;border:1px solid #00e5ff30;background:linear-gradient(120deg,#0d2030,#101827)}
+.setting-title{font-size:13px;font-weight:800}
+.setting-description{font-size:11px;color:var(--muted);margin-top:5px;line-height:1.6}
+.switch{position:relative;width:52px;height:29px;flex:0 0 52px}
+.switch input{display:none}
+.switch-track{position:absolute;inset:0;background:#344155;border-radius:30px;cursor:pointer;transition:.25s}
+.switch-track:before{content:"";position:absolute;width:21px;height:21px;left:4px;top:4px;border-radius:50%;background:white;transition:.25s}
+.switch input:checked+.switch-track{background:#00bcd4;box-shadow:0 0 15px #00e5ff55}
+.switch input:checked+.switch-track:before{transform:translateX(23px)}
+
 footer{border-top:1px solid var(--border);margin-top:45px;padding:28px 0;color:var(--muted);font-size:11px;line-height:1.8;text-align:center}
 .footer-links{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin:12px 0}
-.floating-sos{
-  position:fixed;right:17px;bottom:20px;z-index:20;
-  width:60px;height:60px;border-radius:50%;
-  background:radial-gradient(circle at 30% 30%,#ff7188,#ff3155);
-  color:white;font-size:13px;font-weight:900;
-  box-shadow:0 0 25px #ff315577,0 0 0 7px #ff31551c;
-  animation:pulse 2s infinite;touch-action:manipulation;
-  -webkit-tap-highlight-color:transparent;appearance:none;-webkit-appearance:none;
-}
-.floating-sos:focus,.floating-sos:focus-visible,.floating-sos:active{outline:none}
-.toast{
-  position:fixed;left:50%;bottom:95px;transform:translateX(-50%);
-  z-index:50;background:#152438;border:1px solid #00e5ff55;
-  padding:13px 17px;border-radius:12px;color:white;
-  font-size:12px;line-height:1.5;max-width:90%;text-align:center;
-  box-shadow:0 10px 35px #0008;
-}
-.modal-bg{
-  position:fixed;inset:0;background:#000b;z-index:40;
-  display:grid;place-items:center;padding:20px;
-}
-.modal{
-  width:min(430px,100%);background:#101b2b;border:1px solid var(--border);
-  padding:23px;border-radius:18px;
-}
+.floating-sos{display:none;position:fixed;right:17px;bottom:20px;z-index:20;width:60px;height:60px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#ff7188,#ff3155);color:white;font-size:13px;font-weight:900;box-shadow:0 0 25px #ff315577,0 0 0 7px #ff31551c;animation:pulse 2s infinite;touch-action:manipulation;appearance:none}
+.floating-sos.enabled{display:grid;place-items:center}
+.toast{position:fixed;left:50%;bottom:95px;transform:translateX(-50%);z-index:50;background:#152438;border:1px solid #00e5ff55;padding:13px 17px;border-radius:12px;color:white;font-size:12px;max-width:90%;text-align:center;box-shadow:0 10px 35px #0008}
+.modal-bg{position:fixed;inset:0;background:#000b;z-index:40;display:grid;place-items:center;padding:20px}
+.modal{width:min(430px,100%);background:#101b2b;border:1px solid var(--border);padding:23px;border-radius:18px}
 .modal h3{margin-top:0}
-.modal p{font-size:13px;color:var(--muted);line-height:1.8}
 .modal-actions{display:flex;gap:9px;margin-top:18px}
 .modal-actions button{flex:1}
+
 @media(max-width:700px){
-  .grid{grid-template-columns:1fr}
-  .hero{padding-top:48px}
-  .contact-form{grid-template-columns:1fr}
-  .auth-buttons{grid-template-columns:1fr}
-  .sos-button{width:155px;height:155px}
-  .nav{min-height:64px}
+.grid{grid-template-columns:1fr}
+.hero{padding-top:48px}
+.contact-form{grid-template-columns:1fr}
+.auth-buttons{grid-template-columns:1fr}
+.sos-button{width:155px;height:155px}
+.nav-links{justify-content:flex-start;gap:22px;padding:0 4%}
 }
 </style>
 </head>
 
 <body>
 <header>
-  <div class="container nav">
-    <div class="brand"><div class="logo">✦</div>SafeSignal</div>
-    <div class="nav-right">
-      <button class="lang-btn" id="langBtn" onclick="toggleLanguage()">தமிழ்</button>
-    </div>
-  </div>
+ <div class="container nav">
+  <div class="brand"><div class="logo">✦</div>SafeSignal</div>
+  <button class="lang-btn" id="langBtn" onclick="toggleLanguage()">தமிழ்</button>
+ </div>
+ <nav class="nav-links">
+  <a href="#home" data-i18n="homeLink">Home</a>
+  <a href="#privacy" data-i18n="privacyLink">Privacy</a>
+  <a href="#terms" data-i18n="termsLink">Terms and Conditions</a>
+  <a href="#about" data-i18n="aboutLink">About Us</a>
+ </nav>
 </header>
 
 <main class="container">
-  <section class="hero">
-    <div class="pill" data-i18n="tagline">PERSONAL SAFETY COMPANION</div>
-    <h1 data-i18n="heroTitle">One Tap.<br><span class="gradient">Someone Knows.</span></h1>
-    <p class="subtitle" data-i18n="heroDesc">Keep your trusted people close. Prepare your emergency contacts before you need them.</p>
+<section class="hero" id="home">
+ <div class="pill" data-i18n="tagline">PERSONAL SAFETY COMPANION</div>
+ <h1>One Tap.<br><span class="gradient">Someone Knows.</span></h1>
+ <p class="subtitle" data-i18n="heroDesc">Keep your trusted people close. Prepare your emergency contacts before you need them.</p>
+ <div class="sos-wrap"><button class="sos-button" onclick="demoSOS()">SOS</button></div>
+ <div class="sos-caption" data-i18n="sosCaption">Tap to view the emergency demo. This button does not send a real alert.</div>
+ <div class="notice" data-i18n="notice">⚠️ SafeSignal is currently a website demo. It does not send emergency SMS, calls, alarms or live location. In a real emergency in India, call 112 directly.</div>
+</section>
 
-    <div class="sos-wrap">
-      <button class="sos-button" onclick="demoSOS()" aria-label="SOS demo">SOS</button>
-    </div>
-    <div class="sos-caption" data-i18n="sosCaption">Tap to view the emergency demo.<br>This button does not send a real alert.</div>
+<section class="section" id="account">
+ <h2 class="section-title" data-i18n="accountTitle">Your SafeSignal Account</h2>
+ <p class="section-desc" data-i18n="accountDesc">Sign in to save your trusted emergency contacts securely.</p>
+ <div class="card account-card">
+  <div id="signedOut">
+   <h3 data-i18n="welcome">Welcome to SafeSignal</h3>
+   <p class="status" data-i18n="loginDesc">Choose Google login or continue as a guest.</p>
+   <div class="auth-buttons">
+    <button class="primary" id="googleBtn" onclick="googleLogin()">Continue with Google</button>
+    <button class="secondary" id="guestBtn" onclick="guestLogin()">Continue as Guest</button>
+   </div>
+  </div>
+  <div id="signedIn" class="hidden">
+   <div class="user-row">
+    <div><div class="status" data-i18n="loggedInAs">Logged in as</div><div class="user-email" id="userEmail"></div></div>
+    <button class="danger" onclick="logout()" data-i18n="logout">Logout</button>
+   </div>
+   <div class="info-box" data-i18n="accountInfo">Your contacts are saved to your SafeSignal account.</div>
+   <button class="secondary hidden" id="upgradeBtn" onclick="upgradeGuest()" style="width:100%;margin-top:12px" data-i18n="upgrade">Link Google account</button>
+  </div>
+  <div class="status" id="authStatus" role="status" aria-live="polite"></div>
+ </div>
+</section>
 
-    <div class="notice" data-i18n="notice">
-      ⚠️ SafeSignal is currently a website demo. It does not send emergency SMS, calls, alarms or live location. In a real emergency in India, call 112 directly.
-    </div>
-  </section>
+<section class="section" id="floatingSettings">
+ <h2 class="section-title" data-i18n="floatingTitle">Floating SOS Button</h2>
+ <p class="section-desc" data-i18n="floatingDesc">Enable this option to show the SOS shortcut on your screen.</p>
+ <div class="floating-setting">
+  <div><div class="setting-title" data-i18n="floatingLabel">Show side SOS button</div><div class="setting-description" id="floatingStatus">Currently OFF</div></div>
+  <label class="switch" aria-label="Enable floating SOS button">
+   <input type="checkbox" id="floatingToggle" onchange="toggleFloatingSOS(this.checked)">
+   <span class="switch-track"></span>
+  </label>
+ </div>
+</section>
 
-  <section class="section" id="account">
-    <h2 class="section-title" data-i18n="accountTitle">Your SafeSignal Account</h2>
-    <p class="section-desc" data-i18n="accountDesc">Sign in to save your trusted emergency contacts securely.</p>
-    <div class="card account-card">
-      <div id="signedOut">
-        <h3 data-i18n="welcome">Welcome to SafeSignal</h3>
-        <p class="status" data-i18n="loginDesc">Choose Google login or continue as a guest.</p>
-        <div class="auth-buttons">
-          <button class="primary" id="googleBtn" onclick="googleLogin()">Continue with Google</button>
-          <button class="secondary" id="guestBtn" onclick="guestLogin()">Continue as Guest</button>
-        </div>
-      </div>
+<section class="section" id="contacts">
+ <h2 class="section-title" data-i18n="contactsTitle">Trusted Contacts</h2>
+ <p class="section-desc" data-i18n="contactsDesc">Add up to 3 people you trust.</p>
+ <div class="card account-card">
+  <div id="contactsLocked" class="empty" data-i18n="loginRequired">Please login to manage your contacts.</div>
+  <div id="contactsArea" class="hidden">
+   <div class="user-row"><h3 data-i18n="savedContacts">Your saved contacts</h3><span class="status" id="contactCount">0 / 3</span></div>
+   <form class="contact-form" id="contactForm">
+    <input id="contactName" type="text" maxlength="50" placeholder="Contact name" required>
+    <input id="contactPhone" type="tel" maxlength="16" placeholder="Phone number" required>
+    <button class="primary" type="submit" id="saveContactBtn" data-i18n="addContact">Add contact</button>
+   </form>
+   <div class="status" id="contactStatus" aria-live="polite"></div>
+   <div class="contact-list" id="contactList"><div class="empty">No contacts added yet.</div></div>
+   <div class="info-box" data-i18n="contactPrivacy">Only your signed-in account can manage these contacts. Add contacts only with their consent.</div>
+  </div>
+ </div>
+</section>
 
-      <div id="signedIn" class="hidden">
-        <div class="user-row">
-          <div>
-            <div class="status" data-i18n="loggedInAs">Logged in as</div>
-            <div class="user-email" id="userEmail">Guest account</div>
-          </div>
-          <button class="danger" onclick="logout()" data-i18n="logout">Logout</button>
-        </div>
-        <div class="info-box" data-i18n="accountInfo">Your contacts are saved to your SafeSignal account. Sign in with the same account to access them again.</div>
-        <button class="secondary hidden" id="upgradeBtn" onclick="upgradeGuest()" style="width:100%;margin-top:12px" data-i18n="upgrade">Link Google account</button>
-      </div>
-      <div class="status" id="authStatus" role="status" aria-live="polite"></div>
-    </div>
-  </section>
+<section class="section">
+ <h2 class="section-title" data-i18n="featuresTitle">Designed for preparedness</h2>
+ <p class="section-desc" data-i18n="featuresDesc">Simple tools to help you prepare before an emergency.</p>
+ <div class="grid">
+  <div class="card"><div class="card-icon">🛡️</div><h3 data-i18n="feature1Title">Trusted Contacts</h3><p data-i18n="feature1Desc">Keep up to three trusted people saved in your account.</p></div>
+  <div class="card"><div class="card-icon">📍</div><h3 data-i18n="feature2Title">Location-ready concept</h3><p data-i18n="feature2Desc">Live location sharing is planned for a future release.</p></div>
+  <div class="card"><div class="card-icon">⚡</div><h3 data-i18n="feature3Title">Quick access</h3><p data-i18n="feature3Desc">A simple interface designed to make important actions easy to find.</p></div>
+ </div>
+</section>
 
-  <section class="section" id="contacts">
-    <h2 class="section-title" data-i18n="contactsTitle">Trusted Contacts</h2>
-    <p class="section-desc" data-i18n="contactsDesc">Add up to 3 people you trust.</p>
-    <div class="card account-card">
-      <div id="contactsLocked" class="empty" data-i18n="loginRequired">Please login to manage your contacts.</div>
-      <div id="contactsArea" class="hidden">
-        <div class="user-row">
-          <h3 data-i18n="savedContacts">Your saved contacts</h3>
-          <span class="status" id="contactCount">0 / 3</span>
-        </div>
-        <form class="contact-form" id="contactForm">
-          <input id="contactName" type="text" maxlength="50" placeholder="Contact name" required>
-          <input id="contactPhone" type="tel" maxlength="16" placeholder="Phone number" required>
-          <button class="primary" type="submit" id="saveContactBtn" data-i18n="addContact">Add contact</button>
-        </form>
-        <div class="status" id="contactStatus" aria-live="polite"></div>
-        <div class="contact-list" id="contactList">
-          <div class="empty" data-i18n="noContacts">No contacts added yet.</div>
-        </div>
-        <div class="info-box" data-i18n="contactPrivacy">Only your signed-in account can read or manage these contacts under the current Firestore rules. Please add contacts only with their consent.</div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <h2 class="section-title" data-i18n="featuresTitle">Designed for preparedness</h2>
-    <p class="section-desc" data-i18n="featuresDesc">Simple tools to help you prepare before an emergency.</p>
-    <div class="grid">
-      <div class="card"><div class="card-icon">🛡️</div><h3 data-i18n="feature1Title">Trusted Contacts</h3><p data-i18n="feature1Desc">Keep up to three trusted people saved in your account.</p></div>
-      <div class="card"><div class="card-icon">📍</div><h3 data-i18n="feature2Title">Location-ready concept</h3><p data-i18n="feature2Desc">Live location sharing is planned for a future verified release.</p></div>
-      <div class="card"><div class="card-icon">⚡</div><h3 data-i18n="feature3Title">Quick access</h3><p data-i18n="feature3Desc">A simple interface designed to make important actions easy to find.</p></div>
-    </div>
-  </section>
-
-  <section class="section" id="about">
-    <div class="card">
-      <h2 data-i18n="aboutTitle">About SafeSignal</h2>
-      <p class="status" data-i18n="aboutDesc">SafeSignal is a personal safety preparedness project. Our goal is to make it easier to keep trusted emergency contacts organised. The current website is an early version and does not provide a real emergency dispatch service.</p>
-    </div>
-  </section>
-
-  <section class="section" id="privacy">
-    <div class="card">
-      <h2 data-i18n="privacyTitle">Privacy</h2>
-      <p class="status" data-i18n="privacyDesc">Your contact details are stored in Firebase Firestore under your account. Current access rules restrict contact access to the authenticated account owner. Do not add information without the contact's permission. You can delete saved contacts from this page. Review the actual Firebase configuration and data practices before public launch.</p>
-    </div>
-  </section>
-
-  <section class="section" id="terms">
-    <div class="card">
-      <h2 data-i18n="termsTitle">Terms of Use</h2>
-      <p class="status" data-i18n="termsDesc">SafeSignal is provided as an early-stage website for preparedness and demonstration. It is not a replacement for emergency services, medical assistance, or official authorities. Do not rely on this demo to send alerts or request rescue. In India, call 112 directly in an emergency.</p>
-    </div>
-  </section>
+<section class="section" id="about"><div class="card"><h2 data-i18n="aboutTitle">About SafeSignal</h2><p class="status" data-i18n="aboutDesc">SafeSignal is a personal safety preparedness project. The current website is an early version and does not provide a real emergency dispatch service.</p></div></section>
+<section class="section" id="privacy"><div class="card"><h2 data-i18n="privacyTitle">Privacy</h2><p class="status" data-i18n="privacyDesc">Your contact details are stored in Firebase Firestore under your account. Current access rules restrict contact access to the authenticated account owner. Do not add information without consent. You can delete saved contacts from this page.</p></div></section>
+<section class="section" id="terms"><div class="card"><h2 data-i18n="termsTitle">Terms and Conditions</h2><p class="status" data-i18n="termsDesc">SafeSignal is an early-stage preparedness demo. It is not a replacement for emergency services or official authorities. In India, call 112 directly in an emergency.</p></div></section>
 </main>
 
 <footer>
-  <div class="container">
-    <strong>SafeSignal</strong> — <span data-i18n="footerLine">One Tap. Someone Knows.</span>
-    <div class="footer-links">
-      <a href="#about" data-i18n="aboutLink">About</a>
-      <a href="#contacts" data-i18n="contactsLink">Contacts</a>
-      <a href="#privacy" data-i18n="privacyLink">Privacy</a>
-      <a href="#terms" data-i18n="termsLink">Terms</a>
-    </div>
-    <span data-i18n="footerNote">Demo version. Not an emergency response service.</span>
+ <div class="container">
+  <strong>SafeSignal</strong> — One Tap. Someone Knows.
+  <div class="footer-links">
+   <a href="#home">Home</a><a href="#about">About Us</a><a href="#privacy">Privacy</a><a href="#terms">Terms and Conditions</a>
   </div>
+  <span data-i18n="footerNote">Demo version. Not an emergency response service.</span>
+ </div>
 </footer>
 
-<button class="floating-sos" onclick="demoSOS()" aria-label="SOS demo">SOS</button>
+<button class="floating-sos" id="floatingSOS" onclick="demoSOS()">SOS</button>
 <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
 
 <div id="editModal" class="modal-bg hidden">
-  <div class="modal">
-    <h3 data-i18n="editTitle">Edit contact</h3>
-    <input id="editName" type="text" maxlength="50" placeholder="Contact name">
-    <input id="editPhone" type="tel" maxlength="16" placeholder="Phone number" style="margin-top:10px">
-    <div class="modal-actions">
-      <button class="primary" onclick="saveEdit()" data-i18n="save">Save</button>
-      <button class="secondary" onclick="closeEdit()" data-i18n="cancel">Cancel</button>
-    </div>
+ <div class="modal">
+  <h3 data-i18n="editTitle">Edit contact</h3>
+  <input id="editName" type="text" maxlength="50" placeholder="Contact name">
+  <input id="editPhone" type="tel" maxlength="16" placeholder="Phone number" style="margin-top:10px">
+  <div class="modal-actions">
+   <button class="primary" onclick="saveEdit()" data-i18n="save">Save</button>
+   <button class="secondary" onclick="closeEdit()" data-i18n="cancel">Cancel</button>
   </div>
+ </div>
 </div>
 
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-app.js";
+import {initializeApp} from "https://www.gstatic.com/firebasejs/13.3.0/firebase-app.js";
 import {
-  getAuth, GoogleAuthProvider, signInWithPopup, signInAnonymously,
-  signOut, onAuthStateChanged, linkWithPopup,
-  setPersistence, browserLocalPersistence
+ getAuth,GoogleAuthProvider,signInWithPopup,signInAnonymously,
+ signOut,onAuthStateChanged,linkWithPopup,setPersistence,browserLocalPersistence
 } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-auth.js";
 import {
-  getFirestore, collection, addDoc, onSnapshot,
-  doc, updateDoc, deleteDoc, serverTimestamp
+ getFirestore,collection,addDoc,onSnapshot,doc,updateDoc,deleteDoc,serverTimestamp
 } from "https://www.gstatic.com/firebasejs/13.3.0/firebase-firestore.js";
 
-/* Firebase project configuration */
+/* FIREBASE CONFIG: Replace apiKey with your actual Firebase Web App API key */
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyAUBNDxgtPC2Pky_vcAVWV9IVtdAEp9rs8",
+  apiKey: "AIzaSyAUBNNDxgtPCP2ky_vcAVWV9IVtdAEp9rs",
   authDomain: "safesignal-22407.firebaseapp.com",
   projectId: "safesignal-22407",
   storageBucket: "safesignal-22407.firebasestorage.app",
@@ -349,333 +254,306 @@ const firebaseConfig = {
   measurementId: "G-PWDTZGFVHP"
 };
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
-const provider = new GoogleAuthProvider();
+const $=id=>document.getElementById(id);
+let auth,db,provider,currentUser=null,contacts=[],stopListening=null,editingId=null,busy=false;
+let currentLang="en",firebaseReady=false;
 
-let currentUser = null;
-let contacts = [];
-let stopListening = null;
-let editingId = null;
-let busy = false;
-let currentLang = "en";
-
-const $ = id => document.getElementById(id);
-
-const translations = {
-en: {
- tagline:"PERSONAL SAFETY COMPANION",
- heroTitle:'One Tap.<br><span class="gradient">Someone Knows.</span>',
- heroDesc:"Keep your trusted people close. Prepare your emergency contacts before you need them.",
- sosCaption:"Tap to view the emergency demo.<br>This button does not send a real alert.",
- notice:"⚠️ SafeSignal is currently a website demo. It does not send emergency SMS, calls, alarms or live location. In a real emergency in India, call 112 directly.",
- accountTitle:"Your SafeSignal Account",accountDesc:"Sign in to save your trusted emergency contacts securely.",
- welcome:"Welcome to SafeSignal",loginDesc:"Choose Google login or continue as a guest.",
- loggedInAs:"Logged in as",logout:"Logout",accountInfo:"Your contacts are saved to your SafeSignal account. Sign in with the same account to access them again.",
- upgrade:"Link Google account",contactsTitle:"Trusted Contacts",contactsDesc:"Add up to 3 people you trust.",
- loginRequired:"Please login to manage your contacts.",savedContacts:"Your saved contacts",
- addContact:"Add contact",noContacts:"No contacts added yet.",
- contactPrivacy:"Only your signed-in account can read or manage these contacts under the current Firestore rules. Please add contacts only with their consent.",
- featuresTitle:"Designed for preparedness",featuresDesc:"Simple tools to help you prepare before an emergency.",
- feature1Title:"Trusted Contacts",feature1Desc:"Keep up to three trusted people saved in your account.",
- feature2Title:"Location-ready concept",feature2Desc:"Live location sharing is planned for a future verified release.",
- feature3Title:"Quick access",feature3Desc:"A simple interface designed to make important actions easy to find.",
- aboutTitle:"About SafeSignal",aboutDesc:"SafeSignal is a personal safety preparedness project. Our goal is to make it easier to keep trusted emergency contacts organised. The current website is an early version and does not provide a real emergency dispatch service.",
- privacyTitle:"Privacy",privacyDesc:"Your contact details are stored in Firebase Firestore under your account. Current access rules restrict contact access to the authenticated account owner. Do not add information without the contact's permission. You can delete saved contacts from this page. Review the actual Firebase configuration and data practices before public launch.",
- termsTitle:"Terms of Use",termsDesc:"SafeSignal is provided as an early-stage website for preparedness and demonstration. It is not a replacement for emergency services, medical assistance, or official authorities. Do not rely on this demo to send alerts or request rescue. In India, call 112 directly in an emergency.",
- footerLine:"One Tap. Someone Knows.",aboutLink:"About",contactsLink:"Contacts",privacyLink:"Privacy",termsLink:"Terms",footerNote:"Demo version. Not an emergency response service.",
- editTitle:"Edit contact",save:"Save",cancel:"Cancel"
+const translations={
+en:{
+homeLink:"Home",privacyLink:"Privacy",termsLink:"Terms and Conditions",aboutLink:"About Us",
+tagline:"PERSONAL SAFETY COMPANION",heroDesc:"Keep your trusted people close. Prepare your emergency contacts before you need them.",
+sosCaption:"Tap to view the emergency demo. This button does not send a real alert.",
+notice:"⚠️ SafeSignal is currently a website demo. It does not send emergency SMS, calls, alarms or live location. In a real emergency in India, call 112 directly.",
+accountTitle:"Your SafeSignal Account",accountDesc:"Sign in to save your trusted emergency contacts securely.",welcome:"Welcome to SafeSignal",loginDesc:"Choose Google login or continue as a guest.",
+loggedInAs:"Logged in as",logout:"Logout",accountInfo:"Your contacts are saved to your SafeSignal account. Sign in with the same account to access them again.",
+upgrade:"Link Google account",contactsTitle:"Trusted Contacts",contactsDesc:"Add up to 3 people you trust.",loginRequired:"Please login to manage your contacts.",
+savedContacts:"Your saved contacts",addContact:"Add contact",noContacts:"No contacts added yet.",
+contactPrivacy:"Only your signed-in account can manage these contacts under the current Firestore rules. Add contacts only with their consent.",
+floatingTitle:"Floating SOS Button",floatingDesc:"Enable this option to show the SOS shortcut on your screen.",floatingLabel:"Show side SOS button",
+floatingOn:"Currently ON",floatingOff:"Currently OFF",
+featuresTitle:"Designed for preparedness",featuresDesc:"Simple tools to help you prepare before an emergency.",
+feature1Title:"Trusted Contacts",feature1Desc:"Keep up to three trusted people saved in your account.",
+feature2Title:"Location-ready concept",feature2Desc:"Live location sharing is planned for a future release.",
+feature3Title:"Quick access",feature3Desc:"A simple interface designed to make important actions easy to find.",
+aboutTitle:"About SafeSignal",aboutDesc:"SafeSignal is a personal safety preparedness project. The current website is an early version and does not provide a real emergency dispatch service.",
+privacyTitle:"Privacy",privacyDesc:"Your contact details are stored in Firebase Firestore under your account. Current access rules restrict contact access to the authenticated account owner. Do not add information without consent. You can delete saved contacts from this page.",
+termsTitle:"Terms and Conditions",termsDesc:"SafeSignal is an early-stage preparedness demo. It is not a replacement for emergency services or official authorities. In India, call 112 directly in an emergency.",
+footerNote:"Demo version. Not an emergency response service.",editTitle:"Edit contact",save:"Save",cancel:"Cancel"
 },
-ta: {
- tagline:"தனிப்பட்ட பாதுகாப்பு துணை",
- heroTitle:'ஒரு தொடுதல்.<br><span class="gradient">யாரோ ஒருவர் அறிவார்.</span>',
- heroDesc:"உங்களுக்கு நம்பிக்கையானவர்களை அருகில் வைத்திருங்கள். அவசரத்திற்கு முன்பே தொடர்புகளைச் சேமியுங்கள்.",
- sosCaption:"அவசரநிலை டெமோவைப் பார்க்க அழுத்தவும்.<br>இது உண்மையான எச்சரிக்கையை அனுப்பாது.",
- notice:"⚠️ SafeSignal தற்போது இணையதள டெமோ மட்டுமே. இது அவசர SMS, அழைப்பு, அலாரம் அல்லது நேரடி இருப்பிடத்தை அனுப்பாது. இந்தியாவில் உண்மையான அவசரநிலையில் 112-ஐ நேரடியாக அழைக்கவும்.",
- accountTitle:"உங்கள் SafeSignal கணக்கு",accountDesc:"நம்பகமான அவசர தொடர்புகளைச் சேமிக்க உள்நுழையவும்.",
- welcome:"SafeSignal-க்கு வரவேற்கிறோம்",loginDesc:"Google மூலம் உள்நுழையவும் அல்லது Guest ஆக தொடரவும்.",
- loggedInAs:"உள்நுழைந்த கணக்கு",logout:"வெளியேறு",accountInfo:"உங்கள் தொடர்புகள் SafeSignal கணக்கில் சேமிக்கப்படும். மீண்டும் அதே கணக்கில் உள்நுழைந்து அணுகலாம்.",
- upgrade:"Google கணக்குடன் இணைக்கவும்",contactsTitle:"நம்பகமான தொடர்புகள்",contactsDesc:"நீங்கள் நம்பும் அதிகபட்சம் 3 நபர்களைச் சேர்க்கவும்.",
- loginRequired:"தொடர்புகளை நிர்வகிக்க முதலில் உள்நுழையவும்.",savedContacts:"சேமிக்கப்பட்ட தொடர்புகள்",
- addContact:"தொடர்பைச் சேர்",noContacts:"இன்னும் தொடர்புகள் சேர்க்கப்படவில்லை.",
- contactPrivacy:"தற்போதைய Firestore விதிகளின்படி உள்நுழைந்த கணக்கு மட்டுமே இந்த தொடர்புகளைப் பார்க்கவும் நிர்வகிக்கவும் முடியும். தொடர்புடையவர்களின் அனுமதியுடன் மட்டும் சேர்க்கவும்.",
- featuresTitle:"முன்னேற்பாட்டிற்காக உருவாக்கப்பட்டது",featuresDesc:"அவசரநிலைக்கு முன்பே தயாராக இருக்க உதவும் எளிய வசதிகள்.",
- feature1Title:"நம்பகமான தொடர்புகள்",feature1Desc:"உங்கள் கணக்கில் மூன்று நம்பகமான நபர்களைச் சேமிக்கலாம்.",
- feature2Title:"இருப்பிடப் பகிர்வு திட்டம்",feature2Desc:"நேரடி இருப்பிடப் பகிர்வு எதிர்கால சரிபார்க்கப்பட்ட பதிப்பில் திட்டமிடப்பட்டுள்ளது.",
- feature3Title:"விரைவான அணுகல்",feature3Desc:"முக்கிய செயல்களை எளிதாகக் கண்டறிய எளிய வடிவமைப்பு.",
- aboutTitle:"SafeSignal பற்றி",aboutDesc:"SafeSignal என்பது தனிப்பட்ட பாதுகாப்பு முன்னேற்பாட்டிற்கான திட்டமாகும். நம்பகமான அவசர தொடர்புகளை ஒழுங்குபடுத்த உதவுவதே எங்கள் நோக்கம். தற்போதைய இணையதளம் ஆரம்பநிலை பதிப்பு மட்டுமே; இது உண்மையான அவசர உதவி சேவை அல்ல.",
- privacyTitle:"தனியுரிமை",privacyDesc:"உங்கள் தொடர்பு விவரங்கள் Firebase Firestore-ல் உங்கள் கணக்கின் கீழ் சேமிக்கப்படும். தற்போதைய அணுகல் விதிகள் அங்கீகரிக்கப்பட்ட கணக்கு உரிமையாளருக்கு மட்டுமே அனுமதி அளிக்கின்றன. தொடர்புடையவர்களின் அனுமதியின்றி தகவல்களைச் சேர்க்க வேண்டாம். இந்தப் பக்கத்திலிருந்து தொடர்புகளை நீக்கலாம். பொதுவெளியில் வெளியிடுவதற்கு முன் உண்மையான தரவு நடைமுறைகளைச் சரிபார்க்கவும்.",
- termsTitle:"பயன்பாட்டு விதிமுறைகள்",termsDesc:"SafeSignal என்பது முன்னேற்பாடு மற்றும் டெமோ பயன்பாட்டிற்கான ஆரம்பநிலை இணையதளம். இது அவசர சேவைகள், மருத்துவ உதவி அல்லது அதிகாரப்பூர்வ அமைப்புகளுக்கு மாற்றாகாது. இந்த டெமோ மூலம் உதவி கிடைக்கும் என்று நம்ப வேண்டாம். இந்தியாவில் அவசரநிலையில் 112-ஐ நேரடியாக அழைக்கவும்.",
- footerLine:"ஒரு தொடுதல். யாரோ ஒருவர் அறிவார்.",aboutLink:"பற்றி",contactsLink:"தொடர்புகள்",privacyLink:"தனியுரிமை",termsLink:"விதிமுறைகள்",footerNote:"டெமோ பதிப்பு. அவசர உதவி சேவை அல்ல.",
- editTitle:"தொடர்பைத் திருத்து",save:"சேமி",cancel:"ரத்து செய்"
+ta:{
+homeLink:"முகப்பு",privacyLink:"தனியுரிமை",termsLink:"விதிமுறைகள்",aboutLink:"எங்களைப் பற்றி",
+tagline:"தனிப்பட்ட பாதுகாப்பு துணை",heroDesc:"உங்களுக்கு நம்பிக்கையானவர்களை அருகில் வைத்திருங்கள். அவசரத்திற்கு முன்பே தொடர்புகளைச் சேமியுங்கள்.",
+sosCaption:"டெமோவைப் பார்க்க அழுத்தவும். இது உண்மையான எச்சரிக்கையை அனுப்பாது.",
+notice:"⚠️ SafeSignal தற்போது இணையதள டெமோ மட்டுமே. இது அவசர SMS, அழைப்பு, அலாரம் அல்லது நேரடி இருப்பிடத்தை அனுப்பாது. இந்தியாவில் அவசரநிலையில் 112-ஐ அழைக்கவும்.",
+accountTitle:"உங்கள் SafeSignal கணக்கு",accountDesc:"அவசர தொடர்புகளைச் சேமிக்க உள்நுழையவும்.",welcome:"SafeSignal-க்கு வரவேற்கிறோம்",
+loginDesc:"Google மூலம் உள்நுழையவும் அல்லது Guest ஆக தொடரவும்.",loggedInAs:"உள்நுழைந்த கணக்கு",logout:"வெளியேறு",
+accountInfo:"உங்கள் தொடர்புகள் SafeSignal கணக்கில் சேமிக்கப்படும்.",upgrade:"Google கணக்குடன் இணைக்கவும்",
+contactsTitle:"நம்பகமான தொடர்புகள்",contactsDesc:"அதிகபட்சம் 3 நபர்களைச் சேர்க்கவும்.",loginRequired:"தொடர்புகளை நிர்வகிக்க முதலில் உள்நுழையவும்.",
+savedContacts:"சேமிக்கப்பட்ட தொடர்புகள்",addContact:"தொடர்பைச் சேர்",noContacts:"இன்னும் தொடர்புகள் சேர்க்கப்படவில்லை.",
+contactPrivacy:"உங்கள் கணக்கு மட்டுமே இந்த தொடர்புகளை நிர்வகிக்க முடியும். அனுமதியுடன் மட்டும் சேர்க்கவும்.",
+floatingTitle:"திரையில் SOS பட்டன்",floatingDesc:"பக்கவாட்டு SOS பட்டனைக் காட்ட இந்த வசதியை இயக்கவும்.",floatingLabel:"பக்கவாட்டு SOS பட்டனைக் காட்டு",
+floatingOn:"தற்போது ON",floatingOff:"தற்போது OFF",
+featuresTitle:"பாதுகாப்பு முன்னேற்பாடு",featuresDesc:"அவசரநிலைக்கு முன்பே தயாராக இருக்க உதவும் வசதிகள்.",
+feature1Title:"நம்பகமான தொடர்புகள்",feature1Desc:"மூன்று நம்பகமான நபர்களைச் சேமிக்கலாம்.",
+feature2Title:"இருப்பிடப் பகிர்வு திட்டம்",feature2Desc:"நேரடி இருப்பிடப் பகிர்வு எதிர்கால பதிப்பில் திட்டமிடப்பட்டுள்ளது.",
+feature3Title:"விரைவான அணுகல்",feature3Desc:"முக்கிய செயல்களை எளிதாகக் கண்டறிய எளிய வடிவமைப்பு.",
+aboutTitle:"SafeSignal பற்றி",aboutDesc:"SafeSignal என்பது தனிப்பட்ட பாதுகாப்பு முன்னேற்பாட்டிற்கான திட்டம். தற்போதைய இணையதளம் ஆரம்பநிலை பதிப்பு மட்டுமே; இது உண்மையான அவசர உதவி சேவை அல்ல.",
+privacyTitle:"தனியுரிமை",privacyDesc:"உங்கள் தொடர்பு விவரங்கள் Firebase Firestore-ல் உங்கள் கணக்கின் கீழ் சேமிக்கப்படும். அனுமதியின்றி தகவல்களைச் சேர்க்க வேண்டாம். இந்தப் பக்கத்திலிருந்து தொடர்புகளை நீக்கலாம்.",
+termsTitle:"விதிமுறைகள் மற்றும் நிபந்தனைகள்",termsDesc:"SafeSignal என்பது ஆரம்பநிலை டெமோ. இது அவசர சேவைகளுக்கு மாற்றாகாது. இந்தியாவில் அவசரநிலையில் 112-ஐ நேரடியாக அழைக்கவும்.",
+footerNote:"டெமோ பதிப்பு. அவசர உதவி சேவை அல்ல.",editTitle:"தொடர்பைத் திருத்து",save:"சேமி",cancel:"ரத்து செய்"
 }
 };
 
-function msg(key) {
- return translations[currentLang]?.[key] || translations.en[key] || key;
-}
+function t(key){return translations[currentLang][key]||translations.en[key]||key;}
 
-window.toggleLanguage = function() {
- currentLang = currentLang === "en" ? "ta" : "en";
- document.body.classList.toggle("ta", currentLang === "ta");
- document.documentElement.lang = currentLang === "ta" ? "ta" : "en";
- document.querySelectorAll("[data-i18n]").forEach(el => {
-   const key = el.dataset.i18n;
-   if (translations[currentLang][key]) el.innerHTML = translations[currentLang][key];
+window.toggleLanguage=()=>{
+ currentLang=currentLang==="en"?"ta":"en";
+ document.body.classList.toggle("ta",currentLang==="ta");
+ document.documentElement.lang=currentLang==="ta"?"ta":"en";
+ document.querySelectorAll("[data-i18n]").forEach(el=>{
+  const key=el.dataset.i18n;
+  if(translations[currentLang][key])el.textContent=translations[currentLang][key];
  });
- $("langBtn").textContent = currentLang === "en" ? "தமிழ்" : "English";
- $("contactName").placeholder = currentLang === "en" ? "Contact name" : "தொடர்பு பெயர்";
- $("contactPhone").placeholder = currentLang === "en" ? "Phone number" : "தொலைபேசி எண்";
+ $("langBtn").textContent=currentLang==="en"?"தமிழ்":"English";
+ $("contactName").placeholder=currentLang==="en"?"Contact name":"தொடர்பு பெயர்";
+ $("contactPhone").placeholder=currentLang==="en"?"Phone number":"தொலைபேசி எண்";
+ updateFloatingStatus();
+ renderContacts();
 };
 
-function showToast(message) {
- const el = $("toast");
- el.textContent = message;
- el.classList.remove("hidden");
+function toast(message){
+ $("toast").textContent=message;
+ $("toast").classList.remove("hidden");
  clearTimeout(window.toastTimer);
- window.toastTimer = setTimeout(() => el.classList.add("hidden"), 3500);
+ window.toastTimer=setTimeout(()=>$("toast").classList.add("hidden"),3500);
 }
 
-function setStatus(message) {
- $("authStatus").textContent = message;
+function errorMessage(e){
+ const code=e?.code||"";
+ if(code.includes("api-key-not-valid")||code.includes("invalid-api-key"))return "Firebase API key invalid. Correct Web App API key replace pannunga.";
+ if(code.includes("unauthorized-domain"))return "Firebase Authentication → Settings → Authorized domains-la nammabustn-hub.github.io add pannunga.";
+ if(code.includes("popup-closed"))return "Google login popup close aagiduchu. Again try pannunga.";
+ if(code.includes("popup-blocked"))return "Browser popup block pannirukku. Popup allow pannitu try pannunga.";
+ if(code.includes("network-request-failed"))return "Internet connection check pannunga.";
+ if(code.includes("permission-denied"))return "Firestore permission denied. Firestore Rules check pannunga.";
+ if(code.includes("operation-not-allowed"))return "Firebase Console-la Google / Anonymous sign-in enable pannunga.";
+ return e?.message||"Something went wrong. Please try again.";
 }
 
-function setBusy(value) {
- busy = value;
- $("googleBtn").disabled = value;
- $("guestBtn").disabled = value;
+function setBusy(value){
+ busy=value;
+ $("googleBtn").disabled=value;
+ $("guestBtn").disabled=value;
 }
 
-function errorMessage(error) {
- const code = error?.code || "";
- if (code.includes("api-key-not-valid") || code.includes("invalid-api-key")) {
-   return "Firebase API key invalid. Firebase Console-la Web App config and Google Cloud API key restrictions check pannanum.";
- }
- if (code.includes("unauthorized-domain")) {
-   return "This domain is not authorised. Firebase Authentication → Settings → Authorized domains-la nammabustn-hub.github.io add pannunga.";
- }
- if (code.includes("popup-closed")) return "Google login popup close aagiduchu. Again try pannunga.";
- if (code.includes("popup-blocked")) return "Browser popup block pannirukku. Popup allow pannitu try pannunga.";
- if (code.includes("network-request-failed")) return "Internet connection check pannunga.";
- if (code.includes("permission-denied")) return "Firestore permission denied. Firestore Rules check pannunga.";
- if (code.includes("operation-not-allowed")) return "Firebase Console-la Anonymous / Google sign-in provider enable pannunga.";
- return error?.message || "Something went wrong. Please try again.";
+function getFloatingPreference(){
+ try{return localStorage.getItem("safesignal_floating_sos")==="on";}
+ catch(e){return false;}
 }
 
-window.guestLogin = async function() {
- if (busy) return;
- setBusy(true);setStatus("Connecting...");
- try {
-   await setPersistence(auth,browserLocalPersistence);
-   await signInAnonymously(auth);
-   setStatus("Guest login successful.");
- } catch(e) {
-   setStatus(errorMessage(e));
- } finally {setBusy(false);}
+function updateFloatingStatus(){
+ const enabled=$("floatingToggle").checked;
+ $("floatingSOS").classList.toggle("enabled",enabled);
+ $("floatingStatus").textContent=enabled?t("floatingOn"):t("floatingOff");
+}
+
+window.toggleFloatingSOS=enabled=>{
+ try{localStorage.setItem("safesignal_floating_sos",enabled?"on":"off");}catch(e){}
+ $("floatingToggle").checked=enabled;
+ updateFloatingStatus();
+ toast(enabled?"Side SOS button enabled.":"Side SOS button disabled.");
 };
 
-window.googleLogin = async function() {
- if (busy) return;
- setBusy(true);setStatus("Connecting to Google...");
- try {
-   await setPersistence(auth,browserLocalPersistence);
-   if (auth.currentUser?.isAnonymous) {
-     await linkWithPopup(auth.currentUser,provider);
-   } else {
-     await signInWithPopup(auth,provider);
-   }
-   setStatus("Google login successful.");
- } catch(e) {
-   setStatus(errorMessage(e));
- } finally {setBusy(false);}
-};
+$("floatingToggle").checked=getFloatingPreference();
+updateFloatingStatus();
 
-window.upgradeGuest = async function() {
- if (!auth.currentUser?.isAnonymous) return;
- setStatus("Linking Google account...");
- try {
-   await linkWithPopup(auth.currentUser,provider);
-   showToast("Google account linked successfully.");
- } catch(e) {
-   setStatus(errorMessage(e));
+/* Firebase initialisation */
+try{
+ if(firebaseConfig.apiKey.includes("PASTE_YOUR")||!firebaseConfig.apiKey.trim()){
+  throw new Error("Firebase API key missing. Replace the apiKey in firebaseConfig.");
  }
+ const app=initializeApp(firebaseConfig);
+ auth=getAuth(app);
+ db=getFirestore(app);
+ provider=new GoogleAuthProvider();
+ firebaseReady=true;
+}catch(e){
+ console.error(e);
+ $("authStatus").textContent=e.message;
+}
+
+window.guestLogin=async()=>{
+ if(busy)return;
+ if(!firebaseReady){$("authStatus").textContent="Firebase setup incomplete. Check your API key.";return;}
+ setBusy(true);
+ $("authStatus").textContent="Connecting...";
+ try{
+  await setPersistence(auth,browserLocalPersistence);
+  await signInAnonymously(auth);
+  $("authStatus").textContent="Guest login successful.";
+ }catch(e){$("authStatus").textContent=errorMessage(e);}
+ finally{setBusy(false);}
 };
 
-window.logout = async function() {
- try {
-   await signOut(auth);
-   setStatus("Logged out.");
- } catch(e) {
-   setStatus(errorMessage(e));
- }
+window.googleLogin=async()=>{
+ if(busy)return;
+ if(!firebaseReady){$("authStatus").textContent="Firebase setup incomplete. Check your API key.";return;}
+ setBusy(true);
+ $("authStatus").textContent="Connecting to Google...";
+ try{
+  await setPersistence(auth,browserLocalPersistence);
+  if(auth.currentUser?.isAnonymous)await linkWithPopup(auth.currentUser,provider);
+  else await signInWithPopup(auth,provider);
+  $("authStatus").textContent="Google login successful.";
+ }catch(e){$("authStatus").textContent=errorMessage(e);}
+ finally{setBusy(false);}
 };
 
-function updateAccountUI(user) {
- currentUser = user;
+window.upgradeGuest=async()=>{
+ if(!auth?.currentUser?.isAnonymous)return;
+ try{
+  await linkWithPopup(auth.currentUser,provider);
+  toast("Google account linked successfully.");
+ }catch(e){$("authStatus").textContent=errorMessage(e);}
+};
+
+window.logout=async()=>{
+ if(!auth)return;
+ try{await signOut(auth);$("authStatus").textContent="Logged out.";}
+ catch(e){$("authStatus").textContent=errorMessage(e);}
+};
+
+function updateAccountUI(user){
+ currentUser=user;
  $("signedOut").classList.toggle("hidden",!!user);
  $("signedIn").classList.toggle("hidden",!user);
  $("contactsLocked").classList.toggle("hidden",!!user);
  $("contactsArea").classList.toggle("hidden",!user);
-
- if (user) {
-   $("userEmail").textContent = user.isAnonymous ? "Guest account" : (user.email || "Google account");
-   $("upgradeBtn").classList.toggle("hidden",!user.isAnonymous);
- } else {
-   $("userEmail").textContent = "";
- }
+ if(user){
+  $("userEmail").textContent=user.isAnonymous?"Guest account":(user.email||"Google account");
+  $("upgradeBtn").classList.toggle("hidden",!user.isAnonymous);
+ }else{$("userEmail").textContent="";}
 }
 
-function listenToContacts(user) {
- if (stopListening) {stopListening();stopListening=null;}
- contacts = [];
+function listenToContacts(user){
+ if(stopListening){stopListening();stopListening=null;}
+ contacts=[];
  renderContacts();
-
- if (!user) return;
- const ref = collection(db,"users",user.uid,"contacts");
- stopListening = onSnapshot(ref,snapshot => {
-   contacts = snapshot.docs.map(d => ({id:d.id,...d.data()}));
-   contacts.sort((a,b) => (a.createdAt?.seconds || 0) - (b.createdAt?.seconds || 0));
-   renderContacts();
- },error => {
-   $("contactStatus").textContent = errorMessage(error);
- });
+ $("contactStatus").textContent="";
+ if(!user||!db)return;
+ const ref=collection(db,"users",user.uid,"contacts");
+ stopListening=onSnapshot(ref,snapshot=>{
+  contacts=snapshot.docs.map(d=>({id:d.id,...d.data()}));
+  renderContacts();
+ },e=>{$("contactStatus").textContent=errorMessage(e);});
 }
 
-function renderContacts() {
- $("contactCount").textContent = `${contacts.length} / 3`;
- $("contactList").innerHTML = "";
-
- if (!contacts.length) {
-   const empty = document.createElement("div");
-   empty.className = "empty";
-   empty.textContent = msg("noContacts");
-   $("contactList").appendChild(empty);
+function renderContacts(){
+ $("contactCount").textContent=contacts.length+" / 3";
+ $("contactList").innerHTML="";
+ if(!contacts.length){
+  const empty=document.createElement("div");
+  empty.className="empty";
+  empty.textContent=t("noContacts");
+  $("contactList").appendChild(empty);
  }
- contacts.forEach(contact => {
-   const item = document.createElement("div");
-   item.className = "contact-item";
-   const info = document.createElement("div");
-   info.className = "contact-info";
-   const name = document.createElement("div");
-   name.className = "contact-name";
-   name.textContent = contact.name || "";
-   const phone = document.createElement("div");
-   phone.className = "contact-phone";
-   phone.textContent = contact.phone || "";
-   info.append(name,phone);
-
-   const actions = document.createElement("div");
-   actions.className = "contact-actions";
-   const edit = document.createElement("button");
-   edit.className = "edit-btn";
-   edit.textContent = currentLang === "ta" ? "திருத்து" : "Edit";
-   edit.onclick = () => openEdit(contact.id);
-   const del = document.createElement("button");
-   del.className = "delete-btn";
-   del.textContent = currentLang === "ta" ? "நீக்கு" : "Delete";
-   del.onclick = () => removeContact(contact.id);
-   actions.append(edit,del);
-   item.append(info,actions);
-   $("contactList").appendChild(item);
+ contacts.forEach(c=>{
+  const item=document.createElement("div");
+  item.className="contact-item";
+  const info=document.createElement("div");
+  info.className="contact-info";
+  const name=document.createElement("div");
+  name.className="contact-name";
+  name.textContent=c.name||"";
+  const phone=document.createElement("div");
+  phone.className="contact-phone";
+  phone.textContent=c.phone||"";
+  info.append(name,phone);
+  const actions=document.createElement("div");
+  actions.className="contact-actions";
+  const edit=document.createElement("button");
+  edit.className="edit-btn";
+  edit.textContent=currentLang==="ta"?"திருத்து":"Edit";
+  edit.onclick=()=>openEdit(c.id);
+  const del=document.createElement("button");
+  del.className="delete-btn";
+  del.textContent=currentLang==="ta"?"நீக்கு":"Delete";
+  del.onclick=()=>removeContact(c.id);
+  actions.append(edit,del);
+  item.append(info,actions);
+  $("contactList").appendChild(item);
  });
- $("saveContactBtn").disabled = contacts.length >= 3 && !editingId;
+ $("saveContactBtn").disabled=contacts.length>=3;
 }
 
-function validPhone(phone) {
- return /^[+0-9\s()-]{7,16}$/.test(phone.trim());
-}
+function validPhone(phone){return /^\+?[0-9\s()-]{7,16}$/.test(phone.trim());}
 
-$("contactForm").addEventListener("submit",async e => {
+$("contactForm").addEventListener("submit",async e=>{
  e.preventDefault();
- if (!currentUser) return;
- const name = $("contactName").value.trim();
- const phone = $("contactPhone").value.trim();
-
- if (name.length < 2) {
-   $("contactStatus").textContent = "Please enter a valid name.";
-   return;
- }
- if (!validPhone(phone)) {
-   $("contactStatus").textContent = "Please enter a valid phone number.";
-   return;
- }
- if (contacts.length >= 3) {
-   $("contactStatus").textContent = "Maximum 3 contacts allowed.";
-   return;
- }
-
- $("saveContactBtn").disabled = true;
- $("contactStatus").textContent = "Saving...";
- try {
-   await addDoc(collection(db,"users",currentUser.uid,"contacts"),{
-     name,phone,createdAt:serverTimestamp()
-   });
-   $("contactName").value = "";
-   $("contactPhone").value = "";
-   $("contactStatus").textContent = "Contact saved successfully.";
- } catch(err) {
-   $("contactStatus").textContent = errorMessage(err);
- } finally {
-   $("saveContactBtn").disabled = contacts.length >= 3;
- }
+ if(!currentUser||!db)return;
+ const name=$("contactName").value.trim();
+ const phone=$("contactPhone").value.trim();
+ if(name.length<2){$("contactStatus").textContent="Enter a valid name.";return;}
+ if(!validPhone(phone)){$("contactStatus").textContent="Enter a valid phone number.";return;}
+ if(contacts.length>=3){$("contactStatus").textContent="Maximum 3 contacts allowed.";return;}
+ $("saveContactBtn").disabled=true;
+ $("contactStatus").textContent="Saving...";
+ try{
+  await addDoc(collection(db,"users",currentUser.uid,"contacts"),{name,phone,createdAt:serverTimestamp()});
+  $("contactName").value="";
+  $("contactPhone").value="";
+  $("contactStatus").textContent="Contact saved successfully.";
+ }catch(e){$("contactStatus").textContent=errorMessage(e);}
+ finally{$("saveContactBtn").disabled=contacts.length>=3;}
 });
 
-window.openEdit = function(id) {
- const contact = contacts.find(c => c.id === id);
- if (!contact) return;
- editingId = id;
- $("editName").value = contact.name || "";
- $("editPhone").value = contact.phone || "";
+window.openEdit=id=>{
+ const c=contacts.find(x=>x.id===id);
+ if(!c)return;
+ editingId=id;
+ $("editName").value=c.name||"";
+ $("editPhone").value=c.phone||"";
  $("editModal").classList.remove("hidden");
 };
 
-window.closeEdit = function() {
- editingId = null;
+window.closeEdit=()=>{
+ editingId=null;
  $("editModal").classList.add("hidden");
 };
 
-window.saveEdit = async function() {
- if (!currentUser || !editingId) return;
- const name = $("editName").value.trim();
- const phone = $("editPhone").value.trim();
- if (name.length < 2 || !validPhone(phone)) {
-   showToast("Please enter valid contact details.");
-   return;
- }
- try {
-   await updateDoc(doc(db,"users",currentUser.uid,"contacts",editingId),{name,phone});
-   closeEdit();
-   showToast("Contact updated.");
- } catch(e) {
-   showToast(errorMessage(e));
- }
+window.saveEdit=async()=>{
+ if(!currentUser||!editingId||!db)return;
+ const name=$("editName").value.trim();
+ const phone=$("editPhone").value.trim();
+ if(name.length<2||!validPhone(phone)){toast("Enter valid contact details.");return;}
+ try{
+  await updateDoc(doc(db,"users",currentUser.uid,"contacts",editingId),{name,phone});
+  closeEdit();
+  toast("Contact updated.");
+ }catch(e){toast(errorMessage(e));}
 };
 
-window.removeContact = async function(id) {
- if (!currentUser) return;
- const ok = confirm(currentLang === "ta" ? "இந்த தொடர்பை நீக்க வேண்டுமா?" : "Delete this contact?");
- if (!ok) return;
- try {
-   await deleteDoc(doc(db,"users",currentUser.uid,"contacts",id));
-   showToast("Contact deleted.");
- } catch(e) {
-   showToast(errorMessage(e));
- }
+window.removeContact=async id=>{
+ if(!currentUser||!db)return;
+ if(!confirm("Delete this contact?"))return;
+ try{
+  await deleteDoc(doc(db,"users",currentUser.uid,"contacts",id));
+  toast("Contact deleted.");
+ }catch(e){toast(errorMessage(e));}
 };
 
-window.demoSOS = function() {
- const message = currentLang === "ta"
- ? "இது SafeSignal டெமோ மட்டுமே. எந்த SMS, அழைப்பு அல்லது இருப்பிடமும் அனுப்பப்படவில்லை. உண்மையான அவசரநிலையில் 112-ஐ அழைக்கவும்."
- : "This is only a SafeSignal demo. No SMS, call or location was sent. In a real emergency, call 112.";
- alert(message);
+window.demoSOS=()=>{
+ alert(currentLang==="ta"
+ ?"இது SafeSignal டெமோ மட்டுமே. எந்த SMS, அழைப்பு அல்லது இருப்பிடமும் அனுப்பப்படவில்லை. உண்மையான அவசரநிலையில் 112-ஐ அழைக்கவும்."
+ :"This is only a SafeSignal demo. No SMS, call or location was sent. In a real emergency, call 112.");
 };
 
-onAuthStateChanged(auth,user => {
- updateAccountUI(user);
- listenToContacts(user);
-});
-
+if(firebaseReady){
+ onAuthStateChanged(auth,user=>{
+  updateAccountUI(user);
+  listenToContacts(user);
+ });
+}
 </script>
 </body>
 </html>
