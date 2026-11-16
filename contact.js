@@ -1,106 +1,74 @@
 
+const contactForm = document.getElementById("contactUsForm");
+const contactStatus = document.getElementById("contactUsStatus");
+const sendButton = document.getElementById("sendMessageBtn");
+
 const CONTACT_EMAIL = "safesignal100@gmail.com";
-
-const contactForm = document.getElementById("contactForm");
-
-const contactStatus =
-  document.getElementById("contactStatus") ||
-  document.getElementById("contactMessage");
+const FORM_ENDPOINT = `https://formsubmit.co/ajax/${CONTACT_EMAIL}`;
 
 if (contactForm) {
   contactForm.addEventListener("submit", async (event) => {
     event.preventDefault();
 
-    const name = contactForm.querySelector('[name="name"]')?.value.trim();
-    const email = contactForm.querySelector('[name="email"]')?.value.trim();
-    const message = contactForm.querySelector('[name="message"]')?.value.trim();
-
-    const submitButton = contactForm.querySelector(
-      'button[type="submit"], input[type="submit"]'
-    );
-
-    function showStatus(text, success = false) {
-      if (!contactStatus) {
-        alert(text);
-        return;
-      }
-
-      contactStatus.textContent = text;
-      contactStatus.style.color = success ? "#35e6a1" : "#ff3155";
-    }
+    const name = document.getElementById("senderName")?.value.trim();
+    const email = document.getElementById("senderEmail")?.value.trim();
+    const message = document.getElementById("senderMessage")?.value.trim();
 
     if (!name || !email || !message) {
-      showStatus("Please fill in all fields.");
+      contactStatus.textContent = "Please fill in all fields.";
       return;
     }
 
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      showStatus("Please enter a valid email address.");
+      contactStatus.textContent = "Please enter a valid email address.";
       return;
     }
 
-    if (message.length < 5) {
-      showStatus("Please enter a longer message.");
+    if (message.length > 3000) {
+      contactStatus.textContent = "Message must be under 3000 characters.";
       return;
     }
+
+    sendButton.disabled = true;
+    sendButton.textContent = "Sending...";
+    contactStatus.textContent = "Sending your message...";
 
     try {
-      if (submitButton) {
-        submitButton.disabled = true;
-        submitButton.textContent = "Sending...";
-      }
-
-      showStatus("Sending your message...");
-
-      const response = await fetch(
-        `https://formsubmit.co/ajax/${CONTACT_EMAIL}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-          },
-          body: JSON.stringify({
-            name: name,
-            email: email,
-            message: message,
-            _subject: "New SafeSignal Contact Message",
-            _template: "table",
-            _url: "https://nammabustn-hub.github.io/safesignal/"
-          })
-        }
-      );
+      const response = await fetch(FORM_ENDPOINT, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({
+          name: name,
+          email: email,
+          message: message,
+          _subject: "New SafeSignal Website Message",
+          _template: "table",
+          _captcha: "true"
+        })
+      });
 
       const result = await response.json();
 
-      if (String(result.success) !== "true") {
-        throw new Error(
-          result.message || "Message could not be sent."
-        );
+      if (!response.ok || result.success === "false" || result.success === false) {
+        throw new Error(result.message || "Message could not be sent.");
       }
 
-      showStatus(
-        "Your message has been sent successfully. Thank you!",
-        true
-      );
+      contactStatus.textContent =
+        "Message submitted successfully! Thank you for contacting SafeSignal.";
 
       contactForm.reset();
 
     } catch (error) {
       console.error("Contact form error:", error);
 
-      showStatus(
-        error.message ||
-        "Unable to send your message. Please try again later."
-      );
-
+      contactStatus.textContent =
+        "Unable to send right now. Please try again later.";
     } finally {
-      if (submitButton) {
-        submitButton.disabled = false;
-        submitButton.textContent = "Send Message";
-      }
+      sendButton.disabled = false;
+      sendButton.textContent = "Send Message";
     }
   });
-} else {
-  console.warn("SafeSignal contact form not found.");
 }
