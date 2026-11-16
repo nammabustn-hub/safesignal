@@ -11,62 +11,44 @@ const nameField = document.getElementById("senderName");
 const emailField = document.getElementById("senderEmail");
 const messageField = document.getElementById("senderMessage");
 
-if (contactForm && nameField && emailField && messageField && sendButton && contactStatus) {
+if (contactForm && contactStatus && sendButton && nameField && emailField && messageField) {
 
-  // Save draft automatically
   function saveDraft() {
-    const draft = {
-      name: nameField.value,
-      email: emailField.value,
-      message: messageField.value
-    };
-
     try {
-      localStorage.setItem(DRAFT_KEY, JSON.stringify(draft));
-    } catch (error) {
-      console.warn("Could not save contact draft:", error);
+      localStorage.setItem(DRAFT_KEY, JSON.stringify({
+        name: nameField.value,
+        email: emailField.value,
+        message: messageField.value
+      }));
+    } catch (e) {
+      console.error("Draft save error:", e);
     }
   }
 
-  // Restore draft after refresh
   function restoreDraft() {
     try {
       const saved = localStorage.getItem(DRAFT_KEY);
       if (!saved) return;
 
       const draft = JSON.parse(saved);
-
       nameField.value = draft.name || "";
       emailField.value = draft.email || "";
       messageField.value = draft.message || "";
-
-      if (draft.name || draft.email || draft.message) {
-        contactStatus.textContent =
-          "Your previous draft has been restored.";
-      }
-    } catch (error) {
-      console.warn("Could not restore contact draft:", error);
+    } catch (e) {
+      console.error("Draft restore error:", e);
     }
   }
 
-  // Clear form and saved draft only after successful sending
   function clearDraft() {
     contactForm.reset();
-
-    try {
-      localStorage.removeItem(DRAFT_KEY);
-    } catch (error) {
-      console.warn("Could not clear saved draft:", error);
-    }
+    localStorage.removeItem(DRAFT_KEY);
   }
 
-  // Restore saved content when page opens
   restoreDraft();
 
-  // Save whenever the user types
-  nameField.addEventListener("input", saveDraft);
-  emailField.addEventListener("input", saveDraft);
-  messageField.addEventListener("input", saveDraft);
+  [nameField, emailField, messageField].forEach(field => {
+    field.addEventListener("input", saveDraft);
+  });
 
   contactForm.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -82,11 +64,6 @@ if (contactForm && nameField && emailField && messageField && sendButton && cont
 
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       contactStatus.textContent = "Please enter a valid email address.";
-      return;
-    }
-
-    if (message.length > 1500) {
-      contactStatus.textContent = "Message must be under 1500 characters.";
       return;
     }
 
@@ -108,44 +85,35 @@ if (contactForm && nameField && emailField && messageField && sendButton && cont
           _subject: "New SafeSignal Website Message",
           _replyto: email,
           _template: "table",
-          _captcha: "true"
+          _captcha: "true",
+          _url: window.location.href
         })
       });
 
-      const responseText = await response.text();
+      const result = await response.json();
 
-      let result;
-      try {
-        result = JSON.parse(responseText);
-      } catch {
-        throw new Error("Email service returned an invalid response.");
-      }
+      console.log("FormSubmit response:", result);
 
       if (
         !response.ok ||
         result.success === false ||
         result.success === "false" ||
-        result.success !== true && result.success !== "true"
+        !(result.success === true || result.success === "true")
       ) {
-        throw new Error(
-          result.message || "Email service could not accept your message."
-        );
+        throw new Error(result.message || "Email service rejected the message.");
       }
 
-      // Success: clear fields and saved draft
       clearDraft();
 
       contactStatus.textContent =
         "Message sent successfully! Thank you for contacting SafeSignal.";
 
     } catch (error) {
-      console.error("SafeSignal contact form error:", error);
-
-      // Keep the draft so the user does not lose their message
+      console.error("Contact form error:", error);
       saveDraft();
 
       contactStatus.textContent =
-        "Message could not be sent. Your draft is saved. Please try again.";
+        "Send failed: " + (error.message || "Please try again.");
     } finally {
       sendButton.disabled = false;
       sendButton.textContent = "Send Message";
